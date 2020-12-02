@@ -139,7 +139,6 @@
 ### V-ed:
 - Tính từ mang nghĩa bị động (chủ ngữ BỊ một thứ khác thực hiện Verb)
 - Một người nào đó (KHÔNG áp dụng cho đồ vật) cảm thấy như thế nào về một cái gì đó
-### Note: V-ing có thể dùng cho người/vật. V-ed CHỈ dùng cho vật!
 #### VD1:
 - I was interested in the lesson.
 → Tôi bị bài học làm cho thấy hứng thú. Tôi cảm thấy hứng thú với bài học.
