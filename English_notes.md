@@ -83,9 +83,9 @@
   + Ex: We will throw a party this Sunday (Chúng ta sẽ tổ chức một bữa tiệc vào Chủ nhật này)
   + Để nhấn mạnh sự việc này ta sẽ nói là: We will be throwing a party this Sunday
 
+## to-V vs V-ing
 ### V-ing theo sau
 - 1 số động từ: avoid, finish, enjoy, delay, forgive, detest, consider,...
-## to-V vs V-ing
 - giới từ (prep), V + prep:
   succeed in, apologize for, insist on, feel like, dream of,...
 - 1 số cụm từ:
