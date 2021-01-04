@@ -55,13 +55,15 @@
   + Logstash cũng luôn lắng nghe input từ filebeat, và sau khi nhận được input, nó sẽ filter rồi chuyển data sang cho elasticsearch với 1 index nào đó
   + Elasticsearch lưu data đó lại
   + Kibana hiển thị data, có thể tìm kiếm, query log trên trang UI này
-- Config filebeat: sửa filebeat.yml với nội dung sau để đọc tất cả các file .log trong thư mục D:/logs/:
+- Config filebeat: sửa filebeat.yml với nội dung sau để đọc tất cả các file .log trong thư mục D:/logs/ (Nhớ comment phần output.elasticsearch vì filebeat sẽ chuyển log tới logstash chứ ko phải elasticsearch):
 ```
 filebeat.inputs:
 - type: log
   enabled: true
   paths:
     - D:/logs/*.log
+output.logstash:
+  hosts: ["localhost:5044"]
 ```
 - Run filebeat: vào thư mục filebeat vừa giải nén mở cmd và run:
 ```
