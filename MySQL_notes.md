@@ -152,9 +152,6 @@ Giải pháp là dùng hàm COALESCE, hàm này sẽ return 1 phần tử để 
 Page<Map<String, Object>> getUser(@Param("sttList") List<String> sttList);
 ```
 
-## JPQL with Pageable param
-Updating...
-
 ## Hibernate N+1 problem on OneToOne relationship
 Ref: https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
 
@@ -289,4 +286,37 @@ WHERE c.store_id = s.store_id
 GROUP BY c.store_id;
 ```
 
+## JPQL with Pageable param
+Vẫn bài toán ở trên (đếm số customer là nam và nữ của từng store). À quên chưa nói, câu query ở trên vẫn thiếu 1 chút, đó là ko SELECT được những store nào mà chưa có customer. Muốn làm như vậy ta phải dùng LEFT JOIN như dưới đây:
+```java
+@Query("SELECT s.name AS storeName, " + 
+	"  SUM(CASE WHEN c.gender = 'male' THEN 1 ELSE 0 END) AS maleCount, " + 
+	"  SUM(CASE WHEN c.gender = 'female' THEN 1 ELSE 0 END) AS femaleCount " + 
+	"FROM store s " + 
+	"LEFT JOIN customer c " + 
+	"ON c.storeId = s.storeId " + 
+	"GROUP BY c.storeId")
+Page<Map<String, Object>> countCustomers(Pageable pageable);
+```
 
+Bên class Service sẽ gọi method trên như sau:
+```java
+Direction direction; int pageNum, pageSize; String sortBy;	// các biến này được tạo trước đó
+PageRequest pageRequest = PageRequest.of(pageNum, pageSize, Sort.by(direction, sortBy));
+Page<Map<String, Object>> dataPage = repository.getData(caller, status, pageRequest);
+```
+
+Vấn đề ở đây là gì: nếu như sortBy = "maleCount" thì Hibernate sẽ tự động thêm alias table vào trước, thành ra câu query được sinh sẽ giống kiểu:
+```sql
+SELECT...
+FROM store s
+ORDER BY s.maleCount ASC...
+```
+Nhưng class Store ko tồn tại field maleCount, do đó sẽ xảy ra lỗi ở đây.
+
+=> Solution: ta dùng JpaSort.unsafe cùng với cặp dấu ngoặc () khi tạo object Sort:
+```java
+PageRequest pageRequest = PageRequest.of(pageNum, pageSize, JpaSort.unsafe(direction, "(" + sortBy + ")"));
+```
+
+Ref: https://stackoverflow.com/a/54478268/7688028
