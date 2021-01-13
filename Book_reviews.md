@@ -180,8 +180,8 @@ Tóm tắt ngắn gọn nhé: cuốn sách kể về 1 cô gái mắc căn bện
 
 Câu nói yêu thích:
 - *Thứ quan trọng ko phải là ngoại hình mà là nội tâm* (tr.201)
-- Thừa nhận một ai đó, yêu một ai đó, ghét một ai đó, niềm vui khi ở bên một người, rồi sự phiền muộn khi ở cạnh một người khác, nắm tay một ai đó, ôm một ai đó, ngang qua đời một ai đó. Đấy chính là "sống" (tr.235)
-- **Dù bạn yêu thích ai hay ghét bỏ ai đó, hay có những cảm xúc giống như vậy – làm ơi hãy nói ra. Nếu ko, biết đâu một lúc nào đó họ sẽ chết như tôi vậy** (tr.297)
+- **Thừa nhận một ai đó, yêu một ai đó, ghét một ai đó, niềm vui khi ở bên một người, rồi sự phiền muộn khi ở cạnh một người khác, nắm tay một ai đó, ôm một ai đó, ngang qua đời một ai đó. Đấy chính là "sống"** (tr.235)
+- *Dù bạn yêu thích ai hay ghét bỏ ai đó, hay có những cảm xúc giống như vậy – làm ơi hãy nói ra. Nếu ko, biết đâu một lúc nào đó họ sẽ chết như tôi vậy* (tr.297)
 
 Rate: 8
 
