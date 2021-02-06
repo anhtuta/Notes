@@ -153,7 +153,9 @@ Page<Map<String, Object>> getUser(@Param("sttList") List<String> sttList);
 ```
 
 ## Hibernate N+1 problem on OneToOne relationship
-Ref: https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
+Ref:
+- https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
+- https://vladmihalcea.com/n-plus-1-query-problem/
 
 Giả sử có 2 bảng Post và PostDetail quan hệ 1-1, bảng con PostDetail có 1 field post_id tham chiếu tới bảng cha. Khai báo entiy như sau:
 ```java
@@ -221,7 +223,7 @@ Solution:
 private PostDetails details;
 ```
 
-2. Dùng @MapsId: Thay vì bảng PostDetail có field post_id là fk tham chiếu tới bảng Post, ta dùng luôn cột id (PK) của bảng này làm FK tham chiếu tới bảng Post:
+2. Dùng @MapsId: Thay vì bảng PostDetail có field post_id là fk tham chiếu tới bảng Post, ta dùng luôn cột id (PK) của bảng này làm FK tham chiếu tới bảng Post (Thực ra chỉ có cách để column id đó vừa làm PK, vừa làm FK, thì mới tạo được quan hệ 1-1 trong MySQL (hình như vậy!!!):
 ```java
 @Entity(name = "PostDetails")
 @Table(name = "post_details")
@@ -246,56 +248,68 @@ public class PostDetails {
 4. Dùng @NamedEntityGraph, @EntityGraph??? (Chưa test thử)
 
 ## Gộp các câu query COUNT vào 1 câu query
-Xét database sakila (database sau khi update sau khi download từ trang chủ của MySQL), xét 2 table `store` và `customer` với quan hệ 1-n. Giờ ta muốn lấy tên store, sau đó đếm số lượng khách hàng nam, nữ ở từng store thì làm như nào?
+Xét 2 table `store` và `staff` với quan hệ 1-n (1 store có nhiều staff, nhưng mỗi 1 staff chỉ làm việc ở 1 store. Lúc này thì table staff sẽ có 1 fk là store_id tham chiếu tới table store). Giờ ta muốn lấy tên store, sau đó đếm số lượng nhân viên nam, nữ ở từng store thì làm như nào?
 
 Solution:
 1. Dùng 3 câu
 ```sql
 -- Câu đầu tiên get store name:
-SELECT s.name AS storeName FROM store s;
+SELECT store.id AS storeId, store.name AS storeName FROM store store;
 
--- 2 câu tiếp, mỗi câu đếm số lượng khách hàng với giới tính tương ứng:
-SELECT COUNT(c.customer_id) AS maleCount
-FROM customer c, store s
-WHERE c.store_id = s.store_id AND c.gender = 'male'
-GROUP BY c.store_id;
+-- 2 câu tiếp, mỗi câu đếm số lượng nhân viên với giới tính tương ứng:
+SELECT store.id AS storeId, COUNT(staff.id) AS maleCount
+FROM store store, staff staff
+WHERE store.id = staff.store_id AND staff.gender = 'male'
+GROUP BY store.id;
 
-SELECT COUNT(c.customer_id) AS femaleCount
-FROM customer c, store s
-WHERE c.store_id = s.store_id AND c.gender = 'female'
-GROUP BY c.store_id;
+SELECT store.id AS storeId, COUNT(staff.id) AS femaleCount
+FROM store store, staff staff
+WHERE store.id = staff.store_id AND staff.gender = 'female'
+GROUP BY store.id;
 ```
 
 2. Dùng 1 câu query duy nhất, ref: https://stackoverflow.com/a/12789493/7688028
 ```sql
 -- Using SUM:
-SELECT s.name AS storeName,
-  SUM(CASE WHEN c.gender = 'male' THEN 1 ELSE 0 END) AS maleCount,
-  SUM(CASE WHEN c.gender = 'female' THEN 1 ELSE 0 END) AS femaleCount
-FROM customer c, store s
-WHERE c.store_id = s.store_id
-GROUP BY c.store_id
+SELECT store.name AS storeName,
+  SUM(CASE WHEN staff.gender = 'male' THEN 1 ELSE 0 END) AS maleCount,
+  SUM(CASE WHEN staff.gender = 'female' THEN 1 ELSE 0 END) AS femaleCount
+FROM store store, staff staff
+WHERE store.id = staff.store_id
+GROUP BY staff.store_id;
 
 -- Using COUNT (COUNT only counts non null values and the DECODE will return non null value 1 only if your condition is satisfied):
-SELECT 
-  s.name AS storeName,
-  COUNT(IF(c.gender = 'male', 1, NULL)) AS maleCount,
-  COUNT(IF(c.gender = 'female', 1, NULL)) AS femaleCount
-FROM customer c, store s
-WHERE c.store_id = s.store_id
-GROUP BY c.store_id;
+SELECT store.name AS storeName,
+  COUNT(IF(staff.gender = 'male', 1, NULL)) AS maleCount,
+  COUNT(IF(staff.gender = 'female', 1, NULL)) AS femaleCount
+FROM staff staff, store store
+WHERE store.id = staff.store_id
+GROUP BY staff.store_id;
 ```
 
+Chú ý: 2 câu trên rõ ràng ```GROUP BY staff.store_id```, nhưng lại ```SELECT store.name```, tức là việc select đó ko có hàm aggregate, mà ko bị lỗi ```only_full_group_by error```, lí do là vì 2 lệnh đó là INNER JOIN, nên 1 staff.store_id luôn có 1 store.name tương ứng. À đấy, chính vì điều này nên những store ko có staff nào chẳng hạn, thì sẽ ko được lấy ra từ các câu query trên. Muốn làm được điều đó phải dùng LEFT JOIN như dưới đây:
+```sql
+-- Using SUM, and also get store with no staff:
+SELECT store.name AS storeName,
+  SUM(CASE WHEN staff.gender = 'male' THEN 1 ELSE 0 END) AS maleCount,
+  SUM(CASE WHEN staff.gender = 'female' THEN 1 ELSE 0 END) AS femaleCount
+FROM store store
+LEFT JOIN staff staff
+ON store.id = staff.store_id
+GROUP BY store.id;
+```
+Chắc chắn rẳng, với câu trên, nếu như ```GROUP BY staff.store_id``` sẽ bị lỗi ```only_full_group_by```
+
 ## JPQL with Pageable param
-Vẫn bài toán ở trên (đếm số customer là nam và nữ của từng store). À quên chưa nói, câu query ở trên vẫn thiếu 1 chút, đó là ko SELECT được những store nào mà chưa có customer. Muốn làm như vậy ta phải dùng LEFT JOIN như dưới đây:
+Vẫn bài toán ở trên (đếm số staff là nam và nữ của từng store).
 ```java
-@Query("SELECT s.name AS storeName, " + 
-	"  SUM(CASE WHEN c.gender = 'male' THEN 1 ELSE 0 END) AS maleCount, " + 
-	"  SUM(CASE WHEN c.gender = 'female' THEN 1 ELSE 0 END) AS femaleCount " + 
-	"FROM store s " + 
-	"LEFT JOIN customer c " + 
-	"ON c.storeId = s.storeId " + 
-	"GROUP BY c.storeId")
+@Query("SELECT store.name AS storeName, " + 
+	"  SUM(CASE WHEN staff.gender = 'male' THEN 1 ELSE 0 END) AS maleCount, " + 
+	"  SUM(CASE WHEN staff.gender = 'female' THEN 1 ELSE 0 END) AS femaleCount " + 
+	"FROM store store " + 
+	"LEFT JOIN staff staff " + 
+	"ON store.id = staff.storeId " + 
+	"GROUP BY store.id")
 Page<Map<String, Object>> countCustomers(Pageable pageable);
 ```
 
@@ -309,12 +323,12 @@ Page<Map<String, Object>> dataPage = repository.getData(caller, status, pageRequ
 Vấn đề ở đây là gì: nếu như sortBy = "maleCount" thì Hibernate sẽ tự động thêm alias table vào trước, thành ra câu query được sinh sẽ giống kiểu:
 ```sql
 SELECT...
-FROM store s
-ORDER BY s.maleCount ASC...
+FROM store store
+ORDER BY store.maleCount ASC...
 ```
 Nhưng class Store ko tồn tại field maleCount, do đó sẽ xảy ra lỗi ở đây.
 
-=> Solution: ta dùng JpaSort.unsafe cùng với cặp dấu ngoặc () khi tạo object Sort:
+=> Solution: ta dùng JpaSort.unsafe cùng với *cặp dấu ngoặc ()* khi tạo object Sort:
 ```java
 PageRequest pageRequest = PageRequest.of(pageNum, pageSize, JpaSort.unsafe(direction, "(" + sortBy + ")"));
 ```
