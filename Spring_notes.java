@@ -89,3 +89,13 @@ public @interface Component {
 }
 
 - Có thể thấy 3 annotation trên chẳng khác gì nhau về bản chất và có thể thay thế cho nhau, và cả 3 đều tương đương @Component
+
+=== Lỗi tomcat khi run project trên IntelliJ IDEA
+Khi run project spring boot trên IntelliJ mà bị lỗi sau:
+ClassNotFoundException: javax.servlet.Filter...
+là do thư viện tomcat starter đó, chỉ cần bỏ thư viện sau khỏi file pom.xml là được:
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-tomcat</artifactId>
+	<scope>provided</scope>
+</dependency>
