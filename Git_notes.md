@@ -37,8 +37,8 @@ Gitflow là 1 quy trình làm việc với Git
 - Chờ teamlead và các member khác review PR, nếu lỗi thì sửa rồi push -f lại (để đảm bảo mỗi PR chỉ có 1 commit). Xong xuôi merge PR vào dev
 - Sau khi làm xong hết các feature, build 1 bản lên môi trường staging và request team QA test sản phẩm
 - Trong quá trình test nếu phát hiện lỗi, đội dev lại tạo nhánh mới từ develop và fix các issue này như quá trình phát triển các feature mới
-- Test xong xuôi hết, tạo 1 nhánh release từ develop, giả sử tên là ```release-20210208``` (ứng với ngày release)
-- Deploy nhánh ```release-20210208``` lên môi trường production
+- Test xong xuôi hết, tạo 1 nhánh release từ develop, giả sử tên là ```release-20210208``` (ứng với ngày release). Tất nhiên mọi thứ phải làm xong trước ngày release. Từ lúc này tới ngày release, nếu trên staging có bug thì sẽ fix bug trên nhánh release đó
+- Tới ngày release: deploy nhánh ```release-20210208``` lên môi trường production
 - Merge lại nhánh ```release-20210208``` vào ```develop``` và ```master```. Gắn tag cho nhánh ```master```, sau đó có thể xóa bỏ nhánh ```release-20210208```
 - Nếu phát hiện lỗi trên production: tạo 1 nhánh hotfix để fix sớm, sau đó tạo PR và merge nhánh đó vào ```develop``` và ```master```
 
