@@ -46,3 +46,36 @@ Gitflow là 1 quy trình làm việc với Git
 - https://danielkummer.github.io/git-flow-cheatsheet/index.vi_VN.html
 - https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 - https://nvie.com/posts/a-successful-git-branching-model/
+
+## git reset
+Đầu tiên cần biết git có 3 khu vực (area) như hình vẽ, gọi tắt là working area, staging area, repository area
+
+![git-index.png](./photos/git-index.png)
+
+- Working area: lưu trữ những thay đổi trên các file
+- Staging area: lưu trữ các file được thay đổi để chuẩn bị cho commit
+- Repository area: lưu trữ các file đã được commit ở staging area
+
+Giả sử trong working area hiện tại, ta sửa file abc.txt và sau đó add nó vào staging area: ```git add abc.txt```
+
+```git reset --hard```:
+- Reset HEAD về commit commit_sha1
+- Xóa bỏ mọi thay đổi trên working directory (khu vực này đang có file abc.txt được thay đổi, và các file đã thay đổi ở commit_sha1)
+- Xóa bỏ mọi thứ trên staging area
+- Nếu ko chỉ rõ commit_sha1 thì HEAD vẫn giữ nguyên
+
+```git reset --mixed commit_sha1``` (đây là chế độ mặc định, nếu ko thêm option cho lệnh reset thì git sẽ hiểu đó là --mixed):
+- Reset HEAD về commit commit_sha1
+- Giữ lại mọi thay đổi working directory (lúc này khu vực này sẽ gồm file abc.txt được thay đổi, và các file đã thay đổi ở commit_sha1)
+- Xóa bỏ mọi thứ trên staging area, tức là lúc này staging area ko có file nào
+- Nếu ko chỉ rõ commit_sha1 thì HEAD vẫn giữ nguyên
+
+```git reset --soft commit_sha1```:
+- Reset HEAD về commit commit_sha1
+- Giữ lại mọi thay đổi working directory
+- Giữ lại mọi thứ trên staging area (lúc này khu vực này gồm file abc.txt và các file ở commit_sha1)
+- Nếu ko chỉ rõ commit_sha1 thì lệnh này chả có tách dụng gì!
+
+Ref:
+- https://www.javatpoint.com/git-index
+- https://www.javatpoint.com/git-reset
