@@ -79,3 +79,8 @@ Giả sử trong working area hiện tại, ta sửa file abc.txt và sau đó a
 Ref:
 - https://www.javatpoint.com/git-index
 - https://www.javatpoint.com/git-reset
+
+## git rebase
+### Undo git rebase
+- Giả sử vừa rebase từ master vào dev nhé, giờ muốn undo việc đó. Đầu tiên cần tìm head commit của dev ngay trước khi rebase bắt đầu bằng lệnh ```git reflog```. Nhớ là phải tìm đúng nhé! Giả sử tìm được HEAD đó là ```HEAD@{5}```
+- Giờ reset dev về commit đó là được: ```git reset --hard HEAD@{5}```
