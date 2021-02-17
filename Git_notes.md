@@ -47,14 +47,14 @@ Gitflow là 1 quy trình làm việc với Git
 - https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 - https://nvie.com/posts/a-successful-git-branching-model/
 
-## git reset
+## Git reset
 Đầu tiên cần biết git có 3 khu vực (area) như hình vẽ, gọi tắt là working area, staging area, repository area
 
 ![git-index.png](./photos/git-index.png)
 
 - Working area: lưu trữ những thay đổi trên các file
 - Staging area: lưu trữ các file được thay đổi để chuẩn bị cho commit
-- Repository area: lưu trữ các file đã được commit ở staging area
+- Repository area: lưu trữ các file đã được commit ở staging area. Repository là nơi sẽ ghi lại trạng thái, lịch sử thay đổi của thư mục và file. Khu vực này nằm ở thư mục .git. Có 2 loại là local repository (ở máy mình) và remote repository (ở trên server remote).
 
 Giả sử trong working area hiện tại, ta sửa file abc.txt và sau đó add nó vào staging area: ```git add abc.txt```
 
@@ -80,7 +80,39 @@ Ref:
 - https://www.javatpoint.com/git-index
 - https://www.javatpoint.com/git-reset
 
-## git rebase
+## Git rebase
 ### Undo git rebase
 - Giả sử vừa rebase từ master vào dev nhé, giờ muốn undo việc đó. Đầu tiên cần tìm head commit của dev ngay trước khi rebase bắt đầu bằng lệnh ```git reflog```. Nhớ là phải tìm đúng nhé! Giả sử tìm được HEAD đó là ```HEAD@{5}```
 - Giờ reset dev về commit đó là được: ```git reset --hard HEAD@{5}```
+
+### Git merge vs git rebase
+- Giả sử đang làm việc trên nhánh feature và cần merge vào nhánh develop. Trong quá trình làm việc trên feature, nhánh develop xuất hiện thêm vài commit mới, lúc này cần lấy những commit đó từ develop sang feature. Có thể dùng merge hoặc rebase từ develop sang feature
+- Merge:
+  + Tạo ra 1 commit merge từ develop sang feature.
+  + Là 1 lệnh ko mang tính phá hủy (nondestructive): những nhánh đang tồn tại không bị thay đổi
+  + Merge sẽ tạo ra lịch sử commit có dạng hình thoi. Nếu nhánh develop thay đổi liên tục, mà mỗi lần đó ta đều muốn lấy code từ develop về, thì sẽ tạo nhiều commit merge từ develop vào feature => commit thừa, và rất nhiều hình thoi chằng chéo :))
+- Rebase:
+  + Đưa toàn bộ những commit mới tạo ở nhánh feature nối tiếp vào "ngọn" của nhánh develop
+  + Rebase sẽ **viết lại lịch sử** (rewrite history) của project bằng cách tạo ra những commit mới ứng với mỗi commit của nhánh feature (rồi lần lượt append những commit đó vào ngọn của develop) (giờ muốn push phải dùng push -f)
+  + Rebase sẽ tạo ra lịch sử commit có dạng tuyến tính nên commit sẽ rõ ràng, dễ theo dõi hơn. Nếu nhánh develop thay đổi liên tục, thì việc này sẽ ko tốn thêm nhiều commit merge thừa, đồng thời lịch sử commit sẽ thẳng tắp
+- Có thể dùng như sau:
+  + Rebase từ develop vào feature để get latest code trong khi đang làm task trên nhánh feature
+  + Merge từ feature vào develop sau khi xong task
+  + Nếu làm theo thứ tự trên thì có thể fast-forward merge
+
+- Ref: https://viblo.asia/p/git-merging-vs-rebasing-3P0lPvoGKox
+
+## Github pull request (PR)
+### Merge PR
+Có 3 cách để merge 1 PR chọn từ dropdown trên trang github, giả sử tạo 1 PR từ nhánh feature-123 vào dev
+- Create a merge commit: như tên gọi, cách này sẽ tạo 1 commit merge với option ```--no-ff```
+- Squash and merge: gộp tất cả các commit ở nhánh feature-123 lại thành 1, sau đó merge ``` fast-forward``` nhánh này vào nhánh dev
+- Rebase and merge: tất cả các commit ở nhánh feature-123 sẽ được thêm vào nhánh dev mà KHÔNG tạo thêm commit merge
+
+## Git cherry-pick
+Dùng để pick (mang, bưng) 1 commit bất kỳ từ nhánh khác sang HEAD của nhánh hiện tại
+
+### Khi nào cần dùng git cherry-pick
+- Undo changes, restore commit cũ: giả sử có 1 commit ở nhánh feature-123. Feature này đã hoàn thiện nhưng sau đó leader bảo ko cần thiết áp dụng feature này vào đợt release lần này. Thế là ko tạo PR và nhánh feature-123 bị lãng quên. Sau này nếu cần bổ sung feature đó ta chỉ việc cherry-pick commit đó từ nhánh feature-123
+- Commit sai branch: có thể checkout sang nhánh khác bê commit vừa làm xong sang nhánh đó
+- Updating...
