@@ -274,6 +274,13 @@ spring:
   + Xong xuôi sẽ có file war trong thư mục target, mở terminal cd vào đó
   + run lệnh (chọn 3 profile stg,log,swagger): ```java -jar -Dspring.profiles.active=stg,log,swagger app-name.war```
 
+## Run Spring Boot project in terminal
+- Giả sử project Spring Boot build thành file tên là HelloSpringBoot.war. Spring boot đã có tomcat nhúng nên ko cần phải deploy trên tomcat nữa, mà có thể run trực tiếp trên terminal như sau:<br/>
+```
+java -server -Xms2g -Xmx2g -jar -Dspring.profiles.active=staging,log -Dspring.datasource.url=jdbc:mysql://localhost:3306/database_name?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false HelloSpringBoot.war
+```
+- Trong đó ```Dspring...``` là các tham số config cho project (giống như trong file application.properties). Các tham số này sẽ ghi đè giá trị đã được config trong file application.properties
+
 ## Ép kiểu sang String
 String str = map.get("abc").toString();
 Nếu map.get("abc") == null thì sẽ bị lỗi ở chỗ này (null sao .toString() được)
@@ -408,7 +415,7 @@ Giống với HashMap (cũng dùng Buckets, Separate chaining, threshold, loadFa
 Nguyên lý resize cũng giống, nhưng tên method resize là ```rehash()``` (trong HashMap là ```resize()```)
 
 Khác HashMap ở chỗ:
-- Thread-safe
+- Thread-safe, do đó chậm hơn HashMap
 - KHÔNG chấp nhận key=null hay value=null (HashMap có thể có 1 key=null và nhiều value=null):
 ```java
 // [Java8]
@@ -424,6 +431,8 @@ public synchronized V put(K key, V value) {
   ...
 }
 ```
+
+Giờ ít dùng Hashtable, nếu muốn thread-safe thì có thể dùng ```ConcurrentHashMap```
 
 ## LinkedHashMap
 Extend từ class HashMap, LinkedHashMap dùng thêm 1 DSLK đôi để duy trì thứ tự các phần tử được put vào map:
