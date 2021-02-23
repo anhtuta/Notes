@@ -59,6 +59,10 @@ Hàng năm, OWASP (the Open Web Application Security Project) công bố 10 lỗ
 </form>
 ```
 
+### Note: No cookies = No CSRF
+Trong 2 ví dụ trên, trang phimmoi và trang vietcombank bắt buộc user phải login mới có thể đổi pass hay là chuyển tiền. Và sau khi user login xong, rồi vào trang của hacker mới click vào URL nhiễm mã độc đó. Bởi vì nếu user chưa login thì có click vào cũng chả sao, vì phía server sẽ từ chối request đó do chưa được xác thực. Giả sử server dùng session để lưu trạng thái user đi, thế thì mỗi request từ user tới server sẽ kèm theo sessionID ở cookie, và server sẽ dùng cookie này để xác thực xem đó là user nào. Sau khi user vào trang của hacker và click vào đường link độc, 1 request sẽ gửi về phimmoi/vietcombank kèm theo sessionID mà user đã login trước đó, thế nên hacker mới có thể hại được user!
+Nếu như server ko authenticate user dùng cookie thì sẽ chẳng có tấn công CSRF!
+
 # Ref
 - https://owasp.org/www-project-top-ten/
 - https://www.hacksplaining.com/owasp

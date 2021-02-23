@@ -12,7 +12,7 @@ Flow login SSO = ADFS:
 https://openid-url.com/oauth2/authorize?client_id=aaa-bbb-111&redirect_uri=https://backend-app.com/api/sso/action&response_mode=form_post&response_type=code+id_token&scope=openid+profile&nonce=randomString
 3. FE (Trình duyệt) sẽ redirect tới URL ở trên và user sẽ login = account ADFS (login trên giao diện của ADFS)
 4. Login xong thì ADFS sẽ redirect tới endpoint_success, việc redirect này tương đương với việc gọi tới API /api/sso/action (method=GET) phía BE, kèm theo id_token (format JWT)
-5. Bên BE sẽ verify signature của JWT trên (dùng cert_key ở trên để verift), rồi check xem jwt còn hạn nữa ko... Nếu jwt hợp lệ thì sẽ đọc được epid từ JWT đó (epid tương đương với username của người dùng)
+5. Bên BE sẽ verify signature của JWT trên (dùng cert_key ở trên để verify), rồi check xem jwt còn hạn nữa ko... Nếu jwt hợp lệ thì sẽ đọc được epid từ JWT đó (epid tương đương với username của người dùng)
 6. Bên BE sinh ra 1 chuỗi random, gọi là otp, và lưu vào otpMap với key=otp, value=epid ở bước 4 (value có thể là 1 object userInfo với data lấy từ jwt, nói chung tùy bài toán cần lưu gì)
 7. Sau đó BE redirect về trang của FE, kèm theo param epid và otp ở trên. VD như sau:
    http://localhost:4202/user/login?epid=D150624094540C100408&otp=aea9ef8d-83fc-4243-af30-2dcd9ad3653a
