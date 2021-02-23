@@ -708,5 +708,15 @@ http.authorizeRequests()
 
 Ngoài ra còn có thể dùng method security, trước hết phải có annotation ```@EnableGlobalMethodSecurity```. Sau đó có thể dùng ```@PreAuthorize, @Secured, @RolesAllowed``` cho từng method muốn bảo vệ
 
+### Access the currently authenticated user
+Spring Security lưu user đã được xác thực trong SecurityContextHolder. Có thể truy cập như sau:
+```java
+SecurityContext context = SecurityContextHolder.getContext();
+Authentication authentication = context.getAuthentication();
+String username = authentication.getName();
+Object principal = authentication.getPrincipal();
+Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+```
+
 ### Ref
 https://www.marcobehler.com/guides/spring-security
