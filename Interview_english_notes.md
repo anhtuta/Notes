@@ -9,6 +9,7 @@ It's hard to determine who is the one I love the most. Every charater, both prot
 - Luffy, the main protagonist of the manga, the caption of the Straw hat pirates, is a righteous, confident, strong-willed person but also sometimes being foolish stubborn and reckless. His lifelong dream is to become the Pirate king
 - Black Leg Sanji is a kind, calm and cool person and a wonderful chef. His ultimate goal is to discover All Blue, the part of the ocean where all four seas happen to meet.
 - Zoro, the one who wants to become the world's greatest swordsman, always looks so serious and detests Sanji a lot!
+
 I like all of them, if I have to pick the most favorite charater, maybe it would be Admiral Kuzan (His code name is Blue Pheasant in English). I'd like to become him because of the devil fruit he ate: its Chilly-Chilly Fruit. If I had his power, I would make it snow all the time during the winter
 
 ### My favorite story in One Piece
