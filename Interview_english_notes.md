@@ -30,6 +30,12 @@ I believe my strongest trait is **working hard** in order to **finish my work be
 ## 4. What are your weaknesses?
 I think my weakest is the ability to communicate using English, because I don't have much opportunity in Samsung to speak to someone using English. All I could do is using text messsages to chat with people who don't know Vietnamese. Sometimes it's hard for me to explain my idea **effectively** to my foreign customers if I have to talk to them. I know that English skill is important in your company, so I'll try my best to improve it. I know that if I have a chance to work with your company, my English will be better!
 
-## 5. Why are you leaving your job? 
+## 5. Why are you leaving your job?
+The main reason why I want to leave my current job is because I found my work boring and doesn't have much challenges to me. I want to find a new environment that is more interesting, more challenging and gives me a chance to learn more about new technologies.
+
+## 6. What is your short-team goal?
+About my short-team goal, I would like to improve English speaking skill in order to **communicate effectively** to customers and other people. If I have time, I'll consider myself to participate in an English class. In the near future, I also want to study and master some technologies that are related to my work
+
+## 7. What is your long-term goal?
 
 
