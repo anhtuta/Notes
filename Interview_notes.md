@@ -4,23 +4,9 @@
 - Overload: là nhiều method có cùng tên, nhưng khác nhau về tham số truyền vào (bao gồm luôn constructor nhé)
 
 ### Generics
-- Là tham số hóa kiểu dữ liệu, chỉ định rõ kiểu dữ liệu muốn làm việc với một class, một interface hay một phương thức nào đó. Sau khi khai báo, trình biên dịch sẽ không chấp nhận việc phương thức hay class có các kiểu dữ liệu khác:
-  + Giúp tạo code có tính reusable (sử dụng lại cao)
+- Là **tham số hóa kiểu dữ liệu**, chỉ định rõ kiểu dữ liệu muốn làm việc với một class, một interface hay một phương thức nào đó. Sau khi khai báo, trình biên dịch sẽ không chấp nhận việc phương thức hay class có các kiểu dữ liệu khác:
+  + Giúp tạo code có tính **reusable** (sử dụng lại cao)
   + Giúp phát hiện lỗi khi dùng kiểu dữ liệu khác với khai báo
-
-### Abstract class và Interface
-- Is-a và Can-do
-- Abstract class:
-  + Là một class cha cho tất cả các class có cùng bản chất
-  + Class khi extend (thừa kế) một abstract class được gọi là ```is-a```
-  + Gồm các field, method và abstract method
-  + Đơn thừa kế: tức là 1 class chỉ có cùng bản chất ```is-a``` với 1 class cha thôi
-- Interface:
-  + Là một chức năng có thể thêm và bất kì class nào
-  + Class khi implement (thực hiện) một interface được gọi là ```can-do```
-  + Chỉ gồm abstract method (tức là method ko có thân hàm) (tuy nhiên Java8 có thêm ```default method``` giống normal method trong abstract class, tức là có thân hàm)
-  + Đa thừa kế: 1 class có thể ```can-do``` nhiều thứ
-- Nhiều class ko cùng bản chất với nhau nhưng có thể cùng implement 1 interface
 
 ### Tham trị vs tham chiếu
 - Tham trị (tham số kiểu giá trị):
@@ -70,7 +56,7 @@ System.out.println(st.getName()); // att_hehehe: đã bị thay đổi
   + Thể hiện qua việc 1 class có thể extends từ 1 ```class``` (single inheritance) hoặc implements từ 1 ```interface``` (single or multiple inheritance) (ngoài ra 1 interface cũng có thể extends nhiều interface khác)
 - Tính đa hình (Polymorphism = many forms)
   + Nghĩa là 1 action (method) có thể được thực hiện bằng **nhiều cách khác nhau**
-  + Tính kế thừa cho phép tái sử dụng lại các attribute, method. Tính đa hình cho phép thực hiện method đó dưới những cách khác nhau
+  + *Tính kế thừa* cho phép **tái sử dụng lại các attribute, method**. *Tính đa hình* cho phép **thực hiện method** đó dưới **nhiều cách khác nhau**
   + Có 2 cách thể hiện tính đa hình:
     + Overload (compile time polymorphism): nhiều method cùng tên nhưng khác tham số
     + Override (run time polymorphism): nhiều class cùng implements/extends từ 1 interface/class cha, khi đó những class con đó sẽ thực thi method của class cha bằng nhiều cách khác nhau
@@ -80,10 +66,6 @@ System.out.println(st.getName()); // att_hehehe: đã bị thay đổi
   int max(int a, int b, int c) {}
   ```
   + VD2 (Override): có 1 interface Sort, interface này có 1 method sort(). Có thêm 2 class Mergesort và Quicksort cùng implements interface Sort đó, mỗi class sẽ thực thi method sort() theo cách khác nhau
-  + ```final``` keyword: dùng để *restrict* (hạn chế) người dùng:
-    + final variable ko thể bị thay đổi giá trị sau khi khởi tạo
-    + final method: ko thể bị override ở class con (nhưng class con vẫn dùng được method này của class cha)
-    + final class: ko thể extends nó được
 - Tính đóng gói (Encapsulation):
   + Là việc đóng gói dữ liệu lại với nhau vào 1 đơn vị duy nhât (private class). Việc truy cập data chỉ được thông qua các method public (getter, setter)
   + Lợi ích:
@@ -95,11 +77,21 @@ System.out.println(st.getName()); // att_hehehe: đã bị thay đổi
   + Tính trừu tượng tập trung vào việc **object đó sẽ làm gì** thay vì *object đó làm như thế nào* (focus on what the object does instead of how it does it)
   + Có 2 cách thể hiện tính trừu tượng: Abstract class (0 to 100%) và Interface (100%)
 - So sánh Abstraction và Encapsulation
+
 | Abstraction                                         | Encapsulation                                                                    |
 |-----------------------------------------------------|----------------------------------------------------------------------------------|
 | Xử lý ở mức design                                  | Xử lý ở mức implement                                                            |
 | Che giấu những xử lý chi tiết                       | Che giấu data trong 1 class, giúp bảo vệ data ko bị thay đổi bởi bên ngoài class |
 | Dùng interface, abstract class để che giấu chi tiết | Dùng access modifier (private, protected), và các getter, setter để bảo vệ data  |
+
+- ```final``` keyword: dùng để *restrict* (hạn chế) người dùng:
+  + final variable ko thể bị thay đổi giá trị sau khi khởi tạo
+  + final method: ko thể bị override ở class con (nhưng class con vẫn dùng được method này của class cha)
+  + final class: ko thể extends nó được
+
+- Inner class (nested class): có thể là static hoặc ko, khác nhau ở chỗ
+  + Nested static class: có thể tạo new 1 instance mà ko cần tạo instance của outer class: ```new NestedStaticClass()```
+  + Nested non-static class: muốn tạo instance mới phải tạo instance của Outer: ```new Outer().new InnerClass()```
 
 ### Abstract class và Interface
 - Is-a và Can-do
@@ -118,7 +110,6 @@ System.out.println(st.getName()); // att_hehehe: đã bị thay đổi
   + Method: chỉ gồm abstract method (tức là method ko có thân hàm) (tuy nhiên Java8 có thêm ```default method``` và ```static method``` giống normal method trong abstract class, tức là có thân hàm)
   + Đa thừa kế: 1 class có thể ```can-do``` nhiều thứ
 - Nhiều class ko cùng bản chất với nhau nhưng có thể cùng implement 1 interface
-
 
 ## SOLID principle
 - **S**ingle responsibility principle: Một class chỉ nên giữ 1 **trách nhiệm duy nhất**. Ngoài ra, chỉ sửa class đó với 1 lý do duy nhất

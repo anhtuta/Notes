@@ -100,5 +100,8 @@ I think I'm the type of person who reacting to a problem is better than anticipa
 ## 10. Which category do you fall under? A person who anticipates a problem well, or a person who reacts to a problem well?
 I think I'm the type of person who reacting to a problem is better than anticipating it. When I'm faced with a problem, I know what steps to take to deal with it
 
+## 11. Did you do any internship?
+Yeah, I did 2 internships when I was a student. My first internship happend at my fourth year university, at that time, I submitted internship form to Fsoft company, and they accepted me. My position was web developer. I've never been an intern before, so I was very excited about it. At that time, I didn't have any knowledge or experience about web development, so I was taught about the most basic things, such as how to make a simple web page using HTML, CSS and Javascript. The internship inspired me to pursue Web Development career!
 
+My second internship happend at my last year in university, I've got Samsung scholarship and started my intership for 3 months at Samsung R&D center. I was assigned to Backend team and they helped me to complete my graduation thesis. And after my graduation, I came back to that team and worked with them as an official employee.
 
