@@ -318,4 +318,35 @@ CREATE INDEX index_name ON table_name(c1,c2,c3);
 - Nhược điểm:
   + ...
 
+## Having
+HAVING dùng để filter kết quả trên các phép toán aggregates, do WHERE không dùng được với aggregates.
+
+VD: đếm các customer ở từng quốc gia, và lọc chỉ lấy những quốc gia có số lượng customer > 10:
+```sql
+-- Query SAI:
+SELECT country_id, COUNT(customer_id) AS totalCustomer
+FROM customers
+WHERE COUNT(customer_id) > 10   -- Không thể dùng hàm aggregate với WHERE
+GROUP BY country_id;
+
+-- Query đúng:
+SELECT country_id, COUNT(customer_id) AS totalCustomer
+FROM customers
+GROUP BY country_id
+HAVING COUNT(customer_id) > 10;   -- Hoặc: HAVING totalCustomer > 10
+```
+Bản chất của HAVING là filter từ kq của SELECT, tức là vẫn query ra hết, sau đó mới lọc các row thỏa mãn điều kiện để hiển thị
+
+HAVING clause **chỉ dùng được với SELECT** statement, và **KHÔNG thể dùng mà không có GROUP BY** clause
+
+So sánh HAVING clause và WHERE clause: https://www.geeksforgeeks.org/difference-between-where-and-having-clause-in-sql/
+
+| WHERE Clause                                           | HAVING Clause                                       |
+|--------------------------------------------------------|-----------------------------------------------------|
+| CÓ thể dùng mà ko có GROUP BY Clause                   | KHÔNG thể dùng mà ko có GROUP BY Clause             |
+| KHÔNG thể dùng với các hàm aggregate                   | CÓ thể dùng với các hàm aggregate                   |
+| Có thể dùng với SELECT, UPDATE, DELETE statement.      | Chỉ dùng với SELECT statement.                      |
+| Dùng trước GROUP BY Clause                             | Dùng sau GROUP BY Clause                            |
+| Dùng với các hàm single row, chẳng hạn UPPER, LOWER... | Dung với các hàm multiple row, chẳng hạn SUM, COUNT |
+
   
