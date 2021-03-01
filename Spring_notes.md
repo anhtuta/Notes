@@ -720,3 +720,36 @@ Collection<? extends GrantedAuthority> authorities = authentication.getAuthoriti
 
 ### Ref
 https://www.marcobehler.com/guides/spring-security
+
+## So sánh JWT với sessionID, stateless, stateful
+Thường thì các hệ thống authen dùng JWT là stateless, còn dùng sessionID là stateful
+- Stateful: server có lưu dữ liệu của client, VD: authen = session
+- Stateless: server ko lưu dữ liệu của client, VD: authen = JWT, access_token
+
+Nếu dùng session để authen (Session-based Authentication), thì từ sessionID của server có thể thêm, sửa, đọc data của session hiện tại:
+```java
+session.setAttribute("abc", "123");
+session.getAttribute("abc");
+```
+Tức Java servlet đã có sẵn method để lưu và đọc data từ session của request rồi. Nghĩa là nó được **thiết kế theo chuẩn stateful**
+
+Nếu dùng JWT để authen (Token-based Authentication), thì spring security sẽ KHÔNG có các method để thêm hay đọc data từ access_token hay JWT, đó là stateless. Spring oauth2 được xây dựng theo chuẩn stateless. Tất nhiên có thể tự custom token và thêm data vào từng token đó rồi lưu lại, như thế sẽ thành stateful
+
+Ưu điểm của JWT:
+- Nhiều server chạy trên nhiều instance khác nhau vẫn có thể check token, do token ko lưu trong database (các server ko dùng chung database)
+- Do ko lưu trong database nên lúc verify signature (check valid token), authorize user từ token ko cần request vào database => tăng performance
+- Thích hợp với các thiết bị mobile, cross domain
+
+Nhược điểm của JWT:
+- **Không thể revoke token**: cái token ấy nó ko đặc trưng cho 1 phiên làm việc của user. Nếu user bị đổi role hoặc logout, thì cái token ấy nó vẫn giữ cái phiên làm việc trước khi mà có sự kiện nào đó liên quan đến user xảy ra. Cái này **ko khắc phục được**. Nên sau khi update role của user, thì phía FE cần logout và xóa cái token đó đi, rồi login lại để bên BE gen lại token mới  
+  + Mặc dù token cũ bị xóa nhưng nếu ai đó lấy được thì vẫn xài được nó với role cũ, bởi vì server ko lưu JWT trong database, mà chỉ verify JWT thông qua signature, nên token cũ thì signature vẫn đúng
+  + Có thể lưu những JWT đã bị invoke trong database, nhưng như vậy ko hay lắm, vì bản chất của JWT là stateless, ko lưu trong database. Do đó nên đặt timeout của JWT ngắn thôi
+
+Ưu điểm của session:
+- Kích thước của session nhỏ hơn nhiều so với JWT
+
+Nhược điểm của authen dùng session:
+- Do sessionID lưu trong memory (RAM) nên việc scale từ 1 server lên nhiều server sẽ khó khăn => có thể dùng server Redis để lưu sessionID, và các server backend khác dùng chung Redis đó
+- Cần bảo vệ user khỏi tấn công CSRF (thêm _csrf token là được)
+- Authen các thiết bị mobile như nào? Vì nó ko có cookie nên ko thể dùng được
+- Cross domain cũng ko dùng được, vì cookie chỉ hoạt động trên domain hoặc subdomain đó. Khác domain là browser sẽ ko gửi kèm được cookie sessionID
