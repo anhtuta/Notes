@@ -28,27 +28,29 @@ Một số từ/cụm từ thay thế:
 ## 0. Warm up
 Greeting: Good morning! How are you? I'm good and glad to meet you, **thank you for inviting me to this interview**
 
+I've never been in an English interview before, so I've got a little nervous
+
 Trouble: phần khởi động có thể nói 1 vài khó khăn trước, nhưng sau đó nên kết lại với 1 điều tích cực và ko phàn nàn nhiều
   + Building location
   + scorching/freezing weather
   + raining outside
   + traffic jam
 
-I've got a little trouble to find the location of this building, and in additional, I've got stuck in some traffic, so it took more time to get here than I expected. But luckily, I left home early this morning, so I still managed to arrive on time
+I've got a little trouble to find the location of this building, and in addition, I've got stuck in some traffic, so it took more time to get here than I expected. But luckily, I left home early this morning, so I still managed to arrive on time
 
 ## 1. Tell me about yourself
-- Name, age, address, how far from year
+- Name, age, address, how far from here
 - University, major
 - First job at Samsung R&D, duties
 - Hobbies (in free time)
 
-**My name is** Tu, I'm 26 years old and currently I'm living in Hanoi. My home is about 12 kilometers from here. I've **attended** HUST since 2013 and **my major was** (where I've **majored in**) Electronics and Telecommunication. After I graduated from university in 2018, I've got Samsung scholarship and I **have been working** at Samsung R&D center since then. My duties include **developing backend servers, reviewing source codes and assiting other team members**. In my free time, I usually watch movies, listen to music, reading book, manga or just hang out with some of my friends.
+**My name is** Tu, I'm 26 years old and currently I'm living in Hanoi. My home is about 12 kilometers from here. I've **attended** HUST since 2013 and **my major was** (where I've **majored in**) Electronics and Telecommunication. After I graduated in 2018, I've got Samsung scholarship and I **have been working** at Samsung R&D center since then. My duties include **developing backend servers, maintaining projects, reviewing source codes and assiting other team members**. In my free time, I usually watch movies, listen to music, read novel and manga or just hang out with some of my friends.
 
 ### Why did you study Electronics instead of IT?
 Well, to be honest, the first year at university, my grade wasn't high enough for me to get into IT major, so I have to picked Electronics instead!
 
 ## 2. Hobbies
-I love comic books, but I don't have much free time everyday so currently, I only read One Piece and Conan Detective. I haven't read some latest chapters yet, because I'm the type of person who don't want to wait so long for the next chapter or volume **to be released**. So I'll wait until lots of chapters come out and read them all.
+I love comic books, but I don't have much free time everyday so currently, I only read One Piece and Conan Detective. I haven't read some latest chapters yet, because I'm the type of person who don't want to wait so long for the next chapter or volume **to be released**. So I'll wait until lots of new chapters come out and read them all.
 
 ### Your favorite manga
 It is **One Piece** of course! One Piece is the manga I love the most because it could give me **variety of emotions**: sad, happy, angry, nervous. It could make me cry and smile at the same time
@@ -62,7 +64,7 @@ It's hard to determine who is the one I love the most. Every charater, both **pr
 I like all of them, if I have to pick the most favorite charater, maybe it would be Admiral Kuzan (His code name is Blue Pheasant in English). I'd like to become him because I'm interested in the devil fruit he ate: it's Chilly-Chilly Fruit. If I've got his power, I would make it snow all the time during the winter
 
 ### Your favorite story in One Piece
-The story touched me the most is Enies Lobby, when Luffy and his crew tried to save Nico Robin (one of his members) from Marines. At that time, Robin **sacrificed her life** to protect all of her friends from **being attack by Marines Admirals**. But Luffy didn't want to lose any of his member, so he decided to **strike** first by directly **invaded the Tower of Justice** (that tower is the world government's stronghold). He told Robin that: *"Say you want to live, we are friends"*. Robin replied while crying "Yes". And then the battle with CP9 (a secret Cipher Pol organization) happend there, was **the most memorable battle** to me
+I shall tell you the story that touched me the most, it is Enies Lobby, when Luffy and his crew tried to save Nico Robin (one of his members) from Marines. At that time, Robin **sacrificed her life** to protect all of her friends from **being attack by Marines Admirals**. But Luffy didn't want to lose any of his member, so he decided to **strike** first by directly **invaded the Tower of Justice** (that tower is the world government's stronghold). He told Robin that: *"Say you want to live, we are friends"*. Robin replied while crying "Yes". And then the battle with CP9 (a secret Cipher Pol organization) happend there, was **the most memorable battle** to me
 
 ### Your favorite music genre /'ʒɑ:nrə/
 I often listen to **pop music, electronic dance music and Vpop**. In pop music, **my favorite bands and singers** are One Direction, One Republic, Charlie Puth, Taylor Swift. About EDM, I'm **a big fan** of Alan Walker, who famous with single Faded, and TheFatRat, who well-known with Unity and Flyaway
@@ -77,7 +79,7 @@ Well, to be honest, I'm not a big fan of football, it's **relatively opposite to
 Well, I don't know exactly who is better because I don't spend a lot of time watching them play on TV. In my opinion, each player has their own strength. Ronaldo is taller than Messi so I think he **could be superior in** header skill. On the contrary, Messi the left-footed man, is shorter than Ronaldo so I think he **could be able to perform** dribble skill better than Rolando
 
 ## 3. What are your strengths?
-I believe my strongest trait is **working hard** in order to **finish my work before deadline**. I'm the type of person who don't like **working overtime**, especially at the weekend, so I always try to complete my work on time. You know, we should spend our weekend with my family and friends, or with someone we love!
+I believe my strongest trait is **working hard** in order to **finish my work before deadline**. I'm the type of person who don't like **working overtime**, especially at the weekend, so I always try to complete my work on time. You know, we should spend the weekend with our family and friends, or with someone we love!
 
 ## 4. What are your weaknesses?
 I think my weakest is the ability to communicate using English, because I haven't have much opportunity to speak to someone in English. All I could do is using text messsages to chat with people who don't know Vietnamese. Sometimes it's hard for me to explain my idea **effectively** to my foreign customers or co-workers. I'm considering myself to take an English class in the near future, so my speaking skill will be better soon
@@ -97,10 +99,7 @@ If I could change one thing about myself, maybe it could be to become less intro
 ## 9. Which category do you fall under? A person who anticipates a problem well, or a person who reacts to a problem well?
 I think I'm the type of person who reacting to a problem is better than anticipating it. When I'm faced with a problem, I know what steps to take to deal with it
 
-## 10. Which category do you fall under? A person who anticipates a problem well, or a person who reacts to a problem well?
-I think I'm the type of person who reacting to a problem is better than anticipating it. When I'm faced with a problem, I know what steps to take to deal with it
-
-## 11. Did you do any internship?
+## 10. Did you do any internship?
 Yeah, I did 2 internships when I was a student. My first internship happend at my fourth year university, at that time, I submitted internship form to Fsoft company, and they accepted me. My position was web developer. I've never been an intern before, so I was very excited about it. At that time, I didn't have any knowledge or experience about web development, so I was taught about the most basic things, such as how to make a simple web page using HTML, CSS and Javascript. The internship inspired me to pursue Web Development career!
 
 My second internship happend at my last year in university, I've got Samsung scholarship and started my intership for 3 months at Samsung R&D center. I was assigned to Backend team and they helped me to complete my graduation thesis. And after my graduation, I came back to that team and worked with them as an official employee.
