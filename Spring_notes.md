@@ -120,8 +120,8 @@ private Integer id;
 
 // Với string thì dùng @NotEmpty vẫn có thể bắt được lỗi = null,
 // do đó ko cần @NotNull ở đây
-@NotEmpty(message = "userName cannot be null or empty")
-private String userName;
+@NotEmpty(message = "username cannot be null or empty")
+private String username;
 
 // Chú ý PHẢI import như sau:
 import javax.validation.constraints.NotEmpty;
@@ -721,7 +721,7 @@ Collection<? extends GrantedAuthority> authorities = authentication.getAuthoriti
 ### Ref
 https://www.marcobehler.com/guides/spring-security
 
-## So sánh JWT với sessionID, stateless, stateful
+## JWT, sessionID, stateless, stateful
 Thường thì các hệ thống authen dùng JWT là stateless, còn dùng sessionID là stateful
 - Stateful: server có lưu dữ liệu của client, VD: authen = session
 - Stateless: server ko lưu dữ liệu của client, VD: authen = JWT, access_token
@@ -735,21 +735,63 @@ Tức Java servlet đã có sẵn method để lưu và đọc data từ session
 
 Nếu dùng JWT để authen (Token-based Authentication), thì spring security sẽ KHÔNG có các method để thêm hay đọc data từ access_token hay JWT, đó là stateless. Spring oauth2 được xây dựng theo chuẩn stateless. Tất nhiên có thể tự custom token và thêm data vào từng token đó rồi lưu lại, như thế sẽ thành stateful
 
-Ưu điểm của JWT:
-- Nhiều server chạy trên nhiều instance khác nhau vẫn có thể check token, do token ko lưu trong database (các server ko dùng chung database)
-- Do ko lưu trong database nên lúc verify signature (check valid token), authorize user từ token ko cần request vào database => tăng performance
-- Thích hợp với các thiết bị mobile, cross domain
+## Authentication cơ bản
+Về cơ bản thì một quá trình authentication sẽ gồm 2 bước:
+- Xác thực một user (thường là request đầu tiên): single sign on, social sign in, oauth..., hoặc đơn giản chỉ là compare username/password từ request gửi lên với username/password trong database
+- Lưu giữ đăng nhập (cho các request phía sau): Basic Authentication, Session-based Authentication, Token-based Authentication
 
-Nhược điểm của JWT:
-- **Không thể revoke token**: cái token ấy nó ko đặc trưng cho 1 phiên làm việc của user. Nếu user bị đổi role hoặc logout, thì cái token ấy nó vẫn giữ cái phiên làm việc trước khi mà có sự kiện nào đó liên quan đến user xảy ra. Cái này **ko khắc phục được**. Nên sau khi update role của user, thì phía FE cần logout và xóa cái token đó đi, rồi login lại để bên BE gen lại token mới  
-  + Mặc dù token cũ bị xóa nhưng nếu ai đó lấy được thì vẫn xài được nó với role cũ, bởi vì server ko lưu JWT trong database, mà chỉ verify JWT thông qua signature, nên token cũ thì signature vẫn đúng
-  + Có thể lưu những JWT đã bị invoke trong database, nhưng như vậy ko hay lắm, vì bản chất của JWT là stateless, ko lưu trong database. Do đó nên đặt timeout của JWT ngắn thôi
+### Lưu giữ đăng nhập
+Xét 3 cơ chế lưu trữ đăng nhập cơ bản như sau:
 
-Ưu điểm của session:
-- Kích thước của session nhỏ hơn nhiều so với JWT
+#### 1. Basic Authentication
+Cách hoạt động: mỗi request tới server sẽ gửi kèm header ```Authorization = Basic base64(username:password)```
+
+Ưu điểm:
+- **Đơn giản**
+- Dễ dàng kết hợp phương pháp này với các phương pháp sử dụng cookie, session, token...
+
+Nhược điểm:
+- **Username/password dễ bị lộ**
+- **KHÔNG thể logout** (do việc lưu username, password dưới trình duyệt). Muốn logout phải xóa lịch sử web
+
+Dùng khi nào: các ứng dụng nội bộ, các thư mục cấm như hệ thống CMS, môi trường development, database admin...
+
+#### 2. Session-based Authentication (cookie-based authentication)
+Cách hoạt động:
+- Sau quá trình xác thực người dùng thành công (username/password,...) thì phía server sẽ **tạo ra và lưu một session chứa thông tin của người dùng đang đăng nhập** và **trả lại cho client session ID** để truy cập session cho những request sau
+- SessionID ở phía server có thể lưu tại database, file, ram 
+- SessionID ở phía client lưu trong **cookie** với flag **httpOnly=true** (để tránh bị đọc trộm). Việt lưu trong cookie giúp browser **tự động** gửi kèm sessionID lên server
+
+Ưu điểm:
+- **Thông tin được giấu kín**: sessionID là 1 string random KHÔNG mang info gì. Mọi thông tin của user đều được lưu ở server
+- **Dung lượng truyền tải nhỏ**: kích thước của session nhỏ hơn nhiều so với JWT
+- **Không cần tác động client**: Việc tạo cookie sessionID là do server thực hiện, việc gửi cũng là do browser tự động gửi kèm cookie
+- **Fully-controlled session**: cho phép hệ thống quản trị TẤT CẢ các hoạt động liên quan tới phiên đăng nhập của người dùng như thời gian login, force logout...
 
 Nhược điểm của authen dùng session:
-- Do sessionID lưu trong memory (RAM) nên việc scale từ 1 server lên nhiều server sẽ khó khăn => có thể dùng server Redis để lưu sessionID, và các server backend khác dùng chung Redis đó
-- Cần bảo vệ user khỏi tấn công CSRF (thêm _csrf token là được)
-- Authen các thiết bị mobile như nào? Vì nó ko có cookie nên ko thể dùng được
-- Cross domain cũng ko dùng được, vì cookie chỉ hoạt động trên domain hoặc subdomain đó. Khác domain là browser sẽ ko gửi kèm được cookie sessionID
+- **Chiếm nhiều bộ nhớ**: mỗi phiên làm việc của user, server sẽ lại phải tạo ra một session và lưu vào bộ nhớ trên server. Số data này có thể còn lớn hơn cả user database do mỗi user có thể có vài session khác nhau
+- **Khó scale**: do sessionID lưu phía server nên việc scale ngang từ 1 server lên nhiều server sẽ khó khăn => các server đó có thể dùng chung 1 chỗ lưu sessionID, chẳng hạn 1 server Redis khác
+- Dễ bị **tấn công CSRF** (thêm _csrf token là được)
+- Không dùng được với các thiết bị mobile (vì nó ko có cookie), cross domain (vì cookie chỉ hoạt động trên domain hoặc subdomain đó. Khác domain là browser sẽ ko gửi kèm được cookie sessionID)
+
+Dùng khi nào: các website và những ứng dụng web làm việc chủ yếu với browser, những hệ thống *monolithic*
+
+#### 3. Token-based Authentication (JWT)
+Cách hoạt động:
+- Một chuỗi ký tự (thường được mã hóa) mang thông tin xác định người dùng được server tạo ra và lưu ở client. Server sau đó có thể không lưu lại token này
+- Mỗi request tới server sẽ gửi kèm header ```Authorization = Bearer jwt```
+
+Ưu điểm:
+- **Stateless**: do server ko cần lưu jwt => dễ dàng scale ngang. Nhiều server chạy trên nhiều instance khác nhau vẫn có thể check token, do token ko lưu trong database (việc check token chỉ cần verify signature dựa vào secretKey)
+- **Phù hợp với nhiều loại client**: mobile, IoT device, cross domain (third party app có thể dùng được)
+- **Chống CSRF**: nguyên lý đơn giản: *No cookie, no CSRF*
+
+Nhược điểm:
+- **Không thể revoke token**, tức là **KHÔNG thể logout**: Nếu user bị đổi role hoặc logout, thì cái token jwt nó vẫn giữ cái phiên làm việc trước khi mà có sự kiện nào đó liên quan đến user xảy ra. Cái này **ko khắc phục được**. Nên sau khi update role của user, thì phía client (FE) cần logout và xóa cái token đó đi, rồi login lại để bên BE gen lại token mới  
+  + Mặc dù token cũ bị xóa nhưng nếu ai đó lấy được thì vẫn xài được nó với role cũ, bởi vì server ko lưu JWT trong database, mà chỉ verify JWT thông qua signature, nên token cũ thì signature vẫn đúng
+  + Có thể lưu những JWT đã bị invoke trong database, nhưng như vậy ko hay lắm, vì bản chất của JWT là stateless, ko lưu trong database. Do đó nên đặt timeout của JWT ngắn thôi
+- **Thông tin dễ lộ**: do thông tin về phiên đăng nhập của người dùng lưu trong jwt (gồm username, role, expire time...)
+- **Dung lượng truyền tải lớn**: jwt có kích thước lớn hơn nhiều so với sessionID
+
+### Ref
+https://kipalog.com/posts/Authentication-story-part-2--Authentication-co-ban
