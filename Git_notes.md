@@ -94,6 +94,20 @@ Ref:
   + Rebase từ develop vào feature để get latest code trong khi đang làm task trên nhánh feature
   + Merge từ feature vào develop sau khi xong task
   + Nếu làm theo thứ tự trên thì có thể fast-forward merge
+- VD:
+  + Giả sử có 2 nhánh tuzaku và dev. Hiện tại nhánh tuzaku đang có 2 commit mới hơn so với dev
+  
+  ![before_merge_tuzaku_to_dev.png](./photos/before_merge_tuzaku_to_dev.png)
+  
+  + Sau khi merge ```--no-ff``` (tạo PR từ tuzaku -> dev, sau đó merge PR với option đầu tiên là "Create a merge commit"), graph sẽ trông như này
+  
+  ![after_merge_tuzaku_to_dev.png](./photos/after_merge_tuzaku_to_dev.png)
+  
+  + Bây giờ ở local, đứng ở nhánh tuzaku gõ lệnh ```git pull origin dev```, thì git sẽ merge ```fast-forward``` từ dev ngược lại tuzaku, việc merge fast-forward lúc này giống như rebase từ dev vậy, graph sẽ thành như sau
+  
+  ![after_merge_dev_back_to_tuzaku.png](./photos/after_merge_dev_back_to_tuzaku.png)
+  
+  + Tuy có hình thoi chứ graph ko thằng tuột, những sẽ biết được lịch sử là đã từng merge từ nhánh nào đó vào nhánh dev. Nếu tất cả dùng rebase, thì 2 hình thoi đó sẽ chỉ là 1 đường thẳng
 
 - Ref: https://viblo.asia/p/git-merging-vs-rebasing-3P0lPvoGKox
 
