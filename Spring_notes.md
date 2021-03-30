@@ -49,7 +49,7 @@ public class Test {
     @Autowired
     private List list2;  // Ko chỉ rõ bean muốn inject, Spring sẽ inject bean mặc định là arrayList
 }
-```java
+```
 
 ## So sánh @Component, @Service...
 - Kiến trúc Spring boot:
