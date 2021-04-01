@@ -58,7 +58,7 @@ Gitflow là 1 quy trình làm việc với Git
 
 Giả sử trong working area hiện tại, ta sửa file abc.txt và sau đó add nó vào staging area: ```git add abc.txt```
 
-```git reset --hard```:
+```git reset --hard commit_sha1```:
 - Reset HEAD về commit commit_sha1
 - Xóa bỏ mọi thay đổi trên working directory (khu vực này đang có file abc.txt được thay đổi, và các file đã thay đổi ở commit_sha1)
 - Xóa bỏ mọi thứ trên staging area
@@ -81,24 +81,33 @@ Ref:
 - https://www.javatpoint.com/git-reset
 
 ## Git rebase
-### Undo git rebase
-- Giả sử vừa rebase từ master vào dev nhé, giờ muốn undo việc đó. Đầu tiên cần tìm head commit của dev ngay trước khi rebase bắt đầu bằng lệnh ```git reflog```. Nhớ là phải tìm đúng nhé! Giả sử tìm được HEAD đó là ```HEAD@{5}```
-- Giờ reset dev về commit đó là được: ```git reset --hard HEAD@{5}```
-
 ### Git merge vs git rebase
-- Giả sử đang làm việc trên nhánh feature và cần merge vào nhánh develop. Trong quá trình làm việc trên feature, nhánh develop xuất hiện thêm vài commit mới, lúc này cần lấy những commit đó từ develop sang feature. Có thể dùng merge hoặc rebase từ develop sang feature
+- Giả sử nhánh develop đang có 2 commit d1, d2, tạo 1 nhánh mới là feature từ develop lúc này để làm việc. Trong quá trình làm việc trên feature, nhánh feature xuất hiện 2 commit f1, f2, đồng thời nhánh develop xuất hiện thêm vài commit mới d3, d4, lúc này cần lấy những commit đó từ develop sang feature. Có thể dùng merge hoặc rebase từ develop sang feature
 - Merge:
   + Tạo ra 1 commit merge từ develop sang feature.
   + Là 1 lệnh ko mang tính phá hủy (nondestructive): những nhánh đang tồn tại không bị thay đổi
   + Merge sẽ tạo ra lịch sử commit có dạng hình thoi. Nếu nhánh develop thay đổi liên tục, mà mỗi lần đó ta đều muốn lấy code từ develop về, thì sẽ tạo nhiều commit merge từ develop vào feature => commit thừa, và rất nhiều hình thoi chằng chéo :))
-- Rebase:
-  + Đưa toàn bộ những commit mới tạo ở nhánh feature nối tiếp vào "ngọn" của nhánh develop
-  + Rebase sẽ **viết lại lịch sử** (rewrite history) của project bằng cách tạo ra những commit mới ứng với mỗi commit của nhánh feature (rồi lần lượt append những commit đó vào ngọn của develop) (giờ muốn push phải dùng push -f)
+- Rebase :
+  + Đưa toàn bộ những commit mới f1, f2 ở nhánh feature nối tiếp vào "ngọn" của nhánh develop, lúc này develop sẽ gồm các commit d1, d2, d3, d4, f1, f2. Thực chất việc rebase này sẽ **viết lại lịch sử** (rewrite history) của project bằng cách **tạo ra những commit mới ứng với mỗi commit của nhánh feature** (rồi lần lượt **append những commit đó vào ngọn của develop**) (giờ muốn push phải dùng **push -f**). Sau đó chuyển HEAD của feature về commit mới nhất là f2
   + Rebase sẽ tạo ra lịch sử commit có dạng tuyến tính nên commit sẽ rõ ràng, dễ theo dõi hơn. Nếu nhánh develop thay đổi liên tục, thì việc này sẽ ko tốn thêm nhiều commit merge thừa, đồng thời lịch sử commit sẽ thẳng tắp
 - Có thể dùng như sau:
   + Rebase từ develop vào feature để get latest code trong khi đang làm task trên nhánh feature
   + Merge từ feature vào develop sau khi xong task
   + Nếu làm theo thứ tự trên thì có thể fast-forward merge
+- VD:
+  + Giả sử có 2 nhánh tuzaku và dev. Hiện tại nhánh tuzaku đang có 2 commit mới hơn so với dev
+  
+  ![before_merge_tuzaku_to_dev.png](./photos/before_merge_tuzaku_to_dev.png)
+  
+  + Sau khi merge ```--no-ff``` (tạo PR từ tuzaku -> dev, sau đó merge PR với option đầu tiên là "Create a merge commit"), graph sẽ trông như này
+  
+  ![after_merge_tuzaku_to_dev.png](./photos/after_merge_tuzaku_to_dev.png)
+  
+  + Bây giờ ở local, đứng ở nhánh tuzaku gõ lệnh ```git pull origin dev```, thì git sẽ merge ```fast-forward``` từ dev ngược lại tuzaku, việc merge fast-forward lúc này giống như rebase từ dev vậy, graph sẽ thành như sau
+  
+  ![after_merge_dev_back_to_tuzaku.png](./photos/after_merge_dev_back_to_tuzaku.png)
+  
+  + Tuy có hình thoi chứ graph ko thằng tuột, những sẽ biết được lịch sử là đã từng merge từ nhánh nào đó vào nhánh dev. Nếu tất cả dùng rebase, thì 2 hình thoi đó sẽ chỉ là 1 đường thẳng
 
 - Ref: https://viblo.asia/p/git-merging-vs-rebasing-3P0lPvoGKox
 
@@ -116,3 +125,17 @@ Dùng để pick (mang, bưng) 1 commit bất kỳ từ nhánh khác sang HEAD c
 - Undo changes, restore commit cũ: giả sử có 1 commit ở nhánh feature-123. Feature này đã hoàn thiện nhưng sau đó leader bảo ko cần thiết áp dụng feature này vào đợt release lần này. Thế là ko tạo PR và nhánh feature-123 bị lãng quên. Sau này nếu cần bổ sung feature đó ta chỉ việc cherry-pick commit đó từ nhánh feature-123
 - Commit sai branch: có thể checkout sang nhánh khác bê commit vừa làm xong sang nhánh đó
 - Updating...
+
+## Git reflog
+Dùng để restore lost commit:
+- Giả sử vừa rebase từ master vào dev nhé, giờ muốn undo việc đó. Đầu tiên cần tìm head commit của dev ngay trước khi rebase bắt đầu bằng lệnh ```git reflog```. Nhớ là phải tìm đúng nhé! Giả sử tìm được HEAD đó là ```HEAD@{5}```
+- Giờ reset dev về commit đó là được: ```git reset --hard HEAD@{5}```
+
+## Git fsck (File System ChecK)
+Cũng dùng để restore
+
+*Recover staged changes*: những file vừa được thêm vào staging area (bằng lệnh ```git add```), sau đó ```reset --hard```, thì recover như nào?
+- Đầu tiên run command: ```git fsck --lost-found```
+- Vào thư mục .git/lost-found/other sẽ tìm thấy file muốn recover
+
+*Recover uncommitted changes*: các file ở working directory chưa được add vào staging area: KHÔNG thể recover được. Giả sử mới thêm 1 file mới, edit rồi lỡ tay xóa nó mà chưa add vào staging, thì có thể dùng IDE để recover (Eclipse, VS Code, Intellij đều hỗ trợ việc này) (git bó tay ko recover được nhé (???))

@@ -2,15 +2,11 @@
 ### HTHT diễn tả hành động:
 - Bắt đầu trong quá khứ (ko rõ thời gian bắt đầu), hiện tại đã KẾT THÚC, hoặc vẫn còn
 - Nhấn mạnh vào KẾT QUẢ hiện tại
-- Vừa mới xảy ra
-  VD: I've just bought this book
-- Lặp lại nhiều lần
-  VD: I've watched "Avenger 1" several times
-- Sau cấu trúc This is the first/second... times
-  VD: This is the first time I've played football
+- Vừa mới xảy ra. VD: I've just bought this book
+- Lặp lại nhiều lần. VD: I've watched "Avenger 1" several times
+- Sau cấu trúc This is the first/second... times. VD: This is the first time I've played football
 - Đi với just, recently, already, yet...
-- Đi với since, for, ever, never, up to now, so far...
-- VD: John has lived in that house for 10 years (he still lives there)
+- Đi với since, for, ever, never, up to now, so far... VD: John has lived in that house for 10 years (he still lives there)
 ### HTHTTD diễn tả hành động:
 - Bắt đầu trong quá khứ (ko rõ thời gian bắt đầu), vẫn ĐANG TIÊP TỤC ở hiện tại
   và có thể kéo dài tiếp ở tương lai. VD:
@@ -153,3 +149,52 @@ Chúng ta thử cân nhắc xem "anh ấy" thì "làm cho quyển sách hứng t
 => "anh ấy" thì chỉ có khả năng "bị quyển sách làm cho hứng thú" thôi chứ không thể
 "làm cho quyển sách hứng thú" được (vì quyển sách vô tri vô giác).
 => chọn "interested" (bị động)
+
+## Câu điều kiện
+### Loại 0: giải thích chân lý, sự thật hiển nhiên
+- Cấu trúc: ```If + HTĐ, HTĐ```
+- VD:
+  + If you heat ice, it melts
+  + Plants die if they don't get enough water
+  + If you throw a rock into water, it sinks
+
+### Loại 1: điều kiện có thể xảy ra ở HT, TL
+- Cấu trúc: ```If + HTĐ, TLĐ``` (TLĐ có thể là ```will``` hoặc ```be going to```, hoặc có thể thay bằng động từ khuyết thiếu (should, may, might, must, can, could...))
+- VD:
+  + If you don't hurry, you will miss the train
+  + What will you do if you miss the plane?
+  + If he calls, I should go
+
+### Loại 2: điều kiện ko có thực ở HT, TL
+- Cấu trúc: ```If + QKĐ, S + would + V``` (would có thể thay = could, might, should (lùi thì))
+- VD:
+  + If I were you, I would accept the invitation and hang out with him (Dùng were thay cho was nhé!)
+  + If I were Elon Musk, I might buy all of bitcoin in order to pump its price
+  + I would be working in Italy if I spoke Italian
+
+### Loại 3: điều kiện ko có thực ở QK
+- Cấu trúc: ```If + QKHT, S + would have P.P``` (would có thể thay = could, might, should (lùi thì))
+- VD:
+  + If I had finished my task yesterday, I could have had time to hang out with you tonight
+  + You could've been better if you'd practiced a bit more before your presentation
+
+### Phủ định: có thể thay ```If only``` = ```Unless```
+- I'll buy you a new laptop if you don't let me down
+- I'll buy you a new laptop unless you let me down
+- If it doesn't rain, we will go to the beach tomorrow
+- We will go to the beach tomorrow unless it rains
+
+## Could/might/shoud/must + have
+- Could/might have P.P (đã có thể làm gì...): có thể xảy ra trong qk, nhưng đã KHÔNG xảy ra, hoặc KHÔNG chắc đã xảy ra chưa (*suy đoán*)
+  + I could have stayed up late last night to finish my homework, but I decided to go to bed early because of my health
+  + Who was the last person to leave the store last night? It could have been Tom, but I'm not sure
+  + Why is John late? He could have got stuck in some traffic/ He might have overslept
+- Should have P.P (đáng lẽ nên làm gì...): diễn tả 1 việc đáng lẽ nên xảy ra trong qk, (với hàm ý *tiếc nuối, trách móc*)
+  + I should have apologized you for what I did last week
+  + Someone stole my phone, I should have locked the door
+  + You shoudn't have eaten so much cake in the party last night
+- Must have P.P (chắc hẳn đã...): chỉ sự *suy đoán* logic điều gì ở qk dựa trên hiện tượng, bằng chứng ở hiện tại (chắc chắn hơn could have)
+  + Katie passed the Math exam with 10/10 score. She must have studied very hard
+  + Challotie broked up with her boyfriend last month, she must have hurt/she must have been heartbroken
+- Must have been V-ing (chắc hẳn lúc ấy đang làm gì...):
+  + I didn't hear you knock, I must have been gardening behind the house. 
