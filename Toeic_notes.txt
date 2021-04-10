@@ -1,0 +1,249 @@
+Economy4, Test1
+1. Most of the companies surveyed ----- their growth to marketing
+and sale strategies
+A.attributes
+B.attributed
+C.attributing
+D.attribution
+
+=> B. companies surveyed là cụm danh từ, attributed là main verb
+
+2. Visitor to the central area are invited to visit Central Ottage,
+one of the few historic spots in the ----- morden town of Joplin
+a.however
+b.instead
+c.separately
+d.otherwise
+
+=> D. otherwise (adj) = different (khác)
+
+3. The design of the proposed project is one of the criteria the
+committee will evaluate ----determining the recipient of the state grant
+a.in
+b.and
+c.yet
+d.which
+
+=> A. evaluate in + V-ing (Tra laban dictionary mà ko thấy cụm từ này)
+
+=====
+Economy4, Test10
+1. ------- the deadline to be met, engineers
+will have to put in at least fifteen
+additional hours over the next week.
+(A) Because
+(B) In order for
+(C) In terms on
+(D) Rather
+
+=> B. In order for so/st to do st: so that someone can do something or
+something can happen
+(Để cái gì đó xảy ra...).
+Ko thể chọn A vì Because + of + N
+
+2. Sheridan Fashions, now -------
+throughout Japan, first began as a small
+tailor shop in Yukita twenty years ago.
+(A) operates
+(B) have been operating
+(C) could have operated
+(D) operating
+
+=> D. (ko cần tobe cũng có V-ing được à)
+
+=====
+ETS2019 - test 3
+This manual provides guidelines for inventory control at
+Malanta facilities. Our advanced manufacturing procedures
+depend on --135-- inventory control. Only by maintaining a precise flow
+of inventory --136-- minimize costs and ensure prompt shipments.
+136.
+(A) is able to
+(B) to be able
+(C) our ability to
+(D) are we able to
+
+=> D. (do đảo ngữ only)
+Câu bình thường:
+We are able to minimize costs and ensure prompt shipments only
+by maintaining a precise flow of inventory.
+Chủ ngữ: we
+Động từ: are
+Cụm giới từ: only by maintaining a precise flow of inventory.
+Đảo ngữ: đảo cụm giới từ only by maintaining a precise flow of inventory:
+Only by maintaining a precise flow of inventory are we able to
+minimize costs and ensure prompt shipments.
+
+=====
+ETS2019 - test 10
+To All Staff,
+As many of you are aware, Jacob Wu, our long-standing Chief Executive Officer,
+---139--- on 1 October. Twenty years ago, Mr. Wu set out to create a
+Hong Kong-based services firm with an international scope
+139.
+(A) retired
+(B) will be retiring
+(C) would retire
+(D) was to retire
+
+=> B. Cấu trúc "will be V-ing" trong mẫu ngữ pháp này dùng để nhấn mạnh ý nghĩa
+cho hành động sẽ diễn ra trong tương lai, không liên quan đến thì "Tương lai
+tiếp diễn". Vì vậy, nếu các bạn dịch "sẽ đang …" là không đúng nhé.
+Ex: We will throw a party this Sunday
+(Chúng ta sẽ tổ chức một bữa tiệc vào Chủ nhật này)
+Để nhấn mạnh sự việc này ta sẽ nói là:
+We will be throwing a party this Sunday
+
+=====
+ETS2019 - test 7
+142. They would appreciate ---- ways to enhance the airport
+user's experience.
+(A) to discuss
+(B) discussing
+(C) discuss
+(D) discussed
+
+=> B. appreciate + V-ing
+
+114. It is ------- for the audience to hold its
+applause until the speaker has finished.
+(A) enthusiastic
+(B) casual
+(C) exclusive
+(D) customary
+
+=> D. customary = traditional (phong tục, 1 cách thông thường)
+
+116. Mr. Nigam was ------- retirement when his
+boss asked him to be the head of security at
+the new facility.
+(A) under
+(B) ahead of
+(C) nearby
+(D) close to
+
+=> D. Chọn (D): gần, sắp sửa ( = near)
+(A) dưới, trong tình trạng
+(B) phía trước, sớm hơn
+(C) gần đó (= not far away, cái này chỉ địa điểm)
+
+119. Videos of Korean pop music have become
+very popular ------- adolescents worldwide.
+(A) including
+(B) whereas
+(C) among
+(D) within
+
+=> C
+
+125. Hotels and universities are ------- to recycle
+their used mattresses through the city's
+recycling program.
+(A) systematic
+(B) eligible
+(C) familiar
+(D) successful
+
+=> B. eligible + to V: đủ điều kiện để làm gì
+A: có hệ thống. C: quen thuộc, thường đi với with. D: thành công
+
+126. The ------- to review plans to replace the
+Tronton Bridge will be scheduled soon.
+(A) heard
+(B) hears
+(C) hearing
+(D) hear
+
+=> C. Do sau chỗ trống là giới từ to bỏ qua, thấy đằng trước là mạo từ the cần điền danh từ.
+The hearing = Buổi điều trần.
+Buổi điều trần để xem xét các kế hoạch thay thế Cầu Tronton sẽ sớm được lên kế hoạch
+(A) động từ bất quy tắc của hear
+(B) thì hiện tại đơn chia ở ngôi thứ 3 số ít
+(D) động từ nguyên mẫu
+
+128. The grocery store ------- vegetables from out
+of town until local prices went down last
+month.
+(A) is buying
+(B) will be buying
+(C) has been buying
+(D) had been buying
+
+=> D. Do thấy trong câu có 2 mệnh đề, ta thấy mệnh đề sau until chia quá khứ đơn nên
+ta chọn quá khứ hoàn thành tiếp diễn. Thì quá khứ hoàn thành tiếp diễn được dùng để
+diễn tả quá trình xảy ra 1 hành động bắt đầu trước một hành động khác trong quá khứ:
+S + had + been + V-ing
+VD1: It had been raining very hard for two hours before it stopped.
+VD2: They had been working very hard before we came.
+
+(A) thì hiện tại tiếp diễn
+(B) thì tương lai tiếp diễn 
+(C) thì hiện tại hoàn thành tiếp diễn
+
+Dịch: Cửa hàng tạp hóa đã mua rau từ ngoài thị trấn cho đến khi giá nội địa giảm vào tháng trước.
+
+130. ------- and cost factored equally in choosing
+Cantavox as our main supplier.
+(A) Reliability
+(B) Allowance
+(C) Dependence
+(D) Estimation
+
+=> A. Độ tin cậy
+Dịch: Độ tin cậy và chi phí được cân bằng như nhau trong việc chọn
+Cantavox làm nhà cung cấp chính của chúng tôi.
+
+(B) sự thừa nhận, tiền trợ cấp
+(C) sự dựa dẫm, phụ thuộc
+(D) sự đánh giá, ước lượng
+
+=====
+ETS2019 - test 6
+106. Mr. Winkel's ------- responsibilities include
+auditing and financial review of large clients.
+(A) accounts
+(B) accounted
+(C) accounting
+(D) accountable
+
+=> Phân tích: từ hạn định + ------- + N
+- Chỗ trống có thể điền 1 danh từ hoặc 1 tính từ bổ sung ý nghĩa cho danh từ responsibilities phía sau.
+(A) accounts (Ns: tài khoản)
+(B) accounted (adj/Ved: được coi là)
+(C) accounting (N: kế toán, sự tính toán)
+(D) accountable (adj: chịu trách nhiệm)
+- Dịch nghĩa ta thấy đáp án C là phù hợp nhất.
+Tạm dịch: Trách nhiệm kế toán của cô Winker bao gồm kiểm toán và đánh giá tài chính cho các khách hàng lớn.
+
+126. The Klassin Group's booth at the Liberty
+Architecture Expo has garnered much -------.
+(A) interest
+(B) interests
+(C) interested
+(D) interesting
+
+=> A. sau tính từ much cần điền danh từ không đếm được.
+Loại trừ: (B) danh từ số nhiều (sở thích), thì hiện tại đơn chia ở ngôi thứ 3 số ít
+(C) tính từ (quan tâm, thích thú, phía sau thường có giới từ in)
+(D) tính từ (thú vị)
+
+128. The recently adopted policy restructures the
+company's debt according to a ------- five-step plan.
+(A) managing
+(B) manageably
+(C) manages
+(D) manageable
+
+=> D. Cần điền tính từ ở đây
+
+129. The quality assurance department needs to hire additional staff ------- production has increased by 50 percent.
+(A) even though
+(B) since
+(C) because of
+(D) therefore
+
+=> B. So sánh since với because of:
+since/because/as + mệnh đề
+because of + N/V-ing
+Because, since, as là các liên từ. Because of là giới từ
+
