@@ -241,3 +241,20 @@ Rate: 7
 ### 24. Điểm đến của cuộc đời
 
 
+### 25. Tán tỉnh bất kỳ ai
+Cuốn này có khá nhiều thủ thuật giúp tạo ấn tượng và tán 1 ai đó, nhưng có vẻ như phù hợp với mấy bọn Âu Mỹ hơn là ở VN, nên t chỉ đọc được vài trang đầu! Sau đây là 1 số ý hay:
+- Một đối tượng tiềm năng là ai đó sẵn sàng đón nhận tình yêu, nếu ai đó vừa mất người vợ hoặc người chồng thân thiết của mình, anh/cô ấy sẽ chưa sẵn sàng với tình yêu.
+- Ấn tượng ban đầu: Những khoảnh khắc đầu tiên bạn gặp người kia có thể sẽ quyết định đi tiếp/không đi tiếp. **Những ấn tượng đầu tiên là những ấn tượng ở lại lâu nhất**. Với đàn ông, quần áo quan trọng hơn. Với phụ nữ, đó là hình dáng và gương mặt của họ
+- Tương đồng: nên tìm ra điểm chung, nhưng, chúng ta cũng lại thấy nhàm chán nếu có quá nhiều sự tương đồng. Ta sẽ tìm những người vừa giống mình lại vừa có thể bổ sung cho mình (tức là có những điểm trái ngược nhau đó)
+- Giá trị: Nếu bạn muốn làm ai đó yêu mình, bạn phải thuyết phục được rằng họ sẽ có một món hời.
+- Thay đổi về thể chất: Khi yêu não người sẽ tiết ra một chất hóa học có tên là phenylethylamine hay gọi tắt là PEA. Đây là hóa chất làm tim bạn đập nhanh hơn, bàn tay toát mồ hôi và mọi thứ bên trong “trở nên rối loạn”.
+- Những trải nghiệm thời thơ ấu. Quan trọng nhất, những gì xảy ra với chúng ta trong khoảng từ 5 đến 8 tuổi. Khi ta còn rất nhỏ, một kiểu tiềm thức 
+"hằn sâu" diễn ra.
+- Ánh mắt: *Người ta thường nhìn chăm chú vào những thứ họ thích và đảo mắt qua rất nhanh những gì họ không thích*.
+Chúng ta chăm chú nhìn một cách yêu thương với người ta yêu, và mắt ta mau chóng rời khỏi những người khó chịu, xấu xí và trì độn.
+Khi ai đó càng tỏ ra lấn át chúng ta, ta càng muốn né tránh ánh mắt họ
+Những người đang yêu chăm chú nhìn vào nhau khi nói chuyện nhiều hơn
+Một người phụ nữ luôn được giáo dục cần phải cụp mắt xuống khi có người đàn ông nào đó ngắm nhìn mình.
+- Giá trị: *đàn ông thích một người phụ nữ biết tỏ ra mình có giá hơn*. Chẳng hạn khi được rủ đi chơi, hẳn là con gái thích lắm, nhưng vẫn cứ kiểu tỉnh bơ: "Sao nhỉ, cũng được"
+- hãy thể hiện sự đồng cảm
+- khen
