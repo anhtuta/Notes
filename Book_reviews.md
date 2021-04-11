@@ -240,7 +240,8 @@ Rate: 7
 
 ### 24. Điểm đến của cuộc đời
 
-
+=====
+## 2021
 ### 25. Tán tỉnh bất kỳ ai
 Cuốn này có khá nhiều thủ thuật giúp tạo ấn tượng và tán 1 ai đó, nhưng có vẻ như phù hợp với mấy bọn Âu Mỹ hơn là ở VN, nên t chỉ đọc được vài trang đầu! Sau đây là 1 số ý hay:
 - Một đối tượng tiềm năng là ai đó sẵn sàng đón nhận tình yêu, nếu ai đó vừa mất người vợ hoặc người chồng thân thiết của mình, anh/cô ấy sẽ chưa sẵn sàng với tình yêu.
