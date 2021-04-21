@@ -17,7 +17,7 @@ Gia đình là số 1, hãy trân trọng bố mẹ khi còn có thể! Phim man
 ### Câu nói hay
 ...
 
-### Rate
+### Review
 Phim cũng hay, hình ảnh đẹp, nội dung dễ hiểu, tuy nhiên cốt truyện còn đơn giản, ko thực sự xuất sắc
 
 Rate 7/10
@@ -35,4 +35,4 @@ Produced by Pixar Animation Studios and released by Walt Disney Pictures
 ### Câu nói hay
 
 
-### Rate
+### Review
