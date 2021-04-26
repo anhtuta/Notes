@@ -271,8 +271,9 @@ class Abc extends React.Component {
 ```
 
 ## Context
-- Dùng để share global data giữa các component, chẳng hạn userInfo, theme, language...
-- VD: các props user và avatar sẽ được truyền từ component cha (Page) tới tận component con dưới cùng (Avatar):
+Dùng để share global data giữa các component, chẳng hạn userInfo, theme, language...
+
+VD: các props user và avatar sẽ được truyền từ component cha (Page) tới tận component con dưới cùng (Avatar):
 ```js
 <Page user={user} avatarSize={avatarSize} />
 // ... which renders ...
@@ -284,4 +285,35 @@ class Abc extends React.Component {
   <Avatar user={user} size={avatarSize} />
 </Link>
 ```
-- Việc truyền props user và avatarSize như thế
+
+Việc truyền props user và avatarSize qua nhiều tầng component nhưng cuối cùng chỉ component tầng cuối cùng là Page mới sử dụng như thế thực sự **annoying!**.  
+=> Vấn đề này gọi là **prop drilling** (also called "Threading")  
+Khi avatar change ở component top, ta phải sửa tất cả các component con của nó
+
+Nếu ko dùng context, thì có thể truyên luôn component Avatar thay vì props như trên:
+```js
+function Page(props) {
+  const user = props.user;
+  const userLink = (
+    <Link href={user.permalink}>
+      <Avatar user={user} size={props.avatarSize} />
+    </Link>
+  );
+  return <PageLayout userLink={userLink} />;
+}
+
+// Now, we have:
+<Page user={user} avatarSize={avatarSize} />
+// ... which renders ...
+<PageLayout userLink={...} />   // thay vì <PageLayout user={user} avatarSize={avatarSize} /> như trước
+// ... which renders ...
+<NavigationBar userLink={...} />  // thay vì <NavigationBar user={user} avatarSize={avatarSize} /> như trước
+// ... which renders ...
+{props.userLink}
+```
+Với cách này, nếu Avatar thay đổi, chỉ cần sửa component top là được, tức là mọi sự thay đổi của component con tầng thấp nhất đều do component cha tầng trên cùng quản lý (component con chỉ cần hiển thị: ```{props.userLink}```)  
+=> Cái này gọi là **Inversion of control** đó!  
+=> Tuy nhiên việc này khiến component top thêm phức tạp  
+=> Còn nữa, trường hợp này các component ở tầng giữa ko dùng Avatar thì ok. Nhưng nếu chúng có cần thì sao???  
+=> Dùng React context. Có thể hiểu đơn giản, Context object chính là 1 central store dùng để share global data và có thể được truy cập, chỉnh sửa bởi bất kì component nào (???)
+=> React context khá giống với Redux. Nếu chỉ cần 1 central store để lưu data, thì có thể thay thế Redux = React context
