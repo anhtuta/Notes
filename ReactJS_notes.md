@@ -1,9 +1,12 @@
-=== 1 biến State là 1 mảng
-Giả sử như sau:
+## State
+- 1 biến State là 1 mảng. Giả sử như sau:
+```js
 this.state = {
   nameArr: []
 }
+```
 Sau đó trong component update lại như sau:
+```js
 doSomething = () => {
   let { nameArr } = this.state;
   nameArr.push("Anhtu");
@@ -11,8 +14,10 @@ doSomething = () => {
     nameArr
   })
 }
-Nếu làm như vậy, component này sẽ KHÔNG rerender, vì state nameArr ko bị thay đổi
-=> Cách làm đúng:
+```
+
+=> Nếu làm như vậy, component này sẽ KHÔNG rerender, vì state nameArr ko bị thay đổi. Cách làm đúng:
+```js
 doSomething = () => {
   let nameArr = [...this.state.nameArr];
   nameArr.push("Anhtu");
@@ -20,8 +25,19 @@ doSomething = () => {
     nameArr
   })
 }
+```
 
-=== Redux demo:
+- Another ex:
+```js
+this.setState({
+	name: "att"
+});
+this.myFunc(this.state.name);
+```
+KHÔNG thể lấy giá trị att ở chỗ this.state.name được, vì hàm setState ở trên là bất đồng bộ, và nó sẽ thực hiện sau cái hàm myFunc ở dưới
+
+## Redux demo
+```js
 import React from 'react';
 import { connect } from 'react-redux';
 import store from '../path/to/store';
@@ -48,6 +64,7 @@ const mapStateToProps = function(store) {
   };
 }
 export default connect(mapStateToProps)(UserListContainer);
+```
 
 - The first argument to connect() is a function that should return an object.
   The object's properties will become "props" on the component.
@@ -59,11 +76,14 @@ export default connect(mapStateToProps)(UserListContainer);
   hàm connect()()
 - Bây giờ thì UserListContainer có thể dùng props.users
 - store có userState bởi vì ta có reducer sau:
+```js
 const reducers = combineReducers({
   userState: userReducer,
   widgetState: widgetReducer
 });
+```
 - userState có users vì ta đã khởi tạo như sau:
+```js
 const initialUserState = {
   users: []
 }
@@ -74,28 +94,23 @@ const userReducer = function(state = initialUserState, action) {
   }
   return state;
 }
+```
 
-===
-- this.setState({
-	name: "att"
-});
-this.myFunc(this.state.name);
-// KHÔNG thể lấy giá trị att ở chỗ this.state.name được,
-// vì hàm setState ở trên là bất đồng bộ, và nó sẽ thực hiện sau cái hàm myFunc ở dưới
-
-===
+## onChange ở thẻ input
 Thay vì dùng onChange, hãy dùng onBlur ở thẻ input:
+```js
 <input type="text" onBlur={(e) => this.onChange('name', e.target.value)} />
+```
 
-=== Thêm props dạng json:
-VD:
+## Thêm props dạng json
+```js
 let jsonProps = {name: "att", address: "Hanoi"};
 <User {...jsonProps} />
+```
 
-=== Axios:
-...{ Pragma: 'no-cache' }, thêm cái này vào axios headers, nếu ko token sẽ bị cache ở cookie
-khi run trên IE (Chrome thì ổn!)
-VD:
+## Axios
+```...{ Pragma: 'no-cache' }```: thêm cái này vào axios headers, nếu ko token sẽ bị cache ở cookie khi run trên IE (Chrome thì ổn!). VD:
+```js
 request.headers = {
     ...{ 'Content-Type': 'application/json' },
     ...{ Authorization: "Bearer " + Cookie.get(TOKEN) },
@@ -103,8 +118,10 @@ request.headers = {
     ...request.headers
 }
 axios(request);
+```
 
-=== Sleep in ReactJS
+## Sleep in ReactJS
+```js
 sleep = (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -126,8 +143,10 @@ render() {
     <button onClick={() => this.handleDemo()}>Demo</button >
   )
 }
+```
 
-=== handle leak
+## Handle leak
+```js
 class Abc extends React.Component {
   const userInfo = this.props.location.state ? this.props.location.state.userInfo : null;
   state = {
@@ -158,15 +177,17 @@ class Abc extends React.Component {
     )
   }
 }
+```
 
-Giả sử trang /abc sẽ render component Abc này
-Với ví dụ trên, nếu như user vào trực tiếp trang /abc
-=> this.props.location.state = null
-=> redirect ngay về home: "/"
-=> Vẫn bị lỗi memory leak, bởi vì sau khi Service.getAllRoles => state change => rerender
-=> chả còn component Abc mà render roles nữa
-=> Cách xử lý 1: dùng biến check xem component đã bị unmounted chưa, nếu rồi thì ko change state nữa
+Giả sử trang /abc sẽ render component Abc này  
+Với ví dụ trên, nếu như user vào trực tiếp trang /abc  
+=> this.props.location.state = null  
+=> redirect ngay về home: "/"  
+=> Vẫn bị lỗi memory leak, bởi vì sau khi Service.getAllRoles => state change => rerender  
+=> chả còn component Abc mà render roles nữa  
+=> Cách xử lý 1: dùng biến check xem component đã bị unmounted chưa, nếu rồi thì ko change state nữa  
 => ko rerender
+```js
 class Abc extends React.Component {
   const userInfo = this.props.location.state ? this.props.location.state.userInfo : null;
   state = {
@@ -206,8 +227,10 @@ class Abc extends React.Component {
     )
   }
 }
+```
 
-- Cách xử lý 2: check luôn userInfo trong componentDidMount:
+=> Cách xử lý 2: check luôn userInfo trong componentDidMount:
+```js
 class Abc extends React.Component {
   state = {
     roles: {},
@@ -245,3 +268,20 @@ class Abc extends React.Component {
     )
   }
 }
+```
+
+## Context
+- Dùng để share global data giữa các component, chẳng hạn userInfo, theme, language...
+- VD: các props user và avatar sẽ được truyền từ component cha (Page) tới tận component con dưới cùng (Avatar):
+```js
+<Page user={user} avatarSize={avatarSize} />
+// ... which renders ...
+<PageLayout user={user} avatarSize={avatarSize} />
+// ... which renders ...
+<NavigationBar user={user} avatarSize={avatarSize} />
+// ... which renders ...
+<Link href={user.permalink}>
+  <Avatar user={user} size={avatarSize} />
+</Link>
+```
+- Việc truyền props user và avatarSize như thế
