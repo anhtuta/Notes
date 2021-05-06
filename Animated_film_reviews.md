@@ -34,6 +34,9 @@ Linh hồn của Joe sau đó đi tới Great Beyond (cõi sau, có vẻ là nơ
 
 Sự trái lập hoàn toàn giữa tính cách của Joe và 22 đã tạo nên điểm nhấn của phim. Joe Gardner, một người có niềm đam mê mãnh liệt, khao khát được sống và thực hiện ước mơ được tham gia biểu diễn nhạc với nghệ sĩ nổi tiếng. Còn 22 đại diện cho một người ko biết mục đích sống của mình là gì, đối với cô, mọi thứ đều nhàm chán, khiến cô ko muốn xuống trái đất để sống! 22 đã trải qua quá trình tìm Spark với rất nhiều mentor trước đó rồi, và họ đều fail!
 
+Câu chuyện sẽ tiếp diễn như nào?... Tự đón xem nhé 😋
+
+Trích 1 đoạn review:  
 "Cuối cùng Joe cũng nhận ra rằng chơi piano chỉ là một phần nhỏ cuộc sống này của ông, rằng cuộc sống đáng sống khi ta lắng nghe xung quanh, không ích kỷ và dám hy sinh cho thứ gì đó ý nghĩa, như cuộc sống mới của 22 chẳng hạn. 
 
 Liệu cuộc sống này đã sắp đặt sẵn chỉ khi con người làm đúng cái mình yêu thích mới thực sự hạnh phúc?
