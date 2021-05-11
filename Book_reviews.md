@@ -259,3 +259,43 @@ Một người phụ nữ luôn được giáo dục cần phải cụp mắt xu
 - Giá trị: *đàn ông thích một người phụ nữ biết tỏ ra mình có giá hơn*. Chẳng hạn khi được rủ đi chơi, hẳn là con gái thích lắm, nhưng vẫn cứ kiểu tỉnh bơ: "Sao nhỉ, cũng được"
 - hãy thể hiện sự đồng cảm
 - khen
+
+### 26. Người đua diều
+**Vì cậu, cả ngàn lần rồi!**
+
+Đó là câu nói hay duy nhất trong truyện, của Hassan dành cho Amir. Amir là con của 1 người quý tộc nổi tiếng ở Kabul. Bố cậu là 1 người đàn ông rất chuẩn mực và dũng cảm, nhưng Amir là 1 người hoàn toàn trái ngược với bố: nhút nhát. Baba, bố của Amir lớn lên cùng người bạn thân nhất là Ali, còn Amir thì lớn lên với Hassan. Amir là người Pashtun, còn Hassan là người Haraza, tộc người mà bị Afghanistan kỳ thị cực kỳ khủng khiếp. Người Pashtun nhìn người Hazara không khác nào một Con người nhìn một loài Súc vật. Và Hassan, một con người Hazara cũng không nằm ngoài cảnh bị kỳ thị như thế.
+
+Amir coi Hassan là bạn thân, và Hassan cũng vậy, thậm chí rất tôn sùng Amir. Phần đầu truyện kể về thời bé của 2 người bạn với nhiều lần Hassan xả thân để cứu Amir, và đặc biệt là trong 1 giải đua diều, Amir đã thắng tất cả các đối thủ bằng việc chặt đứt diều của tất cả kẻ khác. Hassan có nhiệm vụ lấy lại chiếc diều rơi cuối cùng đó cho Amir, nhưng mọi chuyện ko hề dễ dàng như vậy. Hassan đụng độ Assef, 1 kẻ cực kì to lớn và cực ghét người Haraza. Amir cũng tới đó, và đã chứng kiến cảnh bạn mình bị lũ người của Assef đánh, nhưng cậu ko hề lộ mặt cứu nguy cho bạn mình! Amir đúng là 1 tên hèn nhát! Đây chính là điều khiến Amir ăn năn, hối hận và cảm thấy tội lỗi nhất trong cuộc đời!
+Phần sau của câu chuyện kể về quá trình Amir từ Mỹ về Afghanistan để lấy lại đứa con của Hassan nhằm chuộc lại lỗi lầm năm xưa (bởi vì Hassan đã chết, nên điều duy nhất mà Amir có thể làm lúc này là chăm sóc thật tốt cho thằng bé, và đưa nó khỏi đất nước Afghanistan đầy chiến tranh, đến với 1 thế giới tốt đẹp hơn).
+
+Người đua diều ko quá đặc sắc nhưng cũng là một khúc ca đầy ám ảnh và ai oán về những lỗi lầm day dứt khôn nguôi và sự cứu chuộc, về tình bạn, tình gia đình, mối quan hệ cha con mong manh, cùng sự chứng thực cho cái triết lý "đời cha ăn mặn, đời con khát nước".
+
+Câu nói hay:
+- Thà bị đau bởi sự thật còn hơn được vỗ về bằng sự dối trá - Baba
+- Trộm cắp là một tội không thể tha thứ, là mẫu số chung mọi tội lỗi. Khi con giết một người, là con đánh cắp một cuộc đời. Con ăn cắp quyền làm vợ của một người đàn bà, cướp người cha của những đứa con. Khi con nói dối, con ăn cắp quyền của ai đó đối với sự thật. Khi con lừa đảo, con ăn cắp quyền đối với sự chính trực. Không có hành động nào cực kỳ xấu xa hơn ăn cắp - Baba
+- *Có rồi lại mất luôn luôn đau hơn cả việc không có ngay từ đầu*
+
+Đọc tới cuối truyện mới biết Hassan chính là anh em cùng cha khác mẹ với Amir. Nhận xét chung là tác phẩm này ko quá đặc sắc, và thực sự buồn!
+
+Rate: 7
+
+### 27. Năm centimet trên giây
+Đây là cuốn tiểu thuyết đầu tiên vừa đọc truyện vừa xem cả phim. Đọc truyện trước xong mới xem phim. Sau khi xem xong cảm thấy sách hay hơn phim, mô tả chi tiết hơn, những tình huống, nội tâm nhân vật được bộc lộ hay hơn, rõ nét hơn, dễ hiểu hơn phim. Có lẽ tác phẩm này chủ yếu tập trung vào miêu tả nội tâm hơn là các lời thoại, nên lên phim ko hay bằng. Chẳng hạn như đoạn sau, nếu xem phim khó có thể cảm nhận được:  
+"Tiếng xe cộ chạy ngoài đường dội vào ống nghe, nghĩa là Akari đang gọi cho tôi từ bốt điện thoại công cộng. Dù đang ở trong phòng riêng, tôi vẫn thấy hơi lạnh từ nơi ấy lan tới tận những ngón tay mình."
+
+Sách chia thành 3 câu chuyện nhỏ, với 3 ngôi kể khác nhau
+
+Chuyện thứ nhất kể về quá khứ của 2 người, do Toono Takaki kể, khi Takaki và Akari Shinohara còn học lớp 6. 2 người liên tục phải chuyển nhà vì công việc của bố mẹ. Cuối cùng Takaki phải chuyển tới cực Nam của Nhật Bản, và trước đó 2 người quyết định gặp nhau lần cuối. Đọc sách mới thấy đoạn này miêu tả hay hơn hẳn xem phim! *Cảm giác vượt hàng ngàn cây số trong 1 thời gian rất dài để tới gặp người mình yêu thực sự rất hạnh phúc!*
+
+Chuyện thứ 2 dựa theo lời kể của Sumida Kanae, 1 cô gái học cùng Takaki sau khi cậu chuyển tới Kagoshima. **Đồng cảm**, có lẽ là 1 chi tiết hay nhất trong chuyện này! Sumida đã thích Takaki ngay từ lần đầu tiên cậu chuyển tới đây học. Sumida đã nhận ra Takaki và mình có 1 điểm chung duy nhất là ko biết làm gì cho tương lai. Chính sự đồng cảm này khiến Sumida làm được những điều mà cô chưa từng làm được: cảm nhận những cơn gió qua những cánh đồng, cảm nhận dư vị mùa hè còn đọng lại trên tiết trời tháng 10, và lần đầu tiên có thể lướt trên những ngọn sóng. Tuy nhiên ngay cả việc tỏ tình với Takaki cô cũng ko thể nói được, bởi vì qua ánh mắt của Takaki, cô đã biết Takaki ko hề dành tình cảm cho mình! Còn gì ngu ngốc hơn khi tỏ tình mà biết trước rằng sẽ nhận được lời từ chối?
+
+Câu chuyện thứ 3, theo lời kể có lẽ là của tác giả, nói về cuộc sống thực tại của Takaki với công việc là 1 lập trình viên. Đọc hết mới thấy, dù đã trải qua rất nhiều mối tình với nhiều người con gái khác nhau, nhưng Takaki vẫn ko thể rung động trước bất kỳ ai: "Tại sao mình không thể đem lại hạnh phúc cho ai hết, dù chỉ một chút, dù chỉ một người?", "Anh hiểu hơn ai hết, đó là điều anh vẫn khao khát lâu nay. Là câu cô bé đã nói với cậu bé năm ấy. "Takaki à, tớ tin mọi chuyện sẽ tốt đẹp thôi.""
+
+Trích 1 comment trên Youtube:  
+Rất nhiều fan anime ở Việt Nam luôn nói rằng: "*Năm centimet trên giây* khiến tôi nghĩ rằng khoảng cách có thể xóa nhòa tình cảm đôi lứa nhưng *Your name* dạy tôi rằng tình yêu đủ lớn để vượt qua không gian và thời gian", nhưng họ quên mất rằng *Your name* là 1 thế giới có yếu tố phép thuật và siêu nhiên còn *Năm centimet trên giây* mới là thế giới mà chúng ta đang sống.
+
+Thông điệp từ tác giả Shinkai Makoto: Bạn đừng yêu đời thế! trầm cảm lên 🤣
+
+Buồn và cô đơn! Tác phẩm thực sự rất buồn! 1 số chi tiết, câu nói hay trong sách:
+- Cố gắng quên đi 1 người bằng cách ko thèm liên lạc trong suốt 1 thời gian dài, để rồi sau đó người ta nhắn tin lại, bao nỗi cô đơn vì thiếu vắng người đó lại sống dậy: **Đã cố gắng bao nhiêu để quên một người nhưng rốt cuộc trái tim tôi vẫn chỉ hướng về người ấy.**
+- Tình cảm dù mạnh mẽ nồng nhiệt đến đâu đi nữa thì cũng sẽ phai mờ theo thời gian, từng chút một.
