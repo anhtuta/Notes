@@ -349,4 +349,50 @@ So sánh HAVING clause và WHERE clause: https://www.geeksforgeeks.org/differenc
 | Dùng trước GROUP BY Clause                             | Dùng sau GROUP BY Clause                            |
 | Dùng với các hàm single row, chẳng hạn UPPER, LOWER... | Dung với các hàm multiple row, chẳng hạn SUM, COUNT |
 
+## MAX
+[SQL Server] Giả sử ta có 2 bảng product và brand như sau (chỉ quan tâm tới 2 bảng này thôi):
+
+![Capture](https://user-images.githubusercontent.com/26838239/118583764-c6fc6b80-b7bf-11eb-81fc-f48a3d3ae0b7.PNG)
+
+Chi tiết db này xem tại: https://www.sqlservertutorial.net/sql-server-sample-database/
+
+```sql
+-- Hiển thị brand_id và giá cao nhất của từng brand, pretty easy
+SELECT p.brand_id, MAX(p.list_price) AS maxPrice
+FROM production.products p
+GROUP BY p.brand_id
+ORDER BY maxPrice;
+
+-- Hiển thị brand_name và giá cao nhất của từng brand, a little more complicate
+-- vì cần phải join với bảng brand để lấy được brand_name
+SELECT b.brand_name, MAX(p.list_price) AS maxPrice
+FROM production.products p, production.brands b
+WHERE p.brand_id = b.brand_id
+GROUP BY b.brand_name
+ORDER BY maxPrice;
+
+-- Làm sao để hiển thị cả tên product ứng với cái brand_id có giá cao nhất đó?
+-- Tạo 1 bảng tạm (sub-query) để lấy ra brand_id và maxPrice như trên, sau đó join bảng tạm này
+-- với bảng products để lấy các cột cần lấy (product_name...)
+SELECT p.product_name, mp.brand_id, mp.maxPrice
+FROM production.products p
+INNER JOIN (
+    SELECT p.brand_id, MAX(p.list_price) AS maxPrice
+    FROM production.products p
+    GROUP BY p.brand_id
+) mp
+ON p.brand_id = mp.brand_id AND p.list_price = mp.maxPrice
+ORDER BY mp.maxPrice;
+
+-- Hmm, hãy nhìn lại câu query trên, có vẻ như nó đang join với chính nó (SELF JOIN)
+-- Có 1 cách khác ko cần subquery như sau
+-- Ref: https://stackoverflow.com/a/7745635/7688028
+SELECT p1.product_name, p1.brand_id, p1.list_price
+FROM production.products p1
+LEFT JOIN production.products p2
+ON (p1.brand_id = p2.brand_id
+AND p1.list_price < p2.list_price)
+WHERE p2.brand_id IS NULL -- the row(s) that actually have the max value will have NULL in the right side???
+ORDER BY p1.list_price;
+```
   
