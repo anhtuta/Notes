@@ -313,3 +313,50 @@ Buồn và cô đơn! Tác phẩm thực sự rất buồn! 1 số chi tiết, c
 - Tình cảm dù mạnh mẽ nồng nhiệt đến đâu đi nữa thì cũng sẽ phai mờ theo thời gian, từng chút một.
 
 Rate: 8
+
+### 28. Khu vườn ngôn từ - Shinkai Makoto
+![aaa5d4302d9d11e89e38a58bdb6aabfb](https://user-images.githubusercontent.com/26838239/120061883-74f1fa80-c089-11eb-9319-f23c20c1b3ab.jpg)
+
+Akizuki Takao, một cậu học sinh lớp 10 (15 tuổi), cảm thấy cô đơn, lạc lõng và chán ghét thực tại khi bố mẹ cậu li dị, và mẹ cậu tiếp tục hẹn hò với 1 người đàn ông khác trẻ hơn mình tới tận 12 tuổi, khi những bài học trên lớp ko còn hứng thú với cậu nữa, hay cả việc quyết định thi vào đại học cũng ko khiến cậu bận tâm. Đam mê duy nhất của cậu là làm giày thủ công. Bởi vậy cậu luôn khép kín mình mỗi khi ở trường và hầu như đều đi muộn. Đặc biệt là vào những hôm mưa rào của mùa hạ, thay vì tới lớp thì cậu lại chọn cách bỏ tiết để trốn tới công viên 1 mình. Cậu hay ngồi ở 1 mái hiên trú mưa trong công viên.
+
+Yukino Yukari, một giáo viên trung học 27 tuổi, cũng là 1 người chán ghét thực tại, sợ hãi và tự ti trước những ánh mắt phán xét của mọi người. Yukino có một vẻ bề ngoài xinh xắn, thực sự rất xinh: *Giống như con thuyền buồm trắng lướt trên mặt biển xám xịt, trước mắt mọi người, Yukino luôn như tỏa sáng rực rỡ. Mặc dù bản thân cô ko hề mong muốn điều đó*. Chính nét đẹp như vậy khiến hồi bé Yukino bị các bạn gái căm ghét vì nổi bật hơn họ rất nhiều. Còn những bạn nam cũng chả giữ được bình tĩnh trước 1 vẻ đẹp như vậy. Yukino cứ sống khép kín như vậy. Sau khi trở thành giáo viên dạy văn ở ngôi trường mà Takao theo học, Yukino được 1 nam sinh lớp 12 tỏ tình và từ chối, khiến Aizawa Shoko từ 1 người rất mến cô trở nên căm ghét cô rất nhiều, có lẽ bởi Aizawa cũng thích anh chàng kia. Thể rồi cả lũ con gái quay lại căm ghét cô, khiến cô sợ hãi và nhiều lần trốn tiết dạy để đến công viên ngồi 1 mình, và cuối cùng cũng nộp đơn nghỉ việc tại trường học.
+
+Yukino cũng giống như Takao, cả 2 đều lui tới công viên 1 mình giữa những ngày mưa, và trùng hợp nữa là cả 2 cũng đều ngồi dưới 1 mái hiên. Lần đầu tiên Takao tới gặp cô đã ngồi trước ở đó, nhưng ko hiểu sao Takao ko muốn tìm chỗ khác ngồi, có lẽ chỗ này đã rất quen thuộc với Takao. Cả 2 đều muốn trốn tránh hiện thực, đều có những khó khăn, khúc mắc riêng và đặc biệt, họ đều cảm thấy cô đơn và lạc lõng. Ban đầu Yukino nhận ra Takao là học sinh trường mình nhờ huy hiệu đẹo trên áo, nhưng Takao thì ko, có lẽ do bản tính khép kín của cậu. Sau lần gặp gỡ đầu tiên, Yukino chào tạm biệt bằng 1 bài thơ:
+
+*Ầm ì sóng dội  
+cuồn cuộn mây trôi  
+Mưa rơi chăng tá?  
+để ta  
+lưu người...*
+
+Dịch nghĩa: sấm vang lên, đột nhiên mây đen kéo tới, băn khoăn chẳng biết hôm nay ngoài trời có mưa không vì tôi muốn giữ người ở lại. Bài thơ này là của người con gái hát lên khi muốn níu giữ người con trai
+
+![Screenshot_20210528-164557](https://user-images.githubusercontent.com/26838239/120063268-7a067800-c090-11eb-9ad5-46b52eecca4e.png)
+
+Có lẽ chính những cơn mưa đã mang Takao và Yukino lại với nhau. Và đã từ khi nào, cả 2 đều thức dậy với mong muốn ngày hôm nay sẽ mưa, để mình có cơ hội gặp người đó!
+
+Mùa hè tới, Takao gần như làm thêm toàn bộ kì nghỉ hè để kiếm thêm tiền làm giày, và ko thèm lưu tới cái công viên kia, vì muốn quên đi người đó!
+
+"Không phải  
+Không đúng như thế  
+Mình muốn gặp.  
+Muốn đến nhức nhối, muốn đến ko sao chịu nổi!"
+
+Cuối cùng Takao cũng tới công viên và đã gặp Yukino ở đó, đáp lại bài thơ mà lần đầu tiên Yukino gửi tới cậu:
+
+*Dãu sấm không vang dội  
+dù mưa  
+chẳng tuôn rơi...  
+Chỉ cần em mong muốn  
+thì ta sẽ chẳng rời*
+
+Khoảnh khắc Takao nói hết tình cảm của mình, và khoảnh khắc Yukino chạy tới ôm lấy cậu là khoảnh khắc đẹp nhất phim. Cả 2 đều cảm thấy chính người kia là người đã cứu giúp mình thoát khỏi thế giới thực tại đáng ghét, Takao giúp Yukino có thêm động lực để sống tiếp, còn Yukino giúp Takao theo đuổi ước mơ làm giày của mình
+
+![Screenshot_20210529-145326](https://user-images.githubusercontent.com/26838239/120063275-8a1e5780-c090-11eb-98ec-612309a4dc52.png)
+
+![Screenshot_20210529-145403](https://user-images.githubusercontent.com/26838239/120063277-8db1de80-c090-11eb-89fa-46427a8fc64a.png)
+
+Trong 5cm/s, tình yêu bị ngăn cách bởi khoảng cách địa lý, thì trong khu vườn ngôn từ, tình yêu bị ngăn cách bở tuổi tác??? Không hẳn như vậy, vì cái kết truyện này tuy ko phải happy ending, nhưng ít ra cũng ko buồn như 5cm/s. Đây cũng là tác phẩm thứ 2 t đọc truyện sau đó xem film, và lại 1 lần nữa cảm nhận truyện vẫn hay hơn, miểu tả nhân vật rõ nét hơn so với phim. Tuy nhiên trong phim lại có nhiều cảnh đẹp hơn, hình ảnh phim này được xây dựng thực sự rất kỳ công, có lẽ do việc rút ngắn tác phẩm dài 220 trang trong 1 bộ phim chỉ vỏn vẹn 45 phút nên được trau chuốt như vậy!
+
+Rate: 8
+
