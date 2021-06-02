@@ -360,3 +360,41 @@ Trong 5cm/s, tình yêu bị ngăn cách bởi khoảng cách địa lý, thì t
 
 Rate: 8
 
+### 29. Phía sau nghi can X - Higashino Keigo
+![phia-sau-nghi-can-x-2](https://user-images.githubusercontent.com/26838239/120518599-efa97580-c3fb-11eb-8506-9dd0f4569f9d.jpg)
+
+Tetsuya Ishigami, một giáo viên cấp III dạy toán, rất đam mê toán học nhưng tiếc là ko thể trở thành nhà toán học được. Ishigami là một người thực sự thông minh, nguy hiểm, lạnh lùng với mọi suy nghĩ cực kỳ thấu đáo, đánh giá sự việc dựa trên những logic, và chỉ cần hợp logic thôi thì sẽ không từ thủ đoạn nào. Hơn nữa, anh là một người có khuôn mặt vô cảm! Nói đến đây có lẽ nhiều người nghĩ đây là 1 tên tội phạm cực kỳ khôn ngoan và nguy hiểm? Không, anh chỉ là 1 người bình thường!
+
+Yasuko Hanaoka sống cùng con gái là Misato ở phòng 204 bên cạnh nhà của Ishigami. Tòa nhà 2 người ở chỉ có 2 tầng, mỗi tầng 4 phòng nên thành ra phòng của cô ở góc trong cùng. Yasuko làm việc ở quán cơm Mỹ Nhân
+
+"Ishigami chẳng có lý do gì để chết. Chỉ là anh không có lý do gì để sống thôi". Ishigami đã từng có ý định thắt cổ tự tử, nhưng rồi ngày hôm đó chuông nhà anh reo, đó chính là Yasuko và Misato, 2 người tới mới chuyển tới đây ở, căn hộ ngay cạnh nhà anh, nên đã sang chào anh 1 tiếng. "Hai người họ có đôi mắt rất đẹp. Chưa bao giờ Ishigami bị thu hút hay xúc động trước một vẻ đẹp nào. Cuộc sống của Ishigami thay đổi hẳn kể từ sau lần gặp gỡ mẹ con Hanaoka. Anh không còn ý muốn tự sát nữa mà đã tìm được niềm vui của cuộc sống. Chỉ cần tưởng tượng hai mẹ con đang làm gì, ở đâu thôi là anh cũng thấy vui rồi. Trên tọa độ thế giới có hai điểm mang tên Yasuko và Misato. Đối với Ishigami, điều đó thật kỳ diệu". Ishigami đã có tình cảm với Yasuko, thế nên ngày nào đi làm cũng ghé qua quán Mỹ Nhân để mua cơm hộp, nếu như Yasuko nghỉ làm, thì hôm đó anh cũng ko tới. Trước khi gặp Yasuko, Ishigami chỉ là một con người không có mục đích sống.
+
+Mọi chuyện bắt đầu từ khi Togashi Shinji, chồng cũ đã ly dị của Yasuko tìm tới quán Mỹ Nhân với mục đích muốn quay lại với cô. Yasuko đã phải trốn tránh rất nhiều, phải thay đổi chỗ làm chỉ để ko bao giờ có cơ hội gặp lại Togashi nữa, ấy vậy mà... Sau hôm gặp gỡ đó, Yasuko dẫn Togashi về phòng của mình, rồi đành phải đưa tiền cho hắn. Misato cũng căn ghét con người này, và nhân lúc Togashi quay đi, ko để ý gì, đã cầm bình hoa đập vào hắn, sau đó 2 mẹ con vật lộn với Togashi và cuối cùng Yasuko đã thắt cổ được Togashi bằng sợi dây điện của máy sưởi. Mọi việc bắt đầu từ đây!
+
+Ishigami cực kỳ yêu quý mẹ con Yasuko, nên đã dùng cái đầu óc thiên tài của mình giúp mẹ con họ xử lý cái xác, tạo chứng cứ ngoại phạm rất hoàn hảo
+
+Thanh tra Kusanagi là người tham gia chính vào việc điều tra vụ án này, cùng với người bạn của anh là nhà vật lý tài năng ko kém Ishigami, tên Yugawa Manabu. Yugawa cũng chính là bạn học cùng khóa của Ishigami tại trường đại học Teito. Xuyên suốt truyện là việc Kusanagi lần theo manh mối, điều tra chứng cứ ngoại phạm của 2 mẹ con Yasuko. Nhưng mọi việc đều đi đến bế tắc, đều đi theo sự tính toán của Ishigami, bở vì sao? Bởi vì chứng cứ ngoại phạm của 2 mẹ con đó là thật, bởi vì buổi tối hôm phát hiện xác chết, 2 mẹ con Yasuko đều đã đi xem phim rồi đi hát karaoke trong thời điểm nạn nhân bị sát hại! Đó là bởi vì Togashi đã bị sát hại tối hôm trước rồi, và hôm sau, chính Ishigami đã lạnh lùng giết 1 người vô gia cư khác, sau đó phá hủy cái xác để ko ai nhận ra đó là Togashi giả, còn cái xác thật, Ishigami đã chặt thành 6 khúc ném xuống sông trong 3 ngày, mỗi khúc 1 nơi. Sau này cảnh sát có tìm ra cái xác thì vụ án cũng đã xong xuôi, Togashi đã chết. Không có chuyện một người lại chết hai lần.
+- "Cách giải quyết vụ án lần này không phải là việc lật tẩy được chứng cứ ngoại phạm. Vấn đề nằm ở chỗ hoàn toàn khác."
+- "Ishigami đã chỉ cho các cậu một câu trả lời. Đó là việc anh ấy ra đầu thú và nội dung lời khai. Anh ấy đã vận dụng hết trí óc để nghĩ ra một câu trả lời mà nhìn từ góc độ nào cũng thấy đúng. Việc các cậu chấp nhận luôn câu trả lời nghĩa là các cậu đã thất bại. Đúng ra các cậu phải dốc hết sức để kiểm tra xem câu trả lời của Ishigami đưa ra có đúng không. Các cậu đang bị Ishigami thử thách."
+
+Kudo Kuniaki, bạn cũ của Yasuko, cũng là người có tình cảm với cô, sau khi vợ mất đã quyết định gặp Yasuko để cầu hôn, đúng dịp Yasuko dính vào vụ án giết người. 2 người đã hẹn nhau đi ăn, hẹn hò, và Ishigami đã bắt gặp cảnh đó. Sau đó Ishigami gửi thư cho Yasuko với nội dung yêu cầu cô ko được qua lại với Kudo nữa. Yasuko cũng cảm thấy có lỗi, nhưng nếu vì chuyện này mà từ nay về sau Yasuko ko được phép quan hệ tới bất kỳ người đàn ông nào khác, khiến cô cảm thấy cuộc sống ko còn ý nghĩa nữa  
+"Tuy nhiên, nếu vì việc đó mà cả cuộc đời này chị không thoát khỏi anh ta được thì việc che giấu vụ đó còn ý nghĩa gì nữa? Nó chẳng khác gì với lúc Togashi còn sống. Chỉ là đổi từ Togashi sang Ishigami mà thôi."  
+Nội dung của bức thư đại khái như này:  
+"Tôi có quyền được ra lệnh cho em: Hãy từ bỏ người đàn ông này ngay lập tức. Nếu không cơn tức giận của tôi sẽ chuyển sang anh ta. Đối với tôi, việc cho anh ta một kết cục giống như Togashi là điều vô cùng đơn giản. Tôi đã chuẩn bị rồi, thậm chí còn chuẩn bị cả cách thức tiến hành nữa. Tôi nhắc lại, nếu em có mối quan hệ nam nữ với người đàn ông này, tôi sẽ không tha thứ cho hành động phản bội đó. Chắc chắn tôi sẽ trả thù."
+
+Đọc tới đây mình cảm thấy đúng là sau này Yasuko khó mà thoát khỏi Ishigami để nghĩ tới việc quan hệ với 1 người đàn ông khác! Mình cảm thấy Ishigami hóa ra cũng chỉ là 1 người ích kỷ, giúp người khác chỉ muốn cô ấy ở bên mình mãi mãi!
+
+Mình đã sai! Đó chỉ là bằng chứng giả tạo của Ishigami gửi cho Yasuko để phía cảnh sát tin rằng chính Ishigami là người đã giết Togashi. Vâng, sau đó Ishigami đã ra đầu thú! Sau đó tin này đến với Yasuko, cô cũng bất ngờ bởi vì mọi kế hoạch đều do Ishigami sắp xếp, chính cô còn ko biết anh xử lý cái xác như nào.
+
+Truyện này miêu tả nội tâm nhân vật cực kỳ hay, mình rất thích:
+- "Dưới vẻ bề ngoài lạnh lùng của Ishigami ẩn chứa một tình yêu vô hạn"
+- "Kusanagi cảm thấy tim mình như bị bóp nghẹt trước cảnh Ishigami cố tỏ vẻ mình là kẻ ác độc. Anh tự hỏi con người ta có thể yêu người khác đến như vậy sao."
+- "Tâm hồn chị sẽ không bao giờ được thanh thản. Chính Ishigami mới là người thấy thanh thản."
+
+Câu nói hay:
+- Đề thi có những chỗ không thể phát hiện ra nếu cứ suy nghĩ theo một hướng. Chẳng hạn như nhìn thì tưởng là bài về hình học nhưng thực ra lại là hàm số.
+- **Bài toán về P ≠ NP: việc tự mình tìm ra câu trả lời và việc kiểm tra câu trả lời của người khác, việc nào dễ hơn.**
+- *Việc nghĩ ra một bài toán vô cùng khó và việc giải bài đó, việc nào khó hơn?*
+- *Có nhiều người yêu chị đến như vậy mà sao chị không thể hạnh phúc?*
+
+Rate: 9
