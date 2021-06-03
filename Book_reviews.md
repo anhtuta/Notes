@@ -397,4 +397,18 @@ Câu nói hay:
 - *Việc nghĩ ra một bài toán vô cùng khó và việc giải bài đó, việc nào khó hơn?*
 - *Có nhiều người yêu chị đến như vậy mà sao chị không thể hạnh phúc?*
 
+Ngoài lề 1 chút, nói qua về bài toán P ≠ NP (Polynomial vs Nondeterministic Polynomial): có phải bất kì vấn đề nào có lời giải có thể được kiểm chứng "nhanh chóng" cũng có thể được giải một cách "nhanh chóng".
+- "Nhanh chóng" ở đây được hiểu là có thể hoàn thành trong thời gian đa thức
+- Một thuật toán được gọi là hoàn thành trong thời gian đa thức, nếu số bước thực thi của thuật toán đó cho tới khi tìm ra lời giải là **O(n^k)**, với n = số lượng input
+- Các phép toán cơ bản cộng trừ nhân chia, luỹ thừa, logarithm đều được thực hiện trong thời gian đa thức
+- Một thuật toán hoàn thành trong **thời gian hàm mũ** chẳng hạn, sẽ ko phải là thời gian đa thức, ví dụ *O(3^n)*, n = số input
+- P: **tập hợp các bài toán** mà *lời giải* của nó có thể được **tìm ra** trong **thời gian đa thức**
+- NP: **tập hợp các bài toán** mà *lời giải* có thể được **kiểm tra** trong **thời gian đa thức**
+- VD các bài toán thuộc NP nhưng có lẽ KHÔNG thuộc P (hiện tại chưa chứng minh được nó thuộc P):
+  + Bài toán phân tích số ra thừa số nguyên tố (phải mất một thời gian rất lâu để tách các số rất lớn thành các số nguyên tố. Tuy nhiên, kiểm tra xem câu trả lời có đúng không chỉ đơn giản là nhân các số kết quả với nhau)
+  + Bài toán Sudoku
+  + Bài toán Hamiltonian Path Problem: given N cities to visit, how can one do this without visiting a city twice?
+  + Hệ mã hoá RSA
+- Nếu chứng minh được P = NP thì mọi thứ sẽ sụp đổ, nhưng thứ được tin là an toàn, sẽ không còn an toàn nữa. Không chỉ có các hệ mã hóa mất an toàn, rất nhiều khía cạnh của công nghệ hiện đại cũng sụp đổ. Bitcoin, Etherium, blockchain, những công nghệ rất hot hiện nay cũng sẽ sụp đổ nếu P = NP
+
 Rate: 9
