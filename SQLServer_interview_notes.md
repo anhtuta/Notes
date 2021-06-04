@@ -277,7 +277,10 @@ SELECT * FROM [AdventureWorks2019].[Person].[Address]
 -- Clustered-index seek
 SELECT * FROM [AdventureWorks2019].[Person].[Address]
 where AddressID = 995;
+```
 
+Điều kiện WHERE phức tạp hơn chưa chắc query sẽ tốn chi phí hơn
+```sql
 --------- Xét VD sau về clustered index PK với 2 cột: bảng Sales.SalesOrderDetail,
 --------- Database AdventureWorks2019, sau đây là DDL tạo bảng:
 CREATE TABLE [Sales].[SalesOrderDetail](
@@ -336,8 +339,10 @@ SELECT SalesOrderID, SalesOrderDetailID
 FROM Sales.SalesOrderDetail
 WHERE SalesOrderID = 58950
 OR SalesOrderDetailID = 68531
+```
 
------- Another example
+Using wildcard at the beginning of LIKE clause is really bad, because SQL engine will not be able to take advantage of Index seek
+```sql
 -- Giả sử bảng [Person].[Address] có index trên cột Address
 -- Index seek (non-clustered) + Key lookup (clustered)
 SELECT * FROM [AdventureWorks2019].[Person].[Address]
@@ -361,6 +366,28 @@ sẽ tận dụng được index seek, nhưng nếu dùng LIKE với wildcard �
 được index, SQL engine phải scan cả index tree
 4 câu query trên, time thực hiện lần lượt là 3%, 4%, 4%, 89%
 **/
+```
+
+Please don't use SELECT TOP, SQL engine will use Index scan, even if we only SELECT TOP 1:
+```sql
+Use [BikeStores];
+SELECT TOP 1 *
+FROM [BikeStores].[production].[products]
+```
+
+Hash match vs Merge join
+```sql
+-- When we join two tables, SQL engine will use Hash match (inner join) operator
+SELECT p.product_id, p.product_name, b.brand_name
+FROM production.products p
+INNER JOIN production.brands b ON p.brand_id = b.brand_id
+
+-- When we join two tables and the two JOIN data sets are sorted according to the join predicate,
+-- SQL engine will use Merge join (inner join) operator
+SELECT p.product_id, p.product_name, b.brand_name
+FROM production.products p
+INNER JOIN production.brands b ON p.brand_id = b.brand_id
+ORDER BY p.brand_id
 ```
 
 Ref:
@@ -471,10 +498,13 @@ The decomposition of the EMPLOYEE table into 1NF has been shown below
 | 12      | Sam       | 7390372389 | Punjab     |
 | 12      | Sam       | 8589830302 | Punjab     |
 
+Using the First Normal Form, data redundancy increases (few values are getting repeated), but values for the EMP_PHONE column are now atomic for each record/row.
+
 ### 18.2. Second Normal Form (2NF): the 2NF relates to partial dependency (partial dependency means subset of composite primary key determines a non-key column)
 - A table will be in 2NF if it is in 1NF, and all non-key columns are fully functional dependent on the primary key. The partial dependencies are removed and placed in a separate table
-- Second Normal Form (2 NF) is a problem when we’re using a composite primary key (a primary key made of two or more columns)
-Ex: The table employee above, composite PK is (EMP_ID, EMP_PHONE). We could see that column EMP_NAME ONLY depends on EMP_ID and it partially depends on EMP_PHONE column. So we could divide this table into 2 smaller tables below:
+- Second Normal Form (2 NF) is a problem when we're using a composite primary key (a primary key made of two or more columns)
+
+Ex: The last table employee above, composite PK is (EMP_ID, EMP_PHONE). We could see that column EMP_NAME ONLY depends on EMP_ID and it partially depends on EMP_PHONE column. So we could divide this table into 2 smaller tables below:
 
 Table Employee:
 | EMP_ID  | EMP_NAME  | EMP_STATE  |
@@ -495,7 +525,7 @@ Table phone:
 ### 18.3. Third Normal Form (3NF): the 3NF states that we should eliminate fields in a table that do not depend on primary key
 - A table will be in 3NF if:
   + It is already in 2NF
-  + Non-Primary key columns dont depend on the other non-Primary key columns
+  + Non-Primary key columns do not depend on the other non-Primary key columns
   + There is no transitive functional dependency (ko có phụ thuộc hàm bắc cầu)
 - Ex:
 
@@ -530,3 +560,40 @@ Employee_zip table:
 
 ### 18.4. Boyce Codd normal form (BCNF)
 BCNF is the advance version of 3NF, a table is in BCNF if it is in 3NF and every functional dependency X → Y, X is the primary key of the table.
+
+Example, let see the table below, assume that each teacher only teaches one subject, but one subject may have two different professors:
+| student_id  | subject | teacher       |
+| ----------- | ------- | ------------- |
+| 101         | Java    | Nguyen Bka    |
+| 101         | C++     | Toan Tvt      |
+| 102         | Java    | Tuzaku        |
+| 103         | C#      | Huy Ga        |
+| 104         | Java    | Tuzaku        |
+| 105         | C++     | Toan Tvt      |
+
+What do you think should be the Primary Key? Well, in the table above student_id, subject together form the primary key, because using student_id and subject, we can find all the columns of the table.
+
+- This table satisfies the 1st Normal form because all the values are atomic
+- This table also satisfies the 2nd Normal Form as their is no Partial Dependency (student_id cannot determine teacher, subject cannot determine teacher)
+- And, there is no Transitive Dependency, hence the table also satisfies the 3rd Normal Form
+- But this table is not in Boyce-Codd Normal Form, because there is one more dependency, teacher → subject
+
+We can divide into two tables below:
+
+Student_teacher table
+| student_id  | teacher_id |
+| ----------- | ---------- |
+| 101         | 1          |
+| 101         | 2          |
+| 102         | 3          |
+| 103         | 4          |
+| 104         | 3          |
+| 105         | 2          |
+
+Teacher table
+| teacher_id | teacher_name | subject |
+| ---------- | ------------ | ------- |
+| 1          | Nguyen Bka   | Java    |
+| 2          | Toan Tvt     | C++     |
+| 3          | Tuzaku       | Java    |
+| 4          | Huy Ga       | C#      |
