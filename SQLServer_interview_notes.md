@@ -107,7 +107,8 @@ ON Person(email);
   + Unique index and UNIQUE constraint are similar, both of them ensure there is no duplicate values on a column
   + When we create a unique constraint, SQL engine will create an Unique index associated with this constraint
 
-- Index with included columns: when we include non-key columns in the non-clustered index, SQL engine will reduce key lookup operator because all columns in the query are included in the index. -- Ex:
+- Index with included columns: when we include non-key columns in the non-clustered index, SQL engine will reduce key lookup operator because all columns in the query are included in the index. Ex:
+```sql
 CREATE INDEX ix_cust_email_inc
 ON sales.customers(email)
 INCLUDE(first_name, last_name);
@@ -116,15 +117,19 @@ INCLUDE(first_name, last_name);
 SELECT first_name, last_name, email
 FROM sales.customers
 WHERE email = 'aide.franco@msn.com';
+```
 
 - Filtered index: A filtered index is a non-clustered index with a predicate that allows us to specify which rows should be added to the index. For example, when the values in a column are mostly NULL and the query selects only from the non-NULL values, we can create a filtered index for the non-NULL data rows
   + A well-designed filtered index can improve query performance as well as reduce index maintenance and storage costs compared with full-table indexes.
   + Ex:
+  ```sql
   CREATE INDEX ix_cust_phone
   ON sales.customers(phone)
   WHERE phone IS NOT NULL; -- this is filtered predicate
+  ```
 
 - Index on Computed Columns: is an index that is created on a computed column. Ex:
+```sql
 -- The following query cannot use index seek, but instead, SQL engine will use index scan:
 SELECT FirstName FROM Person where FirstName LIKE 'K%'
 
@@ -134,6 +139,7 @@ ALTER TABLE Person ADD FirstName_Left AS LEFT(FirstName, 1)
 -- Then creata an index on that column:
 CREATE INDEX idx_LeftFirstName
 ON Person(FirstName_Left)
+```
 
 ### 9.3. What is heap?
   + A heap is a table without a clustered index
@@ -150,8 +156,25 @@ Heap can be used in another case, when we intend to return almost entire table c
   + If a heap doenst have any non-clustered index, then the entire table must be scanned in order to find a row
     => Do not use heap when there is no non-clustered index, unless you intend to return the entire table content without any specified order
   + Do not use a heap if the data is frequently updated, because it needs to re-build the heap after updating a row
-## 10. Store procedure 
-Store procedure is an object that stores one or group of sql statements. In other words, store procedure is a prepared SQL code that can be reused over and over again
+## 10. Stored procedure 
+Stored procedure is an object that stores one or group of sql statements. In other words, stored procedure is a prepared SQL code that can be reused over and over again. Stored procedure can accept the parameters and return a result set
+
+Advantages:
+- Easy to modify without the need to restart or re-deploy the application (Backend)
+- Reduced network traffic: application only need to pass procedure name (and params) over the network instead of the whole SQL statements
+- Reusable: procedure can be executed by multiple users or multiple applications
+- Povides better security: procedure helps to eliminate direct access to tables in database. We can also encrypt procedure while creating them so the code inside the stored procedure is not visble, ex:
+```sql
+--- Database AdventureWorks2019
+CREATE PROCEDURE getStoreNames(@BusinessEntityID INT = 1)
+WITH ENCRYPTION AS
+BEGIN
+    SET NOCOUNT ON
+    SELECT s.BusinessEntityID, s.Name
+    FROM Sales.Store s
+    WHERE s.BusinessEntityID = @BusinessEntityID
+END
+```
 
 ## 11. TRIGGER
 - Triggers are special stored procedures that are executed automatically when a database event occur.
