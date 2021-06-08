@@ -176,6 +176,13 @@ BEGIN
 END
 ```
 
+Drawbacks
+- Difficult to test: business logic which is encapsulated in stored procedures becomes very difficult to test, because there is no way to clearly separate the domain logic from the actual data (which means we cannot using mocking data for testing) (ko thể test trên data mock, vì procedure chỉ có thể test với data thật trong db)
+- Difficult to debug: we could use SQL Profiler and print statements for debugging, but it's not so easy
+- There is no versioning and history: there is nothing inside procedure which tells us which version stored procedure is on, and there isn't any change being made after procedure has been modified
+- Runtime Validation: procedure error only occurs when we execute the script (such as: missing permission to execute a stored procedure, or syntax error...). Any data errors in handling stored procedures are not generated until runtime
+- ...
+
 ## 11. TRIGGER
 - Triggers are special stored procedures that are executed automatically when a database event occur.
 - 3 types of trigger:
