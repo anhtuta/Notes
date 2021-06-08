@@ -107,7 +107,8 @@ ON Person(email);
   + Unique index and UNIQUE constraint are similar, both of them ensure there is no duplicate values on a column
   + When we create a unique constraint, SQL engine will create an Unique index associated with this constraint
 
-- Index with included columns: when we include non-key columns in the non-clustered index, SQL engine will reduce key lookup operator because all columns in the query are included in the index. -- Ex:
+- Index with included columns: when we include non-key columns in the non-clustered index, SQL engine will reduce key lookup operator because all columns in the query are included in the index. Ex:
+```sql
 CREATE INDEX ix_cust_email_inc
 ON sales.customers(email)
 INCLUDE(first_name, last_name);
@@ -116,15 +117,19 @@ INCLUDE(first_name, last_name);
 SELECT first_name, last_name, email
 FROM sales.customers
 WHERE email = 'aide.franco@msn.com';
+```
 
 - Filtered index: A filtered index is a non-clustered index with a predicate that allows us to specify which rows should be added to the index. For example, when the values in a column are mostly NULL and the query selects only from the non-NULL values, we can create a filtered index for the non-NULL data rows
   + A well-designed filtered index can improve query performance as well as reduce index maintenance and storage costs compared with full-table indexes.
   + Ex:
+  ```sql
   CREATE INDEX ix_cust_phone
   ON sales.customers(phone)
   WHERE phone IS NOT NULL; -- this is filtered predicate
+  ```
 
 - Index on Computed Columns: is an index that is created on a computed column. Ex:
+```sql
 -- The following query cannot use index seek, but instead, SQL engine will use index scan:
 SELECT FirstName FROM Person where FirstName LIKE 'K%'
 
@@ -134,6 +139,7 @@ ALTER TABLE Person ADD FirstName_Left AS LEFT(FirstName, 1)
 -- Then creata an index on that column:
 CREATE INDEX idx_LeftFirstName
 ON Person(FirstName_Left)
+```
 
 ### 9.3. What is heap?
   + A heap is a table without a clustered index
@@ -150,21 +156,210 @@ Heap can be used in another case, when we intend to return almost entire table c
   + If a heap doenst have any non-clustered index, then the entire table must be scanned in order to find a row
     => Do not use heap when there is no non-clustered index, unless you intend to return the entire table content without any specified order
   + Do not use a heap if the data is frequently updated, because it needs to re-build the heap after updating a row
-## 10. Store procedure 
-Store procedure is an object that stores one or group of sql statements. In other words, store procedure is a prepared SQL code that can be reused over and over again
+
+## 10. Stored procedure 
+Stored procedure is an object that stores one or group of sql statements. In other words, stored procedure is a prepared SQL code that can be reused over and over again. Stored procedure can accept the parameters and return a result set
+
+Advantages:
+- Easy to modify without the need to restart or re-deploy the application (Backend)
+- Reduced network traffic: application only need to pass procedure name (and params) over the network instead of the whole SQL statements
+- Reusable: procedure can be executed by multiple users or multiple applications
+- Povides better security: procedure helps to eliminate direct access to tables in database. We can also encrypt procedure while creating them so the code inside the stored procedure is not visble, ex:
+```sql
+--- Database AdventureWorks2019
+CREATE PROCEDURE getStoreNames(@BusinessEntityID INT = 1)
+WITH ENCRYPTION AS
+BEGIN
+    SET NOCOUNT ON
+    SELECT s.BusinessEntityID, s.Name
+    FROM Sales.Store s
+    WHERE s.BusinessEntityID = @BusinessEntityID
+END
+```
+
+Drawbacks
+- Difficult to test: business logic which is encapsulated in stored procedures becomes very difficult to test, because there is no way to clearly separate the domain logic from the actual data (which means we cannot using mocking data for testing) (ko thể test trên data mock, vì procedure chỉ có thể test với data thật trong db)
+- Difficult to debug: we could use SQL Profiler and print statements for debugging, but it's not so easy
+- There is no versioning and history: there is nothing inside procedure which tells us which version stored procedure is on, and there isn't any change being made after procedure has been modified
+- Runtime Validation: procedure error only occurs when we execute the script (such as: missing permission to execute a stored procedure, or syntax error...). Any data errors in handling stored procedures are not generated until runtime
+- ...
 
 ## 11. TRIGGER
-- Triggers are special stored procedures that are executed automatically when a database event occur.
+- Triggers are special stored procedures that are executed automatically when a database event occurs.
 - 3 types of trigger:
-  + DML triggers: are invoked automatically whenever an INSERT, UPDATE, DELETE event occur
-  + DDL triggers: are invoked automatically whenever a CREATE, ALTER, DROP event occur
-  + Logon triggers: which fire in response to LOGON events
+  + DML triggers: are invoked automatically whenever an INSERT, UPDATE, DELETE event occurs
+  + DDL triggers: are invoked automatically whenever a CREATE, ALTER, DROP event occurs
+  + Logon triggers: which fire in response to LOGON events. This event occurs when a user session is being established with SQL Server that is made after the authentication phase finishes, but before the user session is actually established. Logon triggers do not fire if authentication fails
+- "Virtual" tables for triggers: INSERTED and DELETED: SQL server provides these two virtual tables for triggers. We could use these tables to get modified row before and after event occurs:
+
+| DML event | INSERTED table holds            | DELETED table holds                  |
+| --------- | ------------------------------- | ------------------------------------ |
+| INSERT    | rows to be inserted             | empty                                |
+| UPDATE    | new rows modified by the update | existing rows modified by the update |
+| DELETE    | empty                           | rows to be deleted                   |
+- Triggers can be used for logging purpose:
+  + We can use DML triggers to track updates to a table when new record has been inserted, or a record has been updated.
+  + We can use DDL triggers to capture the modifications to database, such as index changes (creating or updating an index in a table)
+- Example:
+```sql
+-- DML trigger: Create trigger after insert/delete staff (database tuta)
+CREATE TRIGGER sto.trg_staff_ins_del
+ON sto.staff
+AFTER INSERT, DELETE AS
+BEGIN
+    -- suppress the number of rows affected messages from being returned whenever the trigger is fired.
+    SET NOCOUNT ON;
+
+    INSERT INTO sto.staff_log(staff_id, staff_name, staff_gender, staff_email, staff_phone, store_id, updated_at, operation)
+    SELECT
+        i.id,
+        i.staff_name,
+        i.staff_gender,
+        i.staff_email,
+        i.staff_phone,
+        i.store_id,
+        GETDATE(),
+        'INS'
+    FROM inserted i  -- using INSERTED table to retrieve modified row
+    UNION ALL
+    SELECT
+        d.id,
+        d.staff_name,
+        d.staff_gender,
+        d.staff_email,
+        d.staff_phone,
+        d.store_id,
+        GETDATE(),
+        'DEL'
+    FROM deleted d  -- using DELETED table to retrieve modified row
+END;
+
+-- DDL trigger: Suppose we want to capture all the modifications made to the database index
+-- Create a DDL trigger to track index changes and insert events data into the index_logs table
+CREATE TRIGGER trg_index_changes
+ON DATABASE FOR CREATE_INDEX, ALTER_INDEX, DROP_INDEX AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO index_logs (
+        event_data,
+        changed_by
+    )
+    VALUES (
+        EVENTDATA(),
+        USER
+    );
+END;
+```
+
+- INSTEAD OF trigger (compare to BEFORE, AFTER trigger above):
+  + An INSTEAD OF trigger is a trigger that allows us to skip an INSERT, DELETE, or UPDATE statement to a table/view and execute other statements defined in the trigger instead. The actual insert, delete, or update operation does not occur at all
+  + In other words, an INSTEAD OF trigger skips a DML statement and execute other statements
+  + Example:
+    + An application needs to insert new brands into the ```production.brands``` table. However, the new brands should be stored in another table called ```production.brand_approvals``` for approval before inserting into the ```production.brands``` table.
+    + We can create a view called ```production.vw_brands``` for the application to insert new brands. If brands are inserted into the view, an INSTEAD OF trigger will be fired to insert brands into the ```production.brand_approvals``` table
 
 ## 12. Cursor
-SQL cursor is T-SQL logic which allows us to loop through the related query result
+A cursor is an object that enables traversal over the rows of a result set. It allows us to process individual row returned by a query.  
+Sometimes we need to work with a row at a time rather than the entire result set at once. In T-SQL, one way of doing this is using a CURSOR.
 
-## 13. Functions
-User-defined functions: scalar function takes one or more parameters and returns a single value
+Example:
+```sql
+-- Database tuta
+-- Here are steps for using a cursor
+CREATE PROCEDURE getStaffInfoByStoreId(
+    @store_id INT
+) AS
+BEGIN
+    -- Check if exist store
+    SELECT id FROM sto.store WHERE id = @store_id;
+    IF(@@ROWCOUNT = 0)
+    THROW 51000, 'Store doesn''t exist!', 1;
+
+    DECLARE @staff_name NVARCHAR(200),
+        @staff_gender NVARCHAR(200), @store_name NVARCHAR(200);
+
+    -- 1. First, declare a cursor. The syntax is: DECLARE cursor_name CURSOR FOR select_statement;
+    DECLARE cursor_staff CURSOR
+    FOR SELECT staff.staff_name, staff.staff_gender, store.store_name FROM sto.staff staff, sto.store store
+        WHERE staff.store_id = store.id
+        AND store.id = @store_id
+
+    -- use cursor to traverse each record
+    -- 2. Second, open cursor
+    OPEN cursor_staff
+    WHILE 1=1
+        BEGIN
+	    -- 3. Third, fetch a row from the cursor into one or more variables
+            FETCH NEXT FROM cursor_staff INTO
+                @staff_name, @staff_gender, @store_name
+            IF @@FETCH_STATUS != 0 BREAK;
+            PRINT @staff_name + ' - ' + @staff_gender + ' - ' + @store_name;
+        END;
+    -- 4. Finally, close cursor and deallocate it
+    CLOSE cursor_staff;
+    DEALLOCATE cursor_staff;
+END;
+```
+
+## 13. User-defined functions
+User-defined functions are routines that accept parameters, perform an action, such as a complex calculation, and return the result of that action as a value. The return value can either be a single scalar value or a result set.
+
+3 major types of user-defined function types: scalar function, table-valued and multi-statement table-valued function
+- Scalar function returns a single data value of the type defined in the RETURNS clause. It can accepts one or more params.
+```sql
+CREATE FUNCTION sumab(
+    @a DEC(10,2),
+    @B DEC(10,2)
+) RETURNS DEC(20,2) AS
+BEGIN
+    RETURN @a + @b;
+END;
+GO
+
+SELECT dbo.sumab(200, 100) AS sum;
+GO
+```
+- Table-Valued function returns a table data type
+```sql
+-- Database tuta
+CREATE FUNCTION funcGetStaffInfoByStoreId(@store_id INT)
+RETURNS TABLE AS
+RETURN
+    SELECT staff.staff_name, staff.staff_gender, store.store_name FROM sto.staff staff, sto.store store
+        WHERE staff.store_id = store.id
+        AND store.id = @store_id;
+GO
+
+SELECT * FROM dbo.funcGetStaffInfoByStoreId(1);
+GO
+```
+- Multi-statement table-valued function (MSTVF) is a table-valued function that returns the result of multiple statements.
+```sql
+-- Contacts are the data of two tables: staff and customer
+-- Database tuta
+CREATE FUNCTION funcGetContacts()
+RETURNS @contacts TABLE(
+    name NVARCHAR(200),
+    gender NVARCHAR(20),
+    email NVARCHAR(200),
+    phone NVARCHAR(50)
+) AS
+BEGIN
+    -- this function returns the result of 2 following statements
+    INSERT INTO @contacts
+    SELECT st.staff_name, st.staff_gender, st.staff_email, st.staff_phone FROM sto.staff st;
+    
+    INSERT INTO @contacts
+    SELECT cus.cus_name, cus.cus_gender, cus.cus_email, cus.cus_phone FROM sto.customer cus;
+
+    RETURN;
+END;
+GO
+
+SELECT * FROM funcGetContacts();
+GO
+```
 
 ## 14. INFORMATION_SCHEMA
 The INFORMATION_SCHEMA is a database that allows us to retrieve metadata about the objects within a database. Here are some tables/views in it:
