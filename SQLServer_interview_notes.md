@@ -156,6 +156,7 @@ Heap can be used in another case, when we intend to return almost entire table c
   + If a heap doenst have any non-clustered index, then the entire table must be scanned in order to find a row
     => Do not use heap when there is no non-clustered index, unless you intend to return the entire table content without any specified order
   + Do not use a heap if the data is frequently updated, because it needs to re-build the heap after updating a row
+
 ## 10. Stored procedure 
 Stored procedure is an object that stores one or group of sql statements. In other words, stored procedure is a prepared SQL code that can be reused over and over again. Stored procedure can accept the parameters and return a result set
 
@@ -184,14 +185,122 @@ Drawbacks
 - ...
 
 ## 11. TRIGGER
-- Triggers are special stored procedures that are executed automatically when a database event occur.
+- Triggers are special stored procedures that are executed automatically when a database event occurs.
 - 3 types of trigger:
-  + DML triggers: are invoked automatically whenever an INSERT, UPDATE, DELETE event occur
-  + DDL triggers: are invoked automatically whenever a CREATE, ALTER, DROP event occur
-  + Logon triggers: which fire in response to LOGON events
+  + DML triggers: are invoked automatically whenever an INSERT, UPDATE, DELETE event occurs
+  + DDL triggers: are invoked automatically whenever a CREATE, ALTER, DROP event occurs
+  + Logon triggers: which fire in response to LOGON events. This event occurs when a user session is being established with SQL Server that is made after the authentication phase finishes, but before the user session is actually established. Logon triggers do not fire if authentication fails
+- "Virtual" tables for triggers: INSERTED and DELETED: SQL server provides these two virtual tables for triggers. We could use these tables to get modified row before and after event occurs:
+
+| DML event | INSERTED table holds            | DELETED table holds                  |
+| --------- | ------------------------------- | ------------------------------------ |
+| INSERT    | rows to be inserted             | empty                                |
+| UPDATE    | new rows modified by the update | existing rows modified by the update |
+| DELETE    | empty                           | rows to be deleted                   |
+- Triggers can be used for logging purpose:
+  + We can use DML triggers to track updates to a table when new record has been inserted, or a record has been updated.
+  + We can use DDL triggers to capture the modifications to database, such as index changes (creating or updating an index in a table)
+- Example:
+```sql
+-- DML trigger: Create trigger after insert/delete staff (database tuta)
+CREATE TRIGGER sto.trg_staff_ins_del
+ON sto.staff
+AFTER INSERT, DELETE AS
+BEGIN
+    -- suppress the number of rows affected messages from being returned whenever the trigger is fired.
+    SET NOCOUNT ON;
+
+    INSERT INTO sto.staff_log(staff_id, staff_name, staff_gender, staff_email, staff_phone, store_id, updated_at, operation)
+    SELECT
+        i.id,
+        i.staff_name,
+        i.staff_gender,
+        i.staff_email,
+        i.staff_phone,
+        i.store_id,
+        GETDATE(),
+        'INS'
+    FROM inserted i  -- using INSERTED table to retrieve modified row
+    UNION ALL
+    SELECT
+        d.id,
+        d.staff_name,
+        d.staff_gender,
+        d.staff_email,
+        d.staff_phone,
+        d.store_id,
+        GETDATE(),
+        'DEL'
+    FROM deleted d  -- using DELETED table to retrieve modified row
+END;
+
+-- DDL trigger: Suppose we want to capture all the modifications made to the database index
+-- Create a DDL trigger to track index changes and insert events data into the index_logs table
+CREATE TRIGGER trg_index_changes
+ON DATABASE FOR CREATE_INDEX, ALTER_INDEX, DROP_INDEX AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO index_logs (
+        event_data,
+        changed_by
+    )
+    VALUES (
+        EVENTDATA(),
+        USER
+    );
+END;
+```
+
+- INSTEAD OF trigger (compare to BEFORE, AFTER trigger above):
+  + An INSTEAD OF trigger is a trigger that allows us to skip an INSERT, DELETE, or UPDATE statement to a table/view and execute other statements defined in the trigger instead. The actual insert, delete, or update operation does not occur at all
+  + In other words, an INSTEAD OF trigger skips a DML statement and execute other statements
+  + Example:
+    + An application needs to insert new brands into the ```production.brands``` table. However, the new brands should be stored in another table called ```production.brand_approvals``` for approval before inserting into the ```production.brands``` table.
+    + We can create a view called ```production.vw_brands``` for the application to insert new brands. If brands are inserted into the view, an INSTEAD OF trigger will be fired to insert brands into the ```production.brand_approvals``` table
 
 ## 12. Cursor
-SQL cursor is T-SQL logic which allows us to loop through the related query result
+A cursor is an object that enables traversal over the rows of a result set. It allows us to process individual row returned by a query.  
+Sometimes we need to work with a row at a time rather than the entire result set at once. In T-SQL, one way of doing this is using a CURSOR.
+
+Example:
+```sql
+-- Database tuta
+-- Here are steps for using a cursor
+CREATE PROCEDURE getStaffInfoByStoreId(
+    @store_id INT
+) AS
+BEGIN
+    -- Check if exist store
+    SELECT id FROM sto.store WHERE id = @store_id;
+    IF(@@ROWCOUNT = 0)
+    THROW 51000, 'Store doesn''t exist!', 1;
+
+    DECLARE @staff_name NVARCHAR(200),
+        @staff_gender NVARCHAR(200), @store_name NVARCHAR(200);
+
+    -- 1. First, declare a cursor. The syntax is: DECLARE cursor_name CURSOR FOR select_statement;
+    DECLARE cursor_staff CURSOR
+    FOR SELECT staff.staff_name, staff.staff_gender, store.store_name FROM sto.staff staff, sto.store store
+        WHERE staff.store_id = store.id
+        AND store.id = @store_id
+
+    -- use cursor to traverse each record
+    -- 2. Second, open cursor
+    OPEN cursor_staff
+    WHILE 1=1
+        BEGIN
+	    -- 3. Third, fetch a row from the cursor into one or more variables
+            FETCH NEXT FROM cursor_staff INTO
+                @staff_name, @staff_gender, @store_name
+            IF @@FETCH_STATUS != 0 BREAK;
+            PRINT @staff_name + ' - ' + @staff_gender + ' - ' + @store_name;
+        END;
+    -- 4. Finally, close cursor and deallocate it
+    CLOSE cursor_staff;
+    DEALLOCATE cursor_staff;
+END;
+```
 
 ## 13. Functions
 User-defined functions: scalar function takes one or more parameters and returns a single value
