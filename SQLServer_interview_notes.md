@@ -302,8 +302,64 @@ BEGIN
 END;
 ```
 
-## 13. Functions
-User-defined functions: scalar function takes one or more parameters and returns a single value
+## 13. User-defined functions
+User-defined functions are routines that accept parameters, perform an action, such as a complex calculation, and return the result of that action as a value. The return value can either be a single scalar value or a result set.
+
+3 major types of user-defined function types: scalar function, table-valued and multi-statement table-valued function
+- Scalar function returns a single data value of the type defined in the RETURNS clause. It can accepts one or more params.
+```sql
+CREATE FUNCTION sumab(
+    @a DEC(10,2),
+    @B DEC(10,2)
+) RETURNS DEC(20,2) AS
+BEGIN
+    RETURN @a + @b;
+END;
+GO
+
+SELECT dbo.sumab(200, 100) AS sum;
+GO
+```
+- Table-Valued function returns a table data type
+```sql
+-- Database tuta
+CREATE FUNCTION funcGetStaffInfoByStoreId(@store_id INT)
+RETURNS TABLE AS
+RETURN
+    SELECT staff.staff_name, staff.staff_gender, store.store_name FROM sto.staff staff, sto.store store
+        WHERE staff.store_id = store.id
+        AND store.id = @store_id;
+GO
+
+SELECT * FROM dbo.funcGetStaffInfoByStoreId(1);
+GO
+```
+- Multi-statement table-valued function (MSTVF) is a table-valued function that returns the result of multiple statements.
+```sql
+-- Contacts are the data of two tables: staff and customer
+-- Database tuta
+CREATE FUNCTION funcGetContacts()
+RETURNS @contacts TABLE(
+    name NVARCHAR(200),
+    gender NVARCHAR(20),
+    email NVARCHAR(200),
+    phone NVARCHAR(50)
+) AS
+BEGIN
+    -- this function returns the result of 2 following statements
+    INSERT INTO @contacts
+    SELECT st.staff_name, st.staff_gender, st.staff_email, st.staff_phone FROM sto.staff st;
+    
+    INSERT INTO @contacts
+    SELECT cus.cus_name, cus.cus_gender, cus.cus_email, cus.cus_phone FROM sto.customer cus;
+
+    RETURN;
+END;
+GO
+
+SELECT * FROM funcGetContacts();
+GO
+```
 
 ## 14. INFORMATION_SCHEMA
 The INFORMATION_SCHEMA is a database that allows us to retrieve metadata about the objects within a database. Here are some tables/views in it:
@@ -553,7 +609,8 @@ SELECT FirstName FROM Person where LEFT(FirstName, 1) = 'K'
 /**
 If we see execution plan, we'll know that SQL engine are using
 clustered-index scan operator, which is very expensive
-(The SQL Server query optimizer cannot find the result of ths LEFT function values in the index pages. For this reason, the query optimizer chooses a cluster index scan and it needs to read the whole table.)
+(The SQL Server query optimizer cannot find the result of the LEFT function values in the index pages.
+For this reason, the query optimizer chooses a cluster index scan and it needs to read the whole table.)
 These functions create the same execution plans in the same conditions:
 SUBSTRING, LEFT, LTRIM, RTRIM, User defined functions
 **/
