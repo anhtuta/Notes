@@ -609,7 +609,8 @@ SELECT FirstName FROM Person where LEFT(FirstName, 1) = 'K'
 /**
 If we see execution plan, we'll know that SQL engine are using
 clustered-index scan operator, which is very expensive
-(The SQL Server query optimizer cannot find the result of ths LEFT function values in the index pages. For this reason, the query optimizer chooses a cluster index scan and it needs to read the whole table.)
+(The SQL Server query optimizer cannot find the result of the LEFT function values in the index pages.
+For this reason, the query optimizer chooses a cluster index scan and it needs to read the whole table.)
 These functions create the same execution plans in the same conditions:
 SUBSTRING, LEFT, LTRIM, RTRIM, User defined functions
 **/
