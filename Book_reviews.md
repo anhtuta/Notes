@@ -412,3 +412,8 @@ Ngoài lề 1 chút, nói qua về bài toán P ≠ NP (Polynomial vs Nondetermi
 - Nếu chứng minh được P = NP thì mọi thứ sẽ sụp đổ, nhưng thứ được tin là an toàn, sẽ không còn an toàn nữa. Không chỉ có các hệ mã hóa mất an toàn, rất nhiều khía cạnh của công nghệ hiện đại cũng sụp đổ. Bitcoin, Etherium, blockchain, những công nghệ rất hot hiện nay cũng sẽ sụp đổ nếu P = NP
 
 Rate: 9
+
+### 29. Điều kỳ diệu của tiệm tạp hóa Namiya - Higashino Keigo
+Tìm đọc cuốn này ngay sau khi đọc xong phía sau nghi can X, đọc được nửa cuốn thì bỏ, bởi vì thể loại và cốt truyện nó chán! Tác phẩm thuộc thể loại kỳ bí chứ ko phải truyện trinh thám như cuốn trước đó mình đọc. Nội dung kể về 3 tên trộm qua đêm tại tiệm tạp hóa Namiya. Nếu đóng cửa, tiệm tạp hoá hoang vu không người ở này sẽ "ngưng đọng thời gian". Và rồi một điều kỳ lạ xảy ra, tất cả những bức thư từ quá khứ dồn dập gửi tới chỗ họ xin nhờ tư vấn. Cách đó hơn 30 năm, tiệm tạp hoá Namiya của một ông cụ già "gần đất xa trời" đã chuyên nhận những bức thư tư vấn tất cả những vấn đề của người gửi, thế nhưng đã không nhận thư nhờ tư vấn kể từ khi ông cụ qua đời...
+Haizzz, đọc tới đây cũng cảm thấy ko thích đọc tiếp rồi, hơn nữa đọc cái title mà cũng ko nhận ra sách này thuộc thể loại kỳ ảo??? Ngu thật!
+Hiện tại đã ngừng đọc do bản thân thấy ko hợp, chả hiểu sao cuốn này cũng được giải thưởng ở Nhật???
