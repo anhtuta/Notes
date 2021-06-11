@@ -793,3 +793,17 @@ Teacher table
 | 2          | Toan Tvt     | C++     |
 | 3          | Tuzaku       | Java    |
 | 4          | Huy Ga       | C#      |
+
+## 19. ACID
+ACID is an acronym for Atomicity (tính nguyên tử), Consistency (tính nhất quán), Isolation (tính cô lập), Durability (tính bền vững).  
+ACID is a set of properties of database transactions intended to guarantee data validity (đảm bảo tính hợp lệ của dữ liệu). In the context of databases, a sequence of database operations that satisfies the ACID properties is called a *transaction*
+
+![acid](https://user-images.githubusercontent.com/26838239/121666269-433e5200-cad3-11eb-84ae-7b14a4277e76.png)
+
+- **Atomicity** guarantees that each transaction is treated as a single "unit", which either succeeds completely, or fails completely: if any of the statements in a transaction fails to complete, the entire transaction fails and the database is left unchanged (transaction will rollback).  
+Example: a transaction inserts 10 records, but while inserting the third record, an error occurs, the transaction will rollback and there's no record has been inserted. If INSERT statement has a trigger, and there's an error on that trigger, the transaction will also rollback
+- **Consistency** ensures that the database must remain in a consistent state after any transaction. This property, either creates an entire new situation or rollback all the processes to the original situation, but never leaves database in the state which is middle of the two situations.
+- Transactions are often executed concurrently (e.g., multiple transactions reading and writing to a table at the same time). **Isolation** ensures that any transaction is in process must remain isolated from any other transactions. In other words, two or more transactions are never mixed up with each other
+- **Durability** guarantees that committed data is saved by the system, even in the case of a system failure (e.g., power outage or crash - mất điện hoặc sự cố), or system restart, the data is available in its correct state
+
+
