@@ -10,9 +10,14 @@ There are 6 types of join:
 - ```CROSS JOIN```: this join combines each row from the first table with each row from the second table. In other words, cross join returns a Cartesian product of rows from both tables. This join doesnt establish any relationship between two tables
 
 ## 2. UNION, INTERSECT, EXCEPT
-```UNION``` operator is used to combine the results of two or more select statements, and it removes duplicated rows. If we want to keep duplicates, we could use UNION ALL operator
+```UNION``` operator is used to combine the results of two or more select statements, and it removes duplicated rows. If we want to keep duplicates, we could use ```UNION ALL ``` operator
 - Every select statement with UNION must have the same number of columns
 - The columns must have similar data types and have the same order
+
+Compare UNION vs UNION ALL: with UNION, SQL engine need an additional Sort operator to remove duplicate values, and we could see this operator is quite expensive (it takes 79% of overall query cost). So in case of we know for sure that there is no duplicate values, we should use ```UNION ALL```
+
+![union-vs-union-all](https://user-images.githubusercontent.com/26838239/122018012-accca200-cdec-11eb-8686-b5a05f442409.jpg)  
+(Ref: http://www.sqlviet.com/blog/union-hay-union-all)
 
 ```INTERSECT``` operator selects elements that are present in both sets (a set could be a result from a select statement). It is similar to INNER JOIN table
 
@@ -107,7 +112,21 @@ ON Person(email);
   + Unique index and UNIQUE constraint are similar, both of them ensure there is no duplicate values on a column
   + When we create a unique constraint, SQL engine will create an Unique index associated with this constraint
 
-- Index with included columns: when we include non-key columns in the non-clustered index, SQL engine will reduce key lookup operator because all columns in the query are included in the index. Ex:
+- Index with included columns (covering index): when we include non-key columns in the non-clustered index, SQL engine will reduce key lookup operator because all columns in the query are included in the index. Type of covering index:
+  + Fully covering index: include all non-key columns, ex:
+  ```sql
+  CREATE NONCLUSTERED INDEX IDX_Employees_Covering
+  ON Employees (DepartmentId,PositionId)
+  INCLUDE (FirstName,LastName,Birthdate,ManagerId,Salary,Address,City,State,HiredDate);
+  ```
+  + Partially covering index: include several non-key columns (not all), ex:
+  ```sql
+  CREATE NONCLUSTERED INDEX IDX_Employees_PartiallyCovering
+  ON Employees (DepartmentId,PositionId) 
+  INCLUDE (FirstName,LastName,email);
+  ```
+
+With covering index, it takes more time to insert new records than non-covering index, but SELECT query performance are better
 ```sql
 CREATE INDEX ix_cust_email_inc
 ON sales.customers(email)
