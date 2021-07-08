@@ -1,18 +1,21 @@
 ## present perfect vs present perfect continuous (HTHT vs HTHTTD)
 ### HTHT diễn tả hành động:
-- Bắt đầu trong quá khứ (ko rõ thời gian bắt đầu), hiện tại đã KẾT THÚC, hoặc vẫn còn
-- Nhấn mạnh vào KẾT QUẢ hiện tại
+- Bắt đầu trong quá khứ (ko rõ thời gian bắt đầu), *hiện tại* đã **KẾT THÚC**
+- Nhấn mạnh vào KẾT QUẢ hiện tại (trả lời cho câu hỏi How much, how many). VD:
+  + I have lost 3 kilos since I was sick
+  + He's watched that film twice
 - Vừa mới xảy ra. VD: I've just bought this book
 - Lặp lại nhiều lần. VD: I've watched "Avenger 1" several times
 - Sau cấu trúc This is the first/second... times. VD: This is the first time I've played football
 - Đi với just, recently, already, yet...
 - Đi với since, for, ever, never, up to now, so far... VD: John has lived in that house for 10 years (he still lives there)
 ### HTHTTD diễn tả hành động:
-- Bắt đầu trong quá khứ (ko rõ thời gian bắt đầu), vẫn ĐANG TIÊP TỤC ở hiện tại
+- Bắt đầu trong quá khứ (ko rõ thời gian bắt đầu), vẫn **ĐANG TIÊP TỤC** ở *hiện tại*
   và có thể kéo dài tiếp ở tương lai. VD:
   + I've been studying English for 10 years
   + It's been raining for 2 hours
-- Nhấn mạnh vào TÍNH LIÊN TỤC
+- Nhấn mạnh vào TÍNH LIÊN TỤC, quá trình thực hiện. VD:
+  + I'm a web developer and I've been doing this for ten years (I've been working as a web developer for ten years)
 - Đi với: since, for
 - Đi với: all day, all day long, all the morning/afternoon...,
 - VD:
