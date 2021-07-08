@@ -104,3 +104,11 @@ Yeah, I did 2 internships when I was a student. My first internship happend at m
 
 My second internship happend at my last year in university, I've got Samsung scholarship and started my intership for 3 months at Samsung R&D center. I was assigned to Backend team and they helped me to complete my graduation thesis. And after my graduation, I came back to that team and worked with them as an official employee.
 
+## 11. Introduce, talk about your work, your position at your company
+Hello everybody, I'm Tu and I've been working at IFI solution for 3 months. I'm a web developer and I've been doing this for 3 years. Basically, web development is about building a website, and it is divided into 2 main types: frontend and backend development.
+
+Frontend developers are responsible for building user interface. They have to care about the content displayed on a website, such as text colors, background colors, headers, footers and so on.
+
+Backend developers are the ones who work behind the scenes. They are in charge of building website's server, working with database and providing data for frontend team
+
+My main responsibilities in my team are developing new features, maintaining and fixing bugs to ensure that our system is working smoothly and stably. I am also in charge of optimizing source code, make it clean and efficient so the system will operate as quick as possible, which helps to improve user's experiences on our websites.
