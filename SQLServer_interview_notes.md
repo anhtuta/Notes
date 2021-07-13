@@ -92,12 +92,15 @@ An index is a special data structure (B-tree) associated with table/view that he
   + When we search data on column that has clustered index, we can get the result directly on B-tree. Searching data on column that has non-clustered index is different. Firstly, database engine will search on B-tree of non-clustered index to find the clustered index key, then it will continue searching on B-tree of clustered index
   + Disadvantages: using index can slow down DML queries (INSERT, UPDATE, DELETE)
   + How to create:
+  ```sql
   -- when we create a primary key, database engine automatically creates a clustered index based on that PK column:
   ALTER TABLE Person
   ADD PRIMARY KEY(person_id);
+  
   -- Or we could create clustered index directly:
   CREATE CLUSTERED INDEX ix_person_id
-  ON Person(person_id);  
+  ON Person(person_id);
+  ```
 
 - Non-clustered index: is a B-tree structure that seperates from table and improves the speed of query
   + A table may have one or more nonn-clustered indexes, each non-clustered index can contain one or more columns
@@ -825,4 +828,423 @@ Example: a transaction inserts 10 records, but while inserting the third record,
 - Transactions are often executed concurrently (e.g., multiple transactions reading and writing to a table at the same time). **Isolation** ensures that any transaction is in process must remain isolated from any other transactions. In other words, two or more transactions are never mixed up with each other
 - **Durability** guarantees that committed data is saved by the system, even in the case of a system failure (e.g., power outage or crash - mất điện hoặc sự cố), or system restart, the data is available in its correct state
 
+## 20. Performance tuning: vertical partitioning
+Vertical partitioning means splitting a large table into smaller tables that contain fewer columns. For example we can divide a large table into two tables: a table contains a group of frequently used columns, and a table contains the remaining columns (một bảng chứa một nhóm các cột được sử dụng thường xuyên và một bảng chứa các cột còn lại)
 
+Vậy lý do nào dẫn đến cải thiện về hiệu năng? Điều này liên quan đến cách tổ chức dữ liệu của bảng bên trong SQL Server. SQL Server chia mỗi bảng thành các trang (page) có kích thước đều nhau 8KB. Các bản ghi được lưu nối tiếp nhau vào từng trang, đến khi đầy trang thì lưu tiếp sang trang mới. Tùy theo kích thước của bản ghi (bằng kích thước của các cột cộng lại) mà có bao nhiêu bản ghi được xếp vừa vào một trang. Nếu kích thước nhỏ sẽ có nhiều bản ghi được chứa trong một trang, ngược lại nếu kích thước lớn thì mỗi trang sẽ chứa được ít bản ghi. Thậm chí nếu kích thước này vượt quá 8KB thì vài trang mới chứa hết một bản ghi (SQL Server 2000 không cho phép điều này nên kích thước bản ghi tối đa được phép tạo trong SQL Server 2000 chỉ là 8KB).
+
+Example
+```sql
+-- Database tuta
+CREATE TABLE TableA(ID INT, txt1 CHAR(10), txt2 CHAR(8000))
+CREATE TABLE TableB1(ID INT, txt1 CHAR(10))
+CREATE TABLE TableB2(ID INT, txt2 CHAR(8000))
+GO
+
+DECLARE @i INT
+SET @i=1
+WHILE @i<=100
+BEGIN
+INSERT TableA (ID, txt1, txt2)
+SELECT @i, REPLICATE('a',10), REPLICATE('a',8000)
+
+INSERT TableB1 (ID, txt1)
+SELECT @i, REPLICATE('a',10)
+
+INSERT TableB2 (ID, txt2)
+SELECT @i, REPLICATE('a',8000)
+SET @i=@i+1
+END
+GO
+
+--ghi dữ liệu ra đĩa và xóa cache
+CHECKPOINT
+
+-- hiện thống kê về vào ra đĩa
+SET STATISTICS IO ON
+
+-- xóa cache để đảm bảo công bằng khi so sánh
+DBCC DROPCLEANBUFFERS
+
+-- query1
+SELECT ID, txt1
+FROM TableA
+
+-- xóa lại cache
+DBCC DROPCLEANBUFFERS
+
+-- query2
+SELECT ID, txt1
+FROM TableB1
+```
+
+Although result of query1 and query2 are the same, but the cost of reading from TableB1 is cheaper than from TableA (4% vs 96% of overall query cost)
+
+![vertical-partitioning-example](https://user-images.githubusercontent.com/26838239/125435898-049a4f6b-e644-4495-afaf-cc29b648700f.PNG)
+
+Open message tab in SSMS, we can see this:
+```
+Table 'TableA'. Scan count 1, logical reads 100, physical reads 0, page server reads 0, read-ahead reads 100, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
+
+Table 'TableB1'. Scan count 1, logical reads 1, physical reads 1, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
+```
+
+On the example above:
+- Size of each record in TableA is about 8KB (4byte INT + 10byte char + 8000byte char), so each record will be store in one page. 100 records in TableA will be stored in 100 pages
+- Size of each record in TableB1 is 14byte, so 100 records will be stored in 1 page. That's why reading from TableB1 is much faster than from TableA
+
+Kỹ thuật phân đoạn này cũng kéo theo một vài rắc rối khi viết code:
+- Đối với lệnh SELECT, bạn phải nhớ các cột nào nằm ở bảng nào để viết câu lệnh cho đúng, vì các cột giờ không nằm chung trong một bảng nữa
+- Khi có thay đổi về thiết kế, chẳng hạn cần di chuyển cột từ bảng này sang bảng kia, bạn phải quay lại sửa lại câu lệnh cũ
+- Đối với các lệnh DELETE/INSERT/UPDATE, bạn luôn nhớ cần thực hiện trên cả hai bảng. Bạn có thể thực hiện câu lệnh qua view, và ở bên dưới view tạo một trigger loại ```INSTEAD OF``` trong đó thực hiện thao tác trên cả hai bảng
+
+Ref: http://www.sqlviet.com/blog/phan-doan-bang-theo-chieu-doc
+
+Another example:
+```sql
+-- Database tuta
+-- EmployeeReports has 4 columns, and size of ReportDescription column is the biggest one
+CREATE TABLE EmployeeReports(
+  ReportID int IDENTITY (1,1) NOT NULL,
+  ReportName varchar (100),
+  ReportNumber varchar (20),
+  ReportDescription varchar (max)
+  CONSTRAINT EReport_PK PRIMARY KEY CLUSTERED (ReportID)
+)
+ 
+DECLARE @i int
+SET @i = 1
+ 
+BEGIN TRAN
+WHILE @i < 100000 
+BEGIN
+INSERT INTO EmployeeReports(
+  ReportName,
+  ReportNumber,
+  ReportDescription
+)
+VALUES (
+  'ReportName',
+  CONVERT (varchar (20), @i),
+  REPLICATE ('Report', 1000)
+)
+SET @i=@i+1
+END
+COMMIT TRAN
+GO
+
+-- Try this query to see CPU time
+DBCC DROPCLEANBUFFERS  -- remove cache
+SET STATISTICS IO ON
+SET STATISTICS TIME ON
+
+SELECT er.ReportID, er.ReportName, er.ReportNumber
+FROM dbo.EmployeeReports er
+WHERE er.ReportNumber LIKE '%33%'
+
+SET STATISTICS IO OFF
+SET STATISTICS TIME OFF
+```
+
+Open message tab, we will see:
+```
+SQL Server Execution Times:
+  CPU time = 156 ms,  elapsed time = 86 ms.
+```
+
+Now split this table into two tables: a table contains ReportID, ReportName, ReportNumber columns and a table contains only ReportDescription column
+```sql
+CREATE TABLE ReportsDesc(
+	ReportID int FOREIGN KEY REFERENCES EmployeeReports (ReportID),
+	ReportDescription varchar(max)
+	CONSTRAINT PK_ReportDesc PRIMARY KEY CLUSTERED (ReportID)
+)
+
+CREATE TABLE ReportsData(
+	ReportID int NOT NULL,
+	ReportName varchar (100),
+	ReportNumber varchar (20),
+	CONSTRAINT DReport_PK PRIMARY KEY CLUSTERED (ReportID)
+)
+
+INSERT INTO dbo.ReportsData(
+    ReportID,
+    ReportName,
+    ReportNumber
+)
+SELECT er.ReportID, 
+er.ReportName, 
+er.ReportNumber 
+FROM dbo.EmployeeReports er
+
+-- Try this query to see CPU time
+DBCC DROPCLEANBUFFERS  -- remove cache
+SET STATISTICS IO ON
+SET STATISTICS TIME ON
+
+SELECT er.ReportID, er.ReportName, er.ReportNumber
+FROM ReportsData er
+WHERE er.ReportNumber LIKE '%33%'
+
+SET STATISTICS IO OFF
+SET STATISTICS TIME OFF
+```
+
+Open message tab, we will see it takes less time than previous query:
+```
+SQL Server Execution Times:
+  CPU time = 31 ms,  elapsed time = 69 ms.
+```
+
+Want to see query cost: open execution plan tab and we can see: 99% vs 1%:
+
+![Capture](https://user-images.githubusercontent.com/26838239/125437208-59131b95-79f3-42e3-b3d5-67ec1c36204a.PNG)
+
+## 21. Query optimization techniques in SQL Server
+Ref of this series: https://www.sqlshack.com/query-optimization-techniques-in-sql-server-the-basics/  
+Thực sự thấy cái series này nó quá dài và lan man, khó hiểu, nhiều từ vựng, nên ở dưới chỉ tóm tắt 1 số ý dễ hiểu
+
+### The basics
+#### 1. Defining Optimization
+We usually cannot spend the resources needed to make a script run as fast as possible, nor should we want to.  
+For the sake of simplicity, we will define **"optimal" as the point at which a query performs acceptably and will continue to do so for a reasonable amount of time in the future**
+
+Over-optimization sounds good, but in the context of resource management is generally wasteful. A giant (but unnecessary) covering index will cost us computing resources whenever we write to a table for the rest of eternity (a long time)
+
+#### 2. What Does the Query Do?
+Step #1 is to step back and understand the query. Some helpful questions that can aid in optimization:
+- **How large is the result set?** Should we brace ourselves (gồng mình lên) for a million rows returned, or just a few?
+- **Are there any parameters that have limited values?** Will a given parameter always have the same value, or are there other limitations on values that can simplify our work by eliminating avenues of research.
+- **How often is the query executed?** Something that occurs once a day will be treated very differently than one that is run every second.
+- **Are there any invalid or unusual input values that are indicative of an application problem?** Is one input set to NULL, but never should be NULL? Are any other inputs set to values that make no sense, are contradictory, or otherwise go against the use-case of the query?
+- **Are there any obvious logical, syntactical, or optimization problems staring us in the face?** Do we see any immediate performance bombs that will always perform poorly, regardless of parameter values or other variables?
+- **What is acceptable query performance?** How fast must the query be for its consumers to be happy? If server performance is poor, how much do we need to decrease resource consumption for it to be acceptable? Lastly, what is the current performance of the query? This will provide us with a baseline so we know how much improvement is needed.
+
+#### 3. Tools
+- **Execution Plans**: it provides a graphical representation of how the query optimizer chose to execute a query
+
+- **STATISTICS IO**: This allows us to see how many logical and physical reads are made when a query is executed. We can turn it on by run this query:
+```sql
+SET STATISTICS IO ON;
+```
+
+After that, we can see additional data in Messages pane:
+```
+(1000 rows affected)
+Table 'Customer'. Scan count 1, logical reads 9, physical reads 0, page server reads 0, read-ahead reads 114,...
+```
+
+Logical reads tell us how many reads were made from the buffer cache. This is the number that we will refer to whenever we talk about how many reads a query is responsible for, or how much IO it is causing.
+
+Physical reads tell us how much data was read from a storage device as it was not yet present in memory. This can be a useful indication of buffer cache/memory capacity problems if data is very frequently being read from storage devices, rather than memory.
+
+In general, IO will be the primary cause of latency and bottlenecks when analyzing slow queries. The unit of measurement of STATISTICS IO = 1 read = a single 8kb page = 8192 bytes.
+
+- **Query Duration**: we will measure duration manually using the timer found in the lower-right hand corner of SSMS. (There are other ways to accurately measure query duration, such as setting on STATISTICS TIME, but we'll focus on queries that are slow enough that such a level of accuracy will not be necessary. We can easily observe when a 30 second query is improved to run in sub-second time.)
+
+- **Our Eyes**: Many performance problems are the result of common query patterns that we will become familiar with below. (As we optimize more and more queries, quickly identifying these indicators becomes more second-nature and we'll get the pleasure of being able to fix a problem quickly, without the need for very time-consuming research.)
+
+#### 4. What Does the Query Optimizer Do?
+Every query follows the same basic process from T-SQL to completing execution on a SQL Server:
+- **Parsing** is the process by which query syntax is checked (ex: wrong key words, named a column using a reserved word, forgot semicolon...)
+- **Binding** checks all objects referenced in your TQL against the system catalogs and any temporary objects defined within your code to determine if they are both valid and referenced correctly. The result of this step is a query tree that is composed of a basic list of the processes needed to execute the query
+- **Optimization**: the optimizer operates similarly to a chess (or any gaming) computer. It needs to consider an immense number of possible moves as quickly as possible, remove the poor choices, and finish with the best possible move. In the world of SQL Server, chess moves mean execution plans: query optimizer need to choose an execution plan
+- **Execution** is the final step. SQL Server takes the execution plan that was identified in the optimization step and follows those instructions in order to execute the query
+
+#### 5. Common Themes in Query Optimization
+- Index Scans: Data may be accessed from an index via either a scan or a seek. If a table contains a million rows, then a scan will need to traverse all million rows to service the query. A seek of the same table can traverse the index's binary tree quickly to return only the data needed, without the need to inspect the entire table.
+
+- Functions Wrapped Around Joins and WHERE Clauses: Consider the following query:
+```sql
+SELECT...
+FROM Person
+WHERE LEFT(Person.LastName, 3) = 'For';
+```
+The entire index was scanned to return our data, because we use ```LEFT``` function. We can change it by:
+```sql
+WHERE Person.LastName LIKE 'For%';
+```
+This will take advantage of index seek
+
+- Implicit Conversions: Consider the following SELECT query, which is filtered against an indexed column:
+```sql
+SELECT
+	EMP.BusinessEntityID,
+	EMP.LoginID,
+	EMP.JobTitle
+FROM HumanResources.Employee EMP
+WHERE EMP.NationalIDNumber = 658797903;
+```
+But we still got a table scan for our efforts! Because the data type of NationalIDNumber column is NVARCHAR, the value we are comparing it to is a numeric. The solution to this problem is very simple:
+```sql
+WHERE EMP.NationalIDNumber = '658797903';
+```
+
+### Tips and tricks
+#### 1. OR in the Join Predicate/WHERE Clause Across Multiple Columns
+SQL Server can efficiently take advantage of indexes via the WHERE clause and ```AND``` operator. But ```OR``` is a different story, each component of the OR must be evaluated independently. When this expensive operation is completed, the results can then be concatenated and returned normally. Example:
+```sql
+-- Database AdventureWorks2019
+SELECT DISTINCT
+	PRODUCT.ProductID,
+	PRODUCT.Name
+FROM Production.Product PRODUCT
+INNER JOIN Sales.SalesOrderDetail DETAIL
+ON PRODUCT.ProductID = DETAIL.ProductID
+OR PRODUCT.rowguid = DETAIL.rowguid;
+```
+
+Open Messages Pane and Execution Plan, we will see SQL engine scanned both tables!
+```
+Table 'Product'. Scan count 7, logical reads 40, physical reads 0,...
+Table 'SalesOrderDetail'. Scan count 6, logical reads 7488, physical reads 0,...
+Table 'Worktable'. Scan count 6, logical reads 1734026, physical reads 0,...
+Table 'Worktable'. Scan count 0, logical reads 0, physical reads 0,...
+```
+
+The best way to deal with an OR is to *eliminate* it (if possible) or break it into smaller queries, example:
+```sql
+SELECT
+	PRODUCT.ProductID,
+	PRODUCT.Name
+FROM Production.Product PRODUCT
+INNER JOIN Sales.SalesOrderDetail DETAIL
+ON PRODUCT.ProductID = DETAIL.ProductID
+UNION
+SELECT
+	PRODUCT.ProductID,
+	PRODUCT.Name
+FROM Production.Product PRODUCT
+INNER JOIN Sales.SalesOrderDetail DETAIL
+ON PRODUCT.rowguid = DETAIL.rowguid
+```
+
+Here is the new result in Messages pane
+```
+Table 'Worktable'. Scan count 0, logical reads 0, physical reads 0,...
+Table 'Product'. Scan count 2, logical reads 30, physical reads 0,...
+Table 'SalesOrderDetail'. Scan count 2, logical reads 737, physical reads 4,...
+```
+
+And Execution plan pane:
+
+![convert-or-to-union](https://user-images.githubusercontent.com/26838239/125437611-02b1fab5-fe55-42bf-a4e7-b155173dc8b0.png)
+
+
+We can see logical reads now is decreased immensely
+
+#### 2. Wildcard String Searches
+SQL Server is not good at fuzzy string searching:
+```sql
+SELECT
+	Person.BusinessEntityID,
+	Person.FirstName,
+	Person.LastName,
+	Person.MiddleName
+FROM Person.Person
+WHERE Person.LastName LIKE '%For%';
+```
+
+In execution plan: SQL engine used Index scan operator
+In messages pane:
+```
+Table 'Person'. Scan count 1, logical reads 107, physical reads 0,...
+```
+
+Solution:
+- **Remove wildcard** if we can, or at least change from "%For%" to "For%"
+- Apply other filters to reduce data size:  If we can filter by date, time, status, or some other commonly used type of criteria, we can perhaps reduce the data we need to scan down to a small enough amount so that our query perform acceptably
+- Implement **full-text index**. If a table has a billion rows and users want to frequently search an NVARCHAR(MAX) column for occurrences of strings in any position, we could think of this solution
+- Implement a **query hash** or **n-gram solution**. Pros: provide very fast search capabilities. Cons: maintenance is hard: we need to update the n-gram table every time a row is inserted, deleted, or the string data in it is updated; also, the number of n-grams per row will increase rapidly as the size of the column increases  
+=> This is an excellent approach for **shorter strings**, such as **names, zip codes, or phone numbers**. It is a very expensive solution for longer strings, such as email text, descriptions
+
+## 22. SQL Server Index Architecture and Design Guide
+Ref: https://docs.microsoft.com/en-us/sql/relational-databases/sql-server-index-design-guide
+
+### 1. General Index Design Guidelines
+#### Database Considerations
+- Databases or tables with **low update** requirements, but **large volumes of data** can benefit from many nonclustered indexes to improve query performance: Large numbers of indexes on a table will reduce the performance of INSERT, UPDATE, DELETE, and MERGE statements (because all indexes must be adjusted appropriately as data in the table changes)
+- **Indexing small tables** may *not be optimal* because it can take the query optimizer longer to traverse the index searching for data than to perform a simple table scan
+- Use the *Database Engine Tuning Advisor* to analyze your database and make index recommendations
+
+#### Query Considerations
+- Create **nonclustered indexes** on the columns that are frequently used in predicates and join conditions in queries. These are your **SARGable columns**
+- **Covering indexes** can improve query performance because all the data needed to meet the requirements of the query exists within the index itself
+- Write queries that insert or modify as *many rows* as possible in a **single statement**, instead of using multiple queries to update the same rows. By using only one statement, optimized index maintenance could be exploited
+
+#### Column Considerations
+- Keep the **length** of the index key **short** for clustered indexes
+- Indexes should be **narrow** (with **as few columns as possible**)
+- Clustered indexes should be created on **unique** or **nonnull** columns
+- Columns that are of the **ntext, text, image, varchar(max), nvarchar(max)**, and **varbinary(max)** data types cannot be specified as index key columns
+- An xml data type can only be a key column in an XML index
+- Examine column **uniqueness**: a unique index will be better than a nonunique index
+- Examine **data distribution**: indexes will be better on columns that are **unique** or contain lots of distinct values
+  + Ex1: physical telephone directory sorted alphabetically on last name will not expedite locating a person if all people in the city are named Smith or Jones: 1 cuốn danh bạ đt sắp xếp theo họ sẽ KHÔNG dễ dàng tìm vị trí của 1 người nếu tất cả mọi người đều có họ là Smith hoặc John)
+  + Ex2: if there are very few distinct values, such as only 1 and 0, most queries will not use the index because a table scan is generally more efficient
+- Consider using **filtered indexes** on columns that have well-defined subsets, ex: sparse columns, columns with mostly NULL values, columns with categories of values, and columns with distinct ranges of values
+- Consider the order of the columns if the index will contain multiple columns. The column that is used in the WHERE clause or a join, should be placed first
+
+#### Index Sort Order
+- When defining indexes, we should consider the order of data for the index key column (ascending (default) or descending)
+- If a query contains ```ORDER BY``` clause that specifies the same direction with the order of data in index, then SQL engine can remove the SORT operator, ex:
+```sql
+/*
+Db AdventureWorks2019: the PurchaseOrderDetail table already has clustered index on two column below:
+ALTER TABLE [Purchasing].[PurchaseOrderDetail] ADD CONSTRAINT
+[PK_PurchaseOrderDetail_PurchaseOrderID_PurchaseOrderDetailID] PRIMARY KEY CLUSTERED 
+(
+    [PurchaseOrderID] ASC,
+    [PurchaseOrderDetailID] ASC
+)
+*/
+-- Query 1
+SELECT * FROM [AdventureWorks2019].[Purchasing].[PurchaseOrderDetail]
+ORDER BY PurchaseOrderID, PurchaseOrderDetailID;
+
+-- Query 2
+SELECT * FROM [AdventureWorks2019].[Purchasing].[PurchaseOrderDetail]
+ORDER BY PurchaseOrderID DESC, PurchaseOrderDetailID
+
+/*
+Open execution plan, we can see the query cost of each query:
+Query 1: 11%
+Query 2: 89%
+It's because the query 2 has additional SORT operator
+*/
+```
+
+![Capture](https://user-images.githubusercontent.com/26838239/125438260-a150b544-ca40-49b9-a491-a7a0dd389a4d.PNG)
+
+```sql
+-- Another example, has SORT operator:
+SELECT RejectedQty, ((RejectedQty/OrderQty)*100) AS RejectionRate,
+    ProductID, DueDate
+FROM Purchasing.PurchaseOrderDetail  
+ORDER BY RejectedQty DESC, ProductID ASC;
+
+-- If we are most interested in finding products sent by these vendors with a high rejection rate,
+-- we could create the following index to remove SORT operator in that query:
+CREATE NONCLUSTERED INDEX IX_PurchaseOrderDetail_RejectedQty
+ON Purchasing.PurchaseOrderDetail
+    (RejectedQty DESC, ProductID ASC, DueDate, OrderQty);
+```
+
+### 2. Clustered Index Design Guidelines
+#### Query Considerations
+- Consider using a clustered index for queries that do the following:
+  + Return a range of values by using operators such as ```BETWEEN```, >, >=, <, and <=
+  + Return **large result sets**
+  + Use **JOIN clauses**; typically these are foreign key columns
+  + Use **ORDER BY** or **GROUP BY** clauses: an index on the columns specified in the ORDER BY or GROUP BY clause may remove the need for SQL engine to use *SORT operator*
+
+#### Column Considerations
+- We can define clustered index on columns that have one or more of the following attributes (khá giống với general guide ở trên):
+  + Indexes should be **narrow**: define the clustered index key with **as few columns as possible**
+  + Columns that are **unique** or contain lots of distinct values
+  + Columns defined as IDENTITY
+  + Columns used frequently to sort the data retrieved from a table
+
+- Clustered indexes are not a good choice for the following attributes:
+  + Columns that undergo frequent changes (Các cột chịu sự thay đổi thường xuyên)
+  + Wide keys (Wide keys are a composite of several columns or several large-size columns)
