@@ -104,7 +104,7 @@ Linh hồn 22 sau khi tới trái đất đã nhận thấy nơi này ko nhàm c
 
 Đôi lúc **những khoảnh khắc nhỏ bé, bình dị, đời thường lại quý giá nhất**
 
-#### Đam mê không phải là mục đích sống
+#### Happiness is a journey, not a destination
 Một trong những phân đoạn ấn tượng nhất của Soul là khi Joe hoàn thành đêm diễn jazz trong mơ của mình và bỗng hỏi:
 - What happens next? (Giờ thì sao?)
 - We come back tomorrow night and do it all again
