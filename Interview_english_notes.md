@@ -91,7 +91,7 @@ The main reason why I want to leave my current job is because I found my work bo
 About my short-team goal, I would like to improve English speaking skill in order to **communicate effectively** to customers and other people. If I have time, I'll consider myself to participate in an English class. In the near future, I also want to study and master some technologies that are related to my work
 
 ## 7. What is your long-term goal?
-Well, I don't have a detailed plan but the most important thing is that I want to become a techical lead in software engineering. Nowadays, technologies are changing day to day, so I have to study more and of course learn from my co-workers, especially the seniors, to fulfill my objectives
+Well, I don't have a detailed plan but the most important thing is that I want to become a technical lead in software engineering. Nowadays, technologies are changing day to day, so I have to study more and of course learn from my co-workers, especially the seniors, to fulfill my objectives
 
 ## 8. If you could change one thing about your personality, what would it be and why?
 If I could change one thing about myself, maybe it could be to become less introvert. I'm a quite person and sometimes don't want to spend lots of time talking with someone unless it's related to work. I would like to change that so I could be able to make more friends
@@ -100,15 +100,57 @@ If I could change one thing about myself, maybe it could be to become less intro
 I think I'm the type of person who reacting to a problem is better than anticipating it. When I'm faced with a problem, I know what steps to take to deal with it
 
 ## 10. Did you do any internship?
-Yeah, I did 2 internships when I was a student. My first internship happend at my fourth year university, at that time, I submitted internship form to Fsoft company, and they accepted me. My position was web developer. I've never been an intern before, so I was very excited about it. At that time, I didn't have any knowledge or experience about web development, so I was taught about the most basic things, such as how to make a simple web page using HTML, CSS and Javascript. The internship inspired me to pursue Web Development career!
+Yeah, I did 2 internships when I was a student. My first internship happened at my fourth year university, at that time, I submitted internship form to Fsoft company, and they accepted me. My position was web developer. I've never been an intern before, so I was very excited about it. At that time, I didn't have any knowledge or experience about web development, so I was taught about the most basic things, such as how to make a simple web page using HTML, CSS and Javascript. The internship inspired me to pursue Web Development career!
 
-My second internship happend at my last year in university, I've got Samsung scholarship and started my intership for 3 months at Samsung R&D center. I was assigned to Backend team and they helped me to complete my graduation thesis. And after my graduation, I came back to that team and worked with them as an official employee.
+My second internship happened at my last year in university, I've got Samsung scholarship and started my internship for 3 months at Samsung R&D center. I was assigned to Backend team and they helped me to complete my graduation thesis. And after my graduation, I came back to that team and worked with them as an official employee.
 
 ## 11. Introduce, talk about your work, your position at your company
-Hello everybody, I'm Tu and I've been working at IFI solution for 3 months. I'm a web developer and I've been doing this for 3 years. Basically, web development is about building a website, and it is divided into 2 main types: frontend and backend development.
+You should say:
+- Your background education or experience
+- Your working position
+- Your responsibility
 
-Frontend developers are responsible for building user interface. They have to care about the content displayed on a website, such as text colors, background colors, headers, footers and so on.
+Answer:
 
-Backend developers are the ones who work behind the scenes. They are in charge of building website's server, working with database and providing data for frontend team
+Hello everybody, I'm Tu and **I've been working** at IFI solution for 3 months. I'm a *web developer* and I've been doing this for 3 years. Basically, web development is about building a website, and it is divided into 2 main types: frontend and backend development.
 
-My main responsibilities in my team are developing new features, maintaining and fixing bugs to ensure that our system is working smoothly and stably. I am also in charge of optimizing source code, make it clean and efficient so the system will operate as quick as possible, which helps to improve user's experiences on our websites.
+**Frontend developers** are responsible for **building user interface**. They have to care about the content displayed on a website, such as text colors, background colors, headers, footers and so on.
+
+**Backend developers** are the ones who **work behind the scenes**. They are in charge of building website's server, working with database and providing data for frontend team
+
+My main responsibilities in my team are **developing new features, maintaining and fixing bugs** to ensure that our system is working smoothly and stably. I am also **in charge of** *optimizing* source code, make it clean and efficient so the system will operate as quick as possible, which helps to improve user's experiences on our websites.
+
+## 12. Talk about computer
+You should say:
+- Computer as a friends (pros)
+- Computer as a foe (cons)
+- Things you can do with computer
+
+Answer:
+
+## 13. Talk about your working process (about programming, IT)
+You should say:
+- Your role and responsibility in the team
+- Your main tasks 
+- Describe your working process from the beginning to the end.
+- Who involved in the process, specify the input and output of each step
+
+You could use:
+- I first begin/start by analyzing...
+- The first step is to...
+- Next,...
+- Finally/last but not least...
+
+Answer:
+
+My name is Tu and I'm a web developer, I'm working in the team as a *normal team member*. My main responsibilities include **developing new features** for application, **maintaining** system to ensure it works efficiently and correctly, and **reviewing** other team members' *source code*.
+
+*The first step* of our working process is **analyzing**, which means **understanding customer's requirements** and then **estimating time** to finish. This is the **most crucial part** of our process because we cannot do anything before knowing exactly what the customers want. This step **involves in** all team members and customers as well.
+
+*The second step* is **designing**, and it belongs to *design team* of course. The designers have to **analyze** how the website looks like and **create the UI** for each web pages, the output for this *stage* would be a **skeleton** of the application.
+
+*The next part* of our process is **coding**, or **developing**, it is done by *dev team*, and this is the *easiest step* in my opinion, because all we need to do is *implementing the blueprint* in the previous step using a specific programming language.
+
+After finishing the development stage, we need to make a request to QA team to **test** our application, and this is the *fourth step*. Their main tasks are **running our app in different scenarios** to see if it works correctly, and also **running it on different devices and platforms** to see if there is any problem occur when we change the environment. The result of this step is errors and defects. In other words, they have to *figure out as many errors as possible*, and then report it to dev team to fix.
+
+*The last part* of our process is **maintaining**, belong to *dev team*, and I think this is the *most tedious step*. Their duties are fixing errors or bugs and optimizing code to enhance performance of the application
