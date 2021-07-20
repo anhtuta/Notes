@@ -154,3 +154,36 @@ My name is Tu and I'm a web developer, I'm working in the team as a *normal team
 After finishing the development stage, we need to make a request to QA team to **test** our application, and this is the *fourth step*. Their main tasks are **running our app in different scenarios** to see if it works correctly, and also **running it on different devices and platforms** to see if there is any problem occur when we change the environment. The result of this step is errors and defects. In other words, they have to *figure out as many errors as possible*, and then report it to dev team to fix.
 
 *The last part* of our process is **maintaining**, belong to *dev team*, and I think this is the *most tedious step*. Their duties are fixing errors or bugs and optimizing code to enhance performance of the application
+
+## 14. Describe Genshin Impact
+You have to use the following structure sentences:
+- Describing function:
+  + S.t + is for + V-ing
+  + **S.t is a s.t + relative pronoun (+ is used to) + V**
+- Classify (A được chia thàn/phân loại thành B,C,D thì A và B,C,D ngang hàng và độc lập):
+  + **be classified into** ... categories. Ex: Computer are often classified into 2 categories: laptop and desktop
+  + **be divided into** ... types. Ex: Computer can be divided into 2 types: laptop and desktop
+  + **include**. Ex: Computer includes laptop and desktop
+- Classify from *general to specific* (A được tạo thành từ B,C,D):
+  + **consists of** (bao gồm). Ex: a computer consists of hardware and software
+  + **is made up of** (được tạo thành từ). Ex: a computer is made up of hardware and software
+  + is composed of (bao gồm)
+  + comprise (bao gồm)
+- Classify from *specific to general* (từ B,C,D tạo thàn A):
+  + **is a type of**. Ex: OCR is a type of software which recognizes characters.
+  + are parts/components of
+  + constitute (cấu tạo, cấu thành). Ex: The RAM and the ROM constitute the main memory
+
+You should say:
+- What is Genshin Impact
+- Describe characters, teleport waypoints, and elements (type of elements, elemental powers and elemental reactions)
+
+Today I'm gonna talk about a video game, it is Genshin Impact. Genshin Impact is an **action, adventure, free-to-play** and **role-playing video game** (RPG) which is developed and published by miHoYo. This game was released on September, 2020 and now become popular **worldwide**.
+
+To newbie, there are 3 things you should care about in this game: characters, teleport waypoints, and elements.
+
+Characters include playable characters and non-player characters (NPC), and your mission is simple, you have to **role-play** as any of available characters to explore **every nook and cranny** in Genshin Impact. An because the world in this game is **gigantic**, traveling from the north to the south of the map could take you several hours, so the game gives you lots of **teleport waypoints**. These waypoints are some kind of *portals*, or *shortcuts* that help you to teleport from one place to another place within few seconds! Sounds so cool, right!
+
+The last thing you should know are elements. **Elements** are some kind of powers (we can call them as **elemental powers**), and they are the most crucial part of this game. Elements are divided into 7 categories: Fire, Water, Grass, Electro, Wind, Ice and Lava. Every characters and monsters in this game can **possess** one elemental power, and when they combine, attack or interact with one another, **elemental reactions** occur. A simple example of elemental reaction is that when you have Ice power and you attack some monsters that have Water power, you could be able to freeze them within few seconds, and then kill them easily. This is the most **fascinating** stuff about this game!
+
+Genshin Impact is honored to become the **Game of the year** 2020!
